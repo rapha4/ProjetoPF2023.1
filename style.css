@@ -1,0 +1,23 @@
+body {
+    background-color: #FF4958;
+}
+
+#interface {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#play {
+    position: absolute;
+    bottom: 25%;
+    width: 220px;
+    height: 80px;
+    background-image: url(./imagens/botao.png);
+}
+
+img {
+    width: 840px;
+    height: 525px;
+    align-content: center;
+}
