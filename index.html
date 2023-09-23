@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <title>Vida Universitaria RPG</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="./javascript.js"></script>
 </head>
 <body>
     <div id="interface" >
+
         <img src="./imagens/interface.png">
-        <div id="botoes">
+        
+        <div id="playDiv">
             <button id="play">Play</button>
         </div>
+
+        <span id="musicaSpan">
+            <button onclick="musicaDeFundoON()" class="musica">MscON</button>
+            <button onclick="musicaDeFundoOFF()" class="musica">MscOFF</button>
+        </span>
     </div>
+
+    <audio loop="true" id="soundtrack">
+        <source src="./soundtrack/Life Is Strange Soundtrack.mp3">
+    </audio>
 </body>
 </html>
