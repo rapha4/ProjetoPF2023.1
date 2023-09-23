@@ -2,22 +2,46 @@ body {
     background-color: #FF4958;
 }
 
+@font-face {
+    font-family: Press_Start_2P;
+    src: url(./font/Press_Start_2P/PressStart2P-Regular.ttf);
+}
+
 #interface {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 3.7%;
+    position: absolute;
+}
+
+#botoes {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 67%;
+    left: 41.5%;
+    width: 17%;
+    height: 9%;
 }
 
 #play {
-    position: absolute;
-    bottom: 25%;
-    width: 220px;
-    height: 80px;
-    background-image: url(./imagens/botao.png);
+    height: 4em;
+    width: 16em;
+    font-family: Press_Start_2P;
+    color: antiquewhite;
+    background-color: #FF4958;
+    border: 5px solid #73F2EB;
+    border-radius: 5px;
+    box-shadow: -2px 3px 5px #222;
+}
+
+#play:active {
+    box-shadow: inset -4px -4px 10px #972B34;
 }
 
 img {
-    width: 840px;
-    height: 525px;
+    width: 65%;
+    height: 55%;
     align-content: center;
+    border: 10px solid white;
 }
