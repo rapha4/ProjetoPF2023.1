@@ -8,6 +8,13 @@ const musicaDeFundoOFF = () => {
     musica.pause()
 }
 
+const mudarTela = () =>  {
+    const interface = document.getElementById("interface")
+    const cursos = document.getElementById("cursos")
+    interface.style.display = "none"
+    cursos.style.display = "block"
+}
+
 // Comentado pois precisa desenvolver a interface primeiro
 /* const xp = document.querySelector('#valorXP')
 const moedas = document.querySelector('#valorMoeda')

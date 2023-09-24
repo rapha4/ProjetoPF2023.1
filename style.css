@@ -73,9 +73,36 @@ body {
     box-shadow: inset -4px -4px 10px #972B34;
 }
 
+/* imagem de fundo */
+
+#inicioImg {
+    width: 65%;
+    height: 55%;
+    align-content: center;
+    border: 10px solid white;
+}
+
+#cursos {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.7%;
+    position: absolute;
+    display: none;
+}
+
+#botoesCursos {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 67%;
+    left: 41.5%;
+    width: 17%;
+    height: 9%;
+}
 
 /* imagem de fundo */
-img {
+
+#cursosImg {
     width: 65%;
     height: 55%;
     align-content: center;

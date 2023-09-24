@@ -9,10 +9,27 @@
 <body>
     <div id="interface" >
 
-        <img src="./imagens/interface.png">
+        <img id = "inicioImg" src="./imagens/interface.png">
         
         <div id="playDiv">
-            <button id="play">Play</button>
+            <button onclick = "mudarTela()" id="play">Play</button>
+        </div>
+        <span id="musicaSpan">
+            <button onclick="musicaDeFundoON()" class="musica">MscON</button>
+            <button onclick="musicaDeFundoOFF()" class="musica">MscOFF</button>
+        </span>
+    </div>
+
+
+    <div id = "cursos"> 
+
+        <img id = "cursosImg" src="./imagens/interface.png">
+
+        <div id="botoesCursos">
+            <button onclick = "mudarTela()"; id="exatas">Exatas</button>
+            <button onclick = "mudarTela()"; id="humanas">Humanas</button>
+            <button onclick = "mudarTela()"; id="biologicas">Exatas</button>
+            <button onclick = "mudarTela()"; id="exatas">Exatas</button>
         </div>
 
         <span id="musicaSpan">
