@@ -73,3 +73,22 @@ resunbtn2.addEventListener('click', () => {
 resunbtn3.addEventListener('click', () => {
     currentState = comprarClique(currentState, 60)
 })
+
+//Funcionalidade de save e load.
+const save=estado=>slot=>{
+	//Essa função armazena os dados do jogo no armazenamento local.
+	localStorage.setItem(slot,JSON.stringify(estado))	
+}
+
+const load=slot=>{
+	//Essa função inicializa o jogo a partir de dados armazenados.
+	const estado=JSON.parse(localStorage.getItem(slot))
+    atualizarDOM(estado)
+    currentState=estado
+}
+
+const deletarSave=slot=>{
+    //Apaga os dados do jogo de um slot do armazenamento local
+    localStorage.removeItem(slot)
+}
+//Funcionalidades posteriores: caso julgado necessário, dar aviso ao usuário: exemplo: "Jogo salvo!"
