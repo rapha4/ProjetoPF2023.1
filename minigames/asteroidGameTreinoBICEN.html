@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vida Universitaria RPG</title>
+</head>
+<body>
+    <canvas width="700" height="500"></canvas>
+
+    <script>
+
+        /////// Define as configurações padrão do jogo
+        const FPS = 30 // frames per second
+        const tamanho_da_nave = 30 // pixels
+        const velocidade_de_rotacao = 1
+        const aceleracao_da_nave = 0.1
+        const friccao = 0.3
+
+        const canvas = document.querySelector("canvas")
+        const context = canvas.getContext("2d")
+
+        /////// Define o status inicial da nave
+        const nave = {
+            x: canvas.width / 2,
+            y: canvas.height / 2, 
+            r: tamanho_da_nave / 2, // raio
+            a: 90/180 * Math.PI,  // angulo
+            rot: 0, // rotacao
+            avanço: false,
+            movimento: {
+                x: 0,
+                y: 0,
+            }
+        }
+
+        //////////// Event Listeners, captura o teclado ///////////
+        const keyDown = (/** @type {KeyboardEvent}*/ ev) => {
+            switch(ev.keyCode) {
+                case 37: // (seta esquerda) rotaciona a nave para a esquerda
+                    nave.rot = velocidade_de_rotacao/FPS
+                    break;
+                case 38: // (seta para cima) move a nave para frente
+                    nave.avanço = true
+                    break;
+                case 39: // (seta direita) rotaciona a nave para a direita
+                    nave.rot = -velocidade_de_rotacao/FPS
+                    break;
+            }
+        }
+
+        const keyUp = (/** @type {KeyboardEvent}*/ ev) => {
+            switch(ev.keyCode) {
+                case 37: // (seta esquerda) para a rotacao da nave para a esquerda
+                    nave.rot = 0
+                    break;
+                case 38: // (seta para cima) para o movimento da nave para frente
+                    nave.avanço = false
+                    break;
+                case 39: // (seta direita) para a rotacao da nave para a direita
+                    nave.rot = 0
+                    break;
+            }
+        }
+
+        document.addEventListener("keydown", keyDown)
+        document.addEventListener("keyup", keyUp)
+
+        ///////////////// frame ////////////////
+
+        const atualizacao = () => {
+        ////// cria o fundo do jogo 
+        context.fillStyle = "#222"
+        context.fillRect(0, 0, canvas.width, canvas.height)
+
+        ////// cria o desenho da nave
+        context.strokeStyle = "white"
+        context.lineWidth = tamanho_da_nave/20
+        context.beginPath()
+        context.moveTo( // topo da nave
+            nave.x + nave.r * Math.cos(nave.a),
+            nave.y - nave.r *Math.sin(nave.a)
+        )
+        context.lineTo( // lado esquerdo da nave
+            nave.x - nave.r * (Math.cos(nave.a) + Math.sin(nave.a)),
+            nave.y + nave.r * (Math.sin(nave.a) - Math.cos(nave.a))
+        )
+        context.lineTo( // trás da nave
+            nave.x - nave.r * (Math.cos(nave.a) - Math.sin(nave.a)),
+            nave.y + nave.r * (Math.sin(nave.a) + Math.cos(nave.a))
+        )
+        context.closePath() // lado direito da nave
+        context.stroke()
+
+        ////// rotacao da nave 
+        nave.a += nave.rot
+
+        ////// movimento da nave
+        if (nave.avanço) {
+            nave.movimento.x += aceleracao_da_nave * Math.cos(nave.a) / FPS
+            nave.movimento.y -= aceleracao_da_nave * Math.sin(nave.a) / FPS
+
+            //cria o desenho da propulsao
+            context.fillStyle = "red"
+            context.strokeStyle = "yellow"
+            context.lineWidth = tamanho_da_nave/10
+            context.beginPath()
+            context.moveTo( // lado esquerdo da propulsao
+                nave.x - nave.r * (Math.cos(nave.a) + 0.5 * Math.sin(nave.a)),
+                nave.y + nave.r * (Math.sin(nave.a) - 0.5 * Math.cos(nave.a))
+            )
+            context.lineTo( // centro da propulsao
+                nave.x - nave.r * 2 * Math.cos(nave.a),
+                nave.y + nave.r * 2  * Math.sin(nave.a) 
+            )
+            context.lineTo( // lado direito da propulsao
+                nave.x - nave.r * (Math.cos(nave.a) - 0.5 * Math.sin(nave.a)),
+                nave.y + nave.r * (Math.sin(nave.a) + 0.5 * Math.cos(nave.a))
+            )
+            context.closePath() 
+            context.fill()
+            context.stroke()
+        }
+        else {
+            nave.movimento.x -= friccao * nave.movimento.x / FPS
+            nave.movimento.y -= friccao * nave.movimento.y / FPS
+        }
+
+        nave.x += nave.movimento.x
+        nave.y += nave.movimento.y
+
+        ////// bordas do jogo, impede que a nave saia do frame
+        if (nave.x < 0 - nave.r) {
+            nave.x = canvas.width - nave.r
+        }
+        else if (nave.x > canvas.width + nave.r) {
+            nave.x = 0 + nave.r
+        }
+        if (nave.y < 0 - nave.r) {
+            nave.y = canvas.height - nave.r
+        }
+        else if (nave.y > canvas.height + nave.r) {
+            nave.y = 0 + nave.r
+        }
+
+        }
+
+        setInterval(atualizacao, 1/FPS)
+
+    </script>
+   
+</body>
+</html>
