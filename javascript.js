@@ -28,16 +28,17 @@ const resunbtn3 = document.querySelector('#resunbtn3') */
 // Feito com auxílio do Chat GPT
 // Baseado em https://replit.com/@BeauCarnes/JavaScript-RPG#script.js
 
-const estadoInicial = criarEstadoInicial()
-// Fazendo uso de variável para atualizar o estado atual. Tentamos de vários modos fazer por funcional, mas não conseguimos achar uma solução efetiva.
-let currentState = estadoInicial 
-
 const criarEstadoInicial = () => {
     return { xp: 0,
     hp: 100,
     moedas: 50 
 }
 }
+
+const estadoInicial = criarEstadoInicial()
+// Fazendo uso de variável para atualizar o estado atual. Tentamos de vários modos fazer por funcional, mas não conseguimos achar uma solução efetiva.
+let currentState = estadoInicial 
+
 
 const comprarHP = (estado, qtdeDeHP) => {
     const custo = qtdeDeHP / 2 // Cada ponto de vida custa 0.5 moedas 
