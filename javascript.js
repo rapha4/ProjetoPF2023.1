@@ -12,7 +12,7 @@ const mudarTela = () =>  {
     const interface = document.getElementById("interface")
     const cursos = document.getElementById("cursos")
     interface.style.display = "none"
-    cursos.style.display = "block"
+    cursos.style.display = "flex"
 }
 
 // Comentado pois precisa desenvolver a interface primeiro
