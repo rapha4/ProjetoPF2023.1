@@ -14,11 +14,27 @@ body {
     src: url(./font/Press_Start_2P/PressStart2P-Regular.ttf);
 }
 
-#interface {
-    display: flex;
-    justify-content: center;
+.gamediv {
+	justify-content: center;
     margin-top: 3.7%;
     position: absolute;
+    display: none;
+}
+#interface {
+    display: flex;
+    
+}
+
+/*Botoes*/
+
+.cuteBtn {
+	font-family: Press_Start_2P;
+	color: antiquewhite;
+	background-color: #FF4958;
+	
+}
+.cuteBtn:active {
+	box-shadow: inset -4px -4px 10px #972B34 !important;
 }
 
 /* Botao de musica */
@@ -31,20 +47,35 @@ body {
     width: 8%;
     height: 4%;
 }
-.musica {
-    font-family: Press_Start_2P;
-    font-size: 0.6em;
-    color: antiquewhite;
-    background-color: #FF4958;
-    border: 2px solid #73F2EB;
+.musica {    
+    font-size: 0.6em;    
+	border: 2px solid #73F2EB;
     border-radius: 3px;
     box-shadow: -1px 2px 3px #222;
 }
 
-.musica:active {
-    box-shadow: inset -4px -4px 10px #972B34;
+
+/* Botao menu */
+
+#menuDiv {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 85%;
+    left: 61.5%;
+    width: 17%;
+    height: 9%;
 }
 
+
+#play,
+#menubtn {
+    height: 4em;
+    width: 16em;    
+    border: 5px solid #73F2EB;
+    border-radius: 5px;
+    box-shadow: -2px 3px 5px #222;
+}
 
 /* Botao play */
 
@@ -58,20 +89,6 @@ body {
     height: 9%;
 }
 
-#play {
-    height: 4em;
-    width: 16em;
-    font-family: Press_Start_2P;
-    color: antiquewhite;
-    background-color: #FF4958;
-    border: 5px solid #73F2EB;
-    border-radius: 5px;
-    box-shadow: -2px 3px 5px #222;
-}
-
-#play:active {
-    box-shadow: inset -4px -4px 10px #972B34;
-}
 
 /* imagem de fundo */
 
@@ -82,13 +99,6 @@ body {
     border: 10px solid white;
 }
 
-#cursos {
-    display: flex;
-    justify-content: center;
-    margin-top: 3.7%;
-    position: absolute;
-    display: none;
-}
 
 #botoesCursos {
     display: flex;

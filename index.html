@@ -7,21 +7,25 @@
     
 </head>
 <body>
-    <div id="interface" >
+    <div class="gamediv" id="interface" >
 
         <img id = "inicioImg" src="./imagens/interface.png">
         
         <div id="playDiv">
-            <button onclick = "mudarTela()" id="play">Play</button>
+            <button class="cuteBtn" onclick = "mudarTela('gamediv')('cursos')" id="play">Play</button>
         </div>
+		<div id="menuDiv">
+            <button class="cuteBtn" onclick = "mudarTela('gamediv')('menu')" id="menubtn">Menu</button>
+        </div>
+		
         <span id="musicaSpan">
-            <button onclick="musicaDeFundoON()" class="musica">MscON</button>
-            <button onclick="musicaDeFundoOFF()" class="musica">MscOFF</button>
+            <button onclick="musicaDeFundoON()" class="cuteBtn musica">MscON</button>
+            <button onclick="musicaDeFundoOFF()" class="cuteBtn musica">MscOFF</button>
         </span>
     </div>
 
 
-    <div id = "cursos"> 
+    <div class="gamediv" id = "cursos"> 
 
         <img id = "cursosImg" src="./imagens/interface.png">
 
@@ -33,10 +37,27 @@
         </div>
 
         <span id="musicaSpan">
-            <button onclick="musicaDeFundoON()" class="musica">MscON</button>
-            <button onclick="musicaDeFundoOFF()" class="musica">MscOFF</button>
+            <button onclick="musicaDeFundoON()" class="cuteBtn musica">MscON</button>
+            <button onclick="musicaDeFundoOFF()" class="cuteBtn musica">MscOFF</button>
         </span>
     </div>
+	
+	<div class="gamediv" id = "menu"> 	
+        <img id = "cursosImg" src="./imagens/interface.png">
+
+        <div id="botoesCursos">
+            <button onclick = "mudarTela()"; id="exatas">Exatas</button>
+            <button onclick = "mudarTela()"; id="humanas">Humanas</button>
+            <button onclick = "mudarTela()"; id="biologicas">Exatas</button>
+            <button onclick = "mudarTela()"; id="exatas">Exatas</button>
+        </div>
+
+        <span id="musicaSpan">
+            <button onclick="musicaDeFundoON()" class="cuteBtn musica">MscON</button>
+            <button onclick="musicaDeFundoOFF()" class="cuteBtn musica">MscOFF</button>
+        </span>
+		
+	</div>
 
   <!-- Atributos e botões comentados para o desenvolvimento da interface primeiro
      <p id = "xp" >XP: <span id="valorXP">0</span></p>

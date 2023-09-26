@@ -8,11 +8,11 @@ const musicaDeFundoOFF = () => {
     musica.pause()
 }
 
-const mudarTela = () =>  {
-    const interface = document.getElementById("interface")
-    const cursos = document.getElementById("cursos")
-    interface.style.display = "none"
-    cursos.style.display = "block"
+const mudarTela = (classe) => (tela) => {
+    const lista = [...document.getElementsByClassName(classe)]
+    const mudar = document.getElementById(tela)
+    lista.map(elem=>elem.style.display="none")
+    mudar.style.display="flex"
 }
 
 // Comentado pois precisa desenvolver a interface primeiro
