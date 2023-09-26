@@ -29,12 +29,10 @@ img{
 
 
 #interface {
-    min-width: 840px;
-    max-width: 840px;
-    min-height: 525px;
-    margin-top: 4rem;
-   position: relative; 
-   border: 10px solid rgb(255, 255, 255); 
+    display: flex;
+    justify-content: center;
+    margin-top: 3.7%;
+    position: absolute;
 }
 
 .img-de-fundo{
@@ -49,17 +47,22 @@ img{
     color: #ffffff;
     background-color: #FF4958;
     border: 2px solid #73F2EB;
+    top: 90%;
+    left: 20%;
+    width: 8%;
+    height: 4%;
+}
+.musica {    
+    font-size: 0.6em;    
+	border: 2px solid #73F2EB;
     border-radius: 3px;
     cursor: pointer;
 }
 
-.botao:active{
+.musica:active {
     box-shadow: inset -4px -4px 10px #972B34;
 }
 
-.botao:hover{
-   font-weight: bold;
-}
 
 /* Botao de musica */
 .musica{
@@ -94,27 +97,12 @@ img{
 /* Tela de escolha dos cursos */
 
 #cursos {
-   
-    background-color: #b4c474;
-    position: relative;
-    min-height: 525px;
+    display: flex;
+    justify-content: center;
+    margin-top: 3.7%;
+    position: absolute;
     display: none;
-    flex-direction: column;
-    align-items: center;
 }
-
-#cursos > p {
-    color: #fff;
-    line-height: 20px;
-    text-align: center;
-    margin-top: 30px;
-    padding-bottom: 20px;
-    font-style: italic;
-    text-shadow: 1px 1px 2px rgb(26, 14, 16);
-    justify-self: flex-start;
-}
-
-
 
 #botoesCursos {
     margin-top: 220px; /* Com certeza mudará */
