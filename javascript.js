@@ -8,6 +8,7 @@ const musicaDeFundoOFF = () => {
     musica.pause()
 }
 
+
 const mudarTela = (classe) => (tela) => {
     const lista = [...document.getElementsByClassName(classe)]
     const mudar = document.getElementById(tela)

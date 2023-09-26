@@ -202,8 +202,8 @@
                     y + r * Math.sin(a)
                 )
                 const conectarLinhas = (numeroVertices, controle=0) => {
-                    if (controle < numeroVertices.length) 
-                        return 1
+                    if (controle > numeroVertices) 
+                        return 0
                     else {
                         context.lineTo(
                             x + r * Math.cos(a + controle * Math.PI * 2 / numeroVertices),
@@ -212,15 +212,16 @@
                         return conectarLinhas(numeroVertices, controle+1)
                     }
                 }
+                console.log("teste")
                 conectarLinhas(vertices)
-                closePath()
+                context.closePath()
                 context.stroke()
 
                 return desenhaAsteroides(resto)
-
-                desenhaAsteroides(criarCinturaoDeAsteroides())
             }
         } 
+
+        desenhaAsteroides(criarCinturaoDeAsteroides())
     }
         setInterval(atualizacao, 1/FPS)
 
