@@ -9,13 +9,13 @@
 <body>
     <div id="interface" > 
         
-        <div id="paginaInicial">
+        <div class="gamediv" id="paginaInicial">
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/interface.png"> 
         <!-- img é 1680 x 1050-->
-            <button onclick = "mudarTela()" class="botao" id="play">Play</button>
+            <button onclick = "mudarTela('gamediv')('cursos')" class="botao" id="play">Play</button>
         </div> 
 
-        <div id = "cursos" > 
+        <div class="gamediv" id = "cursos" > 
             <p> <span class="especial">PARABÉNS!</span> Você foi selecionado na chamada regular. 
                  Escolha uma área do conhecimento para se matricular.
             </p>
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div id="resun">
+        <div class="gamediv" id="resun">
             <p id = "xp" >XP: <span id="valorXP">0</span></p>
              <p id = "moeda" >HP:<span id="valorHP">100</span></p>
             <p id = "hp" >Moedas:<span id="valorMoeda">50</span></p>
@@ -46,7 +46,7 @@
         </div>
 
          <span class="botoes-musica">
-            <button onclick="mudarTela()" class="botao config"><i class="fa-solid fa-gear"></i></button>
+            <button onclick="mudarTela('gamediv')('config')" class="botao config"><i class="fa-solid fa-gear"></i></button>
              <button onclick="musicaDeFundoON()" class="botao musica"><i class="fa-solid fa-volume-high"></i></button>
              <button onclick="musicaDeFundoOFF()" class="botao musica"><i class="fa-solid fa-volume-xmark"></i></button>
         </span>
