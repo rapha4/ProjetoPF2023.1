@@ -111,3 +111,115 @@ const deletarSave=slot=>{
     localStorage.removeItem(slot)
 }
 //Funcionalidades posteriores: caso julgado necessário, dar aviso ao usuário: exemplo: "Jogo salvo!"
+
+/*let batalha;
+let hpBoss;
+const batalhaBoss = document.querySelector("#batalhaBoss");
+const nomeBossTxt = document.querySelector("#nomeBoss");
+const hpBossTxt = document.querySelector("#hpBoss");
+
+const boss = [
+    {
+      nome: "Vetores e Geometria Analítica",
+      nivel: 2,
+      hp: 45
+    },
+    {
+        nome: "Cálculo A",
+        nivel: 3,
+        hp: 60
+    },
+    {
+      nome: "Dioglos",
+      nivel: 6,
+      hp: 85
+    },
+    {
+        nome: "Cirdneh e Lilak",
+        nivel: 9,
+        hp: 100
+      }
+  ];
+// Os textos ainda vão ser modificados 
+  const areaBatalha = [
+    {   
+        nome: "resun",
+        "botao de acao": ["","",""],
+        "funcao botao": [ , , ],
+        texto: "Você entrou no Resun",
+    },
+    {
+		nome: "luta",
+		"botao de acao": ["ATACAR", "DESVIAR", "CORRER"],
+		"funcao botao": [atacar, desviar, correr],
+		texto: "Você está lutando com o boss"
+	},
+	{
+		nome: "boss derrotado",
+		"botao de acao": ["Próximo mês", "Próximo mês", "Próximo mês"],
+		"funcao botao": [proxMes, proxMes, proxMes],
+		texto: 'O boss grita "Arg!" enquanto te dá um 10. Você ganha experiência'
+	},
+	{
+		nome: "derrota",
+		"botao de acao": ["JOGAR DE NOVO?", "SAIR DO JOGO", ""],
+		"funcao botao": [jogarDeNovo, sairDoJogo],
+		texto: "TIROU 0!!!"
+	},
+	{
+		nome: "vitoria",
+		"botao de acao": ["JOGAR DE NOVO", "SAIR DO JOGO", ""],
+		"funcao botao": [jogarDeNovo, sairDoJogo, restart],
+		texto: "Você sobreviveu o semestre! Ganhou o título de veterano 🎉"
+    }
+  ]
+
+  function lutarBoss() {
+	batalha = 1;
+	irLutar();
+  }
+
+  function irLutar(){
+    update(areaBatalha[1]);
+    hpBoss = boss[batalha].hp;
+    batalhaBoss.style.display = "block";
+    nomeBossTxt.innerText = boss[batalha].nome;
+	hpBossTxt.innerText = hpBoss;
+  }
+
+  function atacar() {
+    text.innerText = "O " + boss[batalha].nome + "atacou."
+    if (bossAtacado()){
+        hp -= getValorAtaqueBoss(boss[batalha].nivel);
+    }else{
+        texto.innerText += "Você errou o ataque";
+    }
+    
+    if (hp <= 0) {
+        derrota()
+    } else if (hpBoss <= 0){
+        batalha === 2 ? vitoria() : bossDerrotado()
+    }
+  }
+
+  function getValorAtaqueBoss (nivel) {
+    // const valorAlea = Math.random()
+    //function getValorAtaqueBoss (nivel, xp, valorAlea){
+    //    return (level * 5) - (Math.floor(valorAle * xp)
+    //}  depois criava uma constante para receber os valores
+
+    let hit = (level * 5) - (Math.floor(Math.random() * xp));
+    console.log(hit);
+    return hit;
+  }
+  //fazer a implementação para se o ataque será efetivo ou n, no jogo original é de 80% de chance de acertar
+function bossAtacado (){
+    return Math.random() > .2 || hp < 20
+}  
+// fazer a implementação de se ele vai conseguir desviar ou n baseado no bossAtacado()
+function desviar() {
+    texto.innerText = "Você desviou do ataque do " + boss[batalha].nome + "."
+}
+function derrotarBoss() {
+
+}*/
