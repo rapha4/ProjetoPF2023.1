@@ -9,7 +9,7 @@ const musicaDeFundoOFF = () => {
 }
 
 // Precisa ajustar essa mudarTela() para ser mais genérica, no momento ela só muda da tela principal para a próxima
-const mudarTela = () =>  {
+/* const mudarTela = () =>  {
     const paginaInicial = document.getElementById("paginaInicial")
     const cursos = document.getElementById("cursos")
     const interface = document.getElementById('interface')
@@ -17,6 +17,13 @@ const mudarTela = () =>  {
     cursos.style.display = 'flex'
     cursos.classList.add(`animacao`)
     interface.style.backgroundColor = '#b4c474'
+} */
+
+const mudarTela = (classe) => (tela) => {
+    const lista = [...document.getElementsByClassName(classe)]
+    const mudar = document.getElementById(tela)
+    lista.map(elem => elem.style.display = "none")
+    mudar.style.display = "flex"
 }
 
 
