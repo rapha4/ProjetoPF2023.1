@@ -4,48 +4,60 @@
     <meta charset="UTF-8">
     <title>Vida Universitaria RPG</title>
     <link rel="stylesheet" href="./style.css">
-    
+    <script src="https://kit.fontawesome.com/8e9a566064.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="interface" >
-
-        <img id = "inicioImg" src="./imagens/interface.png">
+    <div id="interface" > 
         
-        <div id="playDiv">
-            <button onclick = "mudarTela()" id="play">Play</button>
+        <div id="paginaInicial">
+            <img id = "inicioImg" class="img-de-fundo" src="./imagens/interface.png"> 
+        <!-- img é 1680 x 1050-->
+            <button onclick = "mudarTela()" class="botao" id="play">Play</button>
+        </div> 
+
+        <div id = "cursos" > 
+            <p> <span class="especial">PARABÉNS!</span> Você foi selecionado na chamada regular. 
+                 Escolha uma área do conhecimento para se matricular.
+            </p>
+            <div id="botoesCursos">
+                <div class="cursoind">
+                    <!-- A ideia aqui seria adicionar uma imagem/ícone para representar cada área -->
+                    <button id="exatas" class="botao btncursos" >Exatas</button>
+                </div>
+                <div class="cursoind">
+                    
+                    <button id="humanas" class="botao btncursos" >...</button>
+                </div>
+                <div class="cursoind">
+                    
+                    <button id="biologicas" class="botao btncursos" >...</button>
+                </div>                
+
+            </div>
         </div>
-        <span id="musicaSpan">
-            <button onclick="musicaDeFundoON()" class="musica">MscON</button>
-            <button onclick="musicaDeFundoOFF()" class="musica">MscOFF</button>
-        </span>
-    </div>
 
-
-    <div id = "cursos"> 
-
-        <img id = "cursosImg" src="./imagens/interface.png">
-
-        <div id="botoesCursos">
-            <button onclick = "mudarTela()"; id="exatas">Exatas</button>
-            <button onclick = "mudarTela()"; id="humanas">Humanas</button>
-            <button onclick = "mudarTela()"; id="biologicas">Exatas</button>
-            <button onclick = "mudarTela()"; id="exatas">Exatas</button>
+        <div id="resun">
+            <p id = "xp" >XP: <span id="valorXP">0</span></p>
+             <p id = "moeda" >HP:<span id="valorHP">100</span></p>
+            <p id = "hp" >Moedas:<span id="valorMoeda">50</span></p>
+            <button id="resunbtn1" class="botao">Bolo de pote (+10 HP por 5 moedas)</button>
+             <button id="resunbtn2" class="botao">Cuscuz (+30 HP por 15 moedas)</button>
+            <button id="resunbtn3" class="botao">Feijoada (+60 HP por 30 moedas) </button>
         </div>
 
-        <span id="musicaSpan">
-            <button onclick="musicaDeFundoON()" class="musica">MscON</button>
-            <button onclick="musicaDeFundoOFF()" class="musica">MscOFF</button>
+         <span class="botoes-musica">
+            <button onclick="mudarTela()" class="botao config"><i class="fa-solid fa-gear"></i></button>
+             <button onclick="musicaDeFundoON()" class="botao musica"><i class="fa-solid fa-volume-high"></i></button>
+             <button onclick="musicaDeFundoOFF()" class="botao musica"><i class="fa-solid fa-volume-xmark"></i></button>
         </span>
-    </div>
 
-  <!-- Atributos e botões comentados para o desenvolvimento da interface primeiro
-     <p id = "xp" >XP: <span id="valorXP">0</span></p>
-    <p id = "moeda" >HP:<span id="valorHP">100</span></p>
-    <p id = "hp" >Moedas:<span id="valorMoeda">50</span></p>
-    <button id="resunbtn1">Bolo de pote (+10 HP por 5 moedas)</button>
-    <button id="resunbtn2">Cuscuz (+30 HP por 15 moedas)</button>
-    <button id="resunbtn3">Feijoada (+60 HP por 30 moedas) </button>
---> 
+        <div id="config">
+
+        </div>
+             
+        
+          
+    </div>
 
     <audio loop="true" id="soundtrack">
         <source src="./soundtrack/Life Is Strange Soundtrack.mp3">

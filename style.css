@@ -1,12 +1,25 @@
 *{ /* Reseta toda a página para podermos customizar como quisermos */
     box-sizing: border-box;
     text-decoration: none;
+    font-family: Press_Start_2P;
+    overflow: hidden;
 }
 
 body {
-    background-color: #FF4958;
+    display: grid;
+    place-items: center;
+    background-color: #8d3837;
     margin: 0;
     padding: 0;   
+}
+
+p{
+    margin: 0;
+}
+
+img{
+    display: block;
+    max-width: 100%;
 }
 
 @font-face {
@@ -14,97 +27,143 @@ body {
     src: url(./font/Press_Start_2P/PressStart2P-Regular.ttf);
 }
 
+
 #interface {
-    display: flex;
-    justify-content: center;
-    margin-top: 3.7%;
-    position: absolute;
+    min-width: 840px;
+    max-width: 840px;
+    min-height: 525px;
+    margin-top: 4rem;
+   position: relative; 
+   border: 10px solid rgb(255, 255, 255); 
 }
 
-/* Botao de musica */
-#musicaSpan {
-    display: flex;
-    justify-content: center;
+.img-de-fundo{
     position: absolute;
-    top: 90%;
-    left: 20%;
-    width: 8%;
-    height: 4%;
-}
-.musica {
-    font-family: Press_Start_2P;
-    font-size: 0.6em;
-    color: antiquewhite;
+    z-index: -99;
+    pointer-events: none;
+} 
+
+/* Estilização dos botões */
+
+.botao{
+    color: #ffffff;
     background-color: #FF4958;
     border: 2px solid #73F2EB;
     border-radius: 3px;
-    box-shadow: -1px 2px 3px #222;
+    cursor: pointer;
 }
 
-.musica:active {
+.botao:active{
     box-shadow: inset -4px -4px 10px #972B34;
 }
 
-
-/* Botao play */
-
-#playDiv {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 67%;
-    left: 41.5%;
-    width: 17%;
-    height: 9%;
+.botao:hover{
+   font-weight: bold;
 }
+
+/* Botao de musica */
+.musica{
+    padding: 6px 8px;
+    font-size: 1.25rem;
+    margin-left: -10px;
+}
+
+.botoes-musica {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+
+/*Botão de iniciar*/
 
 #play {
-    height: 4em;
-    width: 16em;
-    font-family: Press_Start_2P;
-    color: antiquewhite;
-    background-color: #FF4958;
-    border: 5px solid #73F2EB;
-    border-radius: 5px;
-    box-shadow: -2px 3px 5px #222;
+    padding: 1rem 3rem;
+    font-size: 1.55rem;
+    position: absolute;
+    left: 320px;
+    bottom: 125px;
 }
 
-#play:active {
-    box-shadow: inset -4px -4px 10px #972B34;
+/* Botão de pausa */
+
+.config{
+    padding: 6px 8px;
+    font-size: 1.25rem;
 }
 
-/* imagem de fundo */
-
-#inicioImg {
-    width: 65%;
-    height: 55%;
-    align-content: center;
-    border: 10px solid white;
-}
+/* Tela de escolha dos cursos */
 
 #cursos {
+   
+    background-color: #b4c474;
+    position: relative;
+    min-height: 525px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cursos > p {
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 30px;
+    padding-bottom: 20px;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgb(26, 14, 16);
+    justify-self: flex-start;
+}
+
+
+
+#botoesCursos {
+    margin-top: 220px; /* Com certeza mudará */
+    width: fit-content;
     display: flex;
-    justify-content: center;
-    margin-top: 3.7%;
-    position: absolute;
+    gap: 50px;
+    justify-self: center;
+}
+
+.btncursos{
+    padding: 20px 50px;
+    width: 200px;
+}
+/* Tela do resun */
+
+#resun{
     display: none;
 }
 
-#botoesCursos {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 67%;
-    left: 41.5%;
-    width: 17%;
-    height: 9%;
+
+/* Animação retirada do stackoverflow https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
+
+ .animacao {
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+     -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+         animation: fadein 2s; 
+} 
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
-/* imagem de fundo */
-
-#cursosImg {
-    width: 65%;
-    height: 55%;
-    align-content: center;
-    border: 10px solid white;
+/* Firefox < 16 */ 
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */ 
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+} 
