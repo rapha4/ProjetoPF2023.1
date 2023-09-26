@@ -23,6 +23,7 @@
         const canvas = document.querySelector("canvas")
         const context = canvas.getContext("2d")
 
+
         /////// Define o status inicial da nave
         const nave = {
             x: canvas.width / 2,
@@ -39,7 +40,6 @@
 
 
         ///////////// cria os registros dos asteroides ///////////////
-
         const criarNovoAsteroide = (x, y) => {
             const novoAsteroide = {
                 x: x,
@@ -67,6 +67,7 @@
         /////// armazena os registros dos asteroides
         const asteroides = criarCinturaoDeAsteroides()
  
+
         //////////// Event Listeners, captura o teclado ///////////
         const keyDown = (/** @type {KeyboardEvent}*/ ev) => {
             switch(ev.keyCode) {
@@ -98,6 +99,7 @@
 
         document.addEventListener("keydown", keyDown)
         document.addEventListener("keyup", keyUp)
+
 
         ///////////////// frame ////////////////
 
@@ -176,16 +178,13 @@
             nave.y = 0 + nave.r
         }
 
-        ////// cria o desenho dos asteroides ( ainda em desenvolvimento, consertar ou adaptar a funcao para que os asteroides sejam desenhados)
-        // talvez seja interessante criar uma funcao que recebe apenas um unico objeto em vez de uma lista e aplicar ele a um map
+        ////// cria o desenho dos asteroides
+        // A funcão "desenhaAsteroides" recebe um registro. Aplicada essa função por um map à uma lista de registros contendo as informações dos asteroides, ela desenha um por vez.
         context.strokeStyle = "slategray"
         context.lineWidth = tamanho_da_nave / 2
     
         const desenhaAsteroides = (quantidadeDeAsteroides) => {
-            if (quantidadeDeAsteroides.length == 'undefined') 
-                return null
-            else {
-                const [primeiro, ...resto] = quantidadeDeAsteroides // pega o primeiro elemento da lista de asteroides e o separa do resto da lista
+                const primeiro = quantidadeDeAsteroides
                 // coordenadas do asteroide
                 const x = primeiro.x
                 const y = primeiro.y
@@ -216,13 +215,11 @@
                 conectarLinhas(vertices)
                 context.closePath()
                 context.stroke()
-
-                return desenhaAsteroides(resto)
             }
+
+            asteroides.map(desenhaAsteroides)
         } 
 
-        desenhaAsteroides(criarCinturaoDeAsteroides())
-    }
         setInterval(atualizacao, 1/FPS)
 
     </script>
