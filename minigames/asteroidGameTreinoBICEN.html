@@ -16,9 +16,9 @@
         const aceleracao_da_nave = 0.1
         const friccao = 0.3
         const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
-        const numero_de_asteroides = 3 // numero inicial de asteroides
-        const velocidade_dos_asteroides = 1.3
-        const vertices_dos_asteroides = 10 // quantidade padrao de vertices dos asteroides
+        const numero_de_asteroides = 5 // numero inicial de asteroides
+        const velocidade_dos_asteroides = 5
+        const vertices_dos_asteroides = 8 // quantidade padrao de vertices dos asteroides
 
         const canvas = document.querySelector("canvas")
         const context = canvas.getContext("2d")
@@ -48,9 +48,14 @@
                 velocidade_y: Math.random() * velocidade_dos_asteroides / FPS * (Math.random() < 0.5 ? 1 : -1),
                 r: tamanho_do_asteroide / 2,
                 a: Math.random() * Math.PI * 2,
-                vertices: Math.floor(Math.random() * (vertices_dos_asteroides + 1) + vertices_dos_asteroides/2)
+                vertices: Math.floor(Math.random() * (vertices_dos_asteroides + 1) + vertices_dos_asteroides/2),
             }
             return novoAsteroide
+        }
+
+        ///// impede que os asteroides sejam criados em cima da nave
+        const distanciaEntreObjetos = (x1, y1, x2, y2) => {
+            return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
         }
 
         const criarCinturaoDeAsteroides = (cinturaoDeAsteroides = [], controle = 0) => {
@@ -60,7 +65,10 @@
                 return cinturaoDeAsteroides
             else {
                 const asteroideTemp = criarNovoAsteroide(x,y)
-                return criarCinturaoDeAsteroides([...cinturaoDeAsteroides, asteroideTemp], controle+1)
+                    if (distanciaEntreObjetos(nave.x, nave.y, asteroideTemp.x, asteroideTemp.y) < tamanho_do_asteroide * 2 + tamanho_da_nave)
+                        return criarCinturaoDeAsteroides()
+                    else
+                        return criarCinturaoDeAsteroides([...cinturaoDeAsteroides, asteroideTemp], controle+1)
             }
             }
 
@@ -218,6 +226,34 @@
             }
 
             asteroides.map(desenhaAsteroides)
+
+            /////// movimento dos asteroides
+            const movimentoAsteroides = (asteroid) => {
+                asteroid.x += asteroid.velocidade_x
+                asteroid.y += asteroid.velocidade_y
+            }
+
+            asteroides.map(movimentoAsteroides)
+
+
+            /////// bordas do jogo, impede que os asteroides saiam do frame
+            const bordasAsteroides = (asteroid) => {
+                if (asteroid.x < 0 - asteroid.r) {
+                    asteroid.x = canvas.width + asteroid.r
+                }
+                else if (asteroid.x > canvas.width + asteroid.r) {
+                    asteroid.x = 0 - asteroid.r
+                }
+                if (asteroid.y < 0 - asteroid.r) {
+                    asteroid.y = canvas.height + asteroid.r
+                }
+                else if (asteroid.y > canvas.height + asteroid.r) {
+                    asteroid.y = 0 - asteroid.r
+                }
+            }
+
+            asteroides.map(bordasAsteroides)
+    
         } 
 
         setInterval(atualizacao, 1/FPS)
