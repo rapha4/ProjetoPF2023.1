@@ -112,11 +112,14 @@ const deletarSave=slot=>{
 }
 //Funcionalidades posteriores: caso julgado necessário, dar aviso ao usuário: exemplo: "Jogo salvo!"
 
-/*let batalha;
-let hpBoss;
+/*
+let hpBoss; 
+
+
 const batalhaBoss = document.querySelector("#batalhaBoss");
 const nomeBossTxt = document.querySelector("#nomeBoss");
 const hpBossTxt = document.querySelector("#hpBoss");
+const valorAlea = Math.random()
 
 const boss = [
     {
@@ -142,12 +145,6 @@ const boss = [
   ];
 // Os textos ainda vão ser modificados 
   const areaBatalha = [
-    {   
-        nome: "resun",
-        "botao de acao": ["","",""],
-        "funcao botao": [ , , ],
-        texto: "Você entrou no Resun",
-    },
     {
 		nome: "luta",
 		"botao de acao": ["ATACAR", "DESVIAR", "CORRER"],
@@ -174,23 +171,42 @@ const boss = [
     }
   ]
 
-  function lutarBoss() {
-	batalha = 1;
-	irLutar();
+  function lutarVetores() {
+	const batalha = 0;
+    const hpBoss =  boss[batalha].hp;
+	return irLutar(batalha, hpBoss)
+  }
+    function lutarCalculo() {
+	const batalha = 1;
+    const hpBoss =  boss[batalha].hp;
+	return irLutar(batalha, hpBoss)
+  }
+    function lutarDioglos() {
+	const batalha = 2;
+    const hpBoss =  boss[batalha].hp;
+	return irLutar(batalha, hpBoss)
+  }
+    function lutarCirdLil() {
+	const batalha = 3;
+    const hpBoss =  boss[batalha].hp;
+	return irLutar(batalha, hpBoss)
   }
 
   function irLutar(){
-    update(areaBatalha[1]);
-    hpBoss = boss[batalha].hp;
-    batalhaBoss.style.display = "block";
     nomeBossTxt.innerText = boss[batalha].nome;
 	hpBossTxt.innerText = hpBoss;
   }
 
   function atacar() {
     text.innerText = "O " + boss[batalha].nome + "atacou."
-    if (bossAtacado()){
-        hp -= getValorAtaqueBoss(boss[batalha].nivel);
+    if (ataqueDoBoss()){
+        const novoHp = estado.hp - pegarValorAtaqueBoss(boss[batalha].nivel);
+        //rever essa aplicação de função
+        atualizarDOM(...estado, hp: novoHp)
+                return {
+            ...estado,
+            hp: novoHP
+        }
     }else{
         texto.innerText += "Você errou o ataque";
     }
@@ -198,12 +214,11 @@ const boss = [
     if (hp <= 0) {
         derrota()
     } else if (hpBoss <= 0){
-        batalha === 2 ? vitoria() : bossDerrotado()
+        batalha === 3 ? vitoria() : bossDerrotado()
     }
   }
 
-  function getValorAtaqueBoss (nivel) {
-    // const valorAlea = Math.random()
+  function pegarValorAtaqueBoss (nivel) {
     //function getValorAtaqueBoss (nivel, xp, valorAlea){
     //    return (level * 5) - (Math.floor(valorAle * xp)
     //}  depois criava uma constante para receber os valores
