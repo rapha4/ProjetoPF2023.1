@@ -12,13 +12,13 @@
         /////// Define as configurações padrão do jogo
         const FPS = 30 // frames per second
         const tamanho_da_nave = 30 // pixels
-        const velocidade_de_rotacao = 1
+        const velocidade_de_rotacao = 0.6
         const aceleracao_da_nave = 0.1
         const duracao_da_explosao_da_nave = 3
         const duracao_da_invisibilidade = 15
         const duracao_do_pisca = 0.7 // durante a invisibilidade
         const maximo_de_lasers = 10 // numero maximo de lasers na tela
-        const velocidade_do_laser = 300
+        const velocidade_do_laser = 50
         const friccao = 0.3
         const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
         const numero_de_asteroides = 8 // numero inicial de asteroides
@@ -67,7 +67,7 @@
                     x: nave.x + nave.r * Math.cos(nave.a),
                     y: nave.y - nave.r * Math.sin(nave.a),
                     velocidade_x: velocidade_do_laser * Math.cos(nave.a) / FPS,
-                    velocidade_y: velocidade_do_laser * Math.sin(nave.a) / FPS
+                    velocidade_y: -velocidade_do_laser * Math.sin(nave.a) / FPS
                 }
                 return criarLaser([...lasers, novoLaser])
             }
@@ -282,6 +282,13 @@
         }
 
         nave.lasers.map(desenhaLasers)  
+
+        ////// movimento dos lasers
+        // precisei usar o "for" para fazer o movimento das balas
+        for (var i = 0; i < nave.lasers.length; i++) {
+            nave.lasers[i].x += nave.lasers[i].velocidade_x
+            nave.lasers[i].y += nave.lasers[i].velocidade_y
+        }
 
         ////// cria o desenho dos asteroides
         // A funcão "desenhaAsteroides" recebe um registro. Aplicada essa função por um map à uma lista de registros contendo as informações dos asteroides, ela desenha um por vez.
