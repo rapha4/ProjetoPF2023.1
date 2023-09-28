@@ -17,6 +17,8 @@
         const duracao_da_explosao_da_nave = 3
         const duracao_da_invisibilidade = 15
         const duracao_do_pisca = 0.7 // durante a invisibilidade
+        const maximo_de_lasers = 10 // numero maximo de lasers na tela
+        const velocidade_do_laser = 300
         const friccao = 0.3
         const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
         const numero_de_asteroides = 8 // numero inicial de asteroides
@@ -39,6 +41,8 @@
                 tempoDoPisca: Math.ceil(duracao_do_pisca * FPS),
                 numeroDoPisca: Math.ceil(duracao_da_invisibilidade / duracao_do_pisca),
                 tempoDeExplosao: 0,
+                podeAtirar: true,
+                lasers: [],
                 avanço: false,
                 movimento: {
                     x: 0,
@@ -47,11 +51,33 @@
             }
         }
 
-        //////////// INFORME: precisei definir "nave" como constante para que fosse possível "ressucitar" ela após colisões.
+        //////////// INFORME: precisei definir "nave" como variável para que fosse possível "ressucitar" ela após colisões.
         var nave = novaNave()
 
         const explodirNave = () => {
             nave.tempoDeExplosao = Math.ceil(duracao_da_explosao_da_nave * FPS)
+        }
+
+        ////////////// cria os lasers /////////////////
+        const criarLaser = (lasers = []) => {
+            if (lasers.length >= maximo_de_lasers)
+                return lasers 
+            else {
+                const novoLaser = {
+                    x: nave.x + nave.r * Math.cos(nave.a),
+                    y: nave.y - nave.r * Math.sin(nave.a),
+                    velocidade_x: velocidade_do_laser * Math.cos(nave.a) / FPS,
+                    velocidade_y: velocidade_do_laser * Math.sin(nave.a) / FPS
+                }
+                return criarLaser([...lasers, novoLaser])
+            }
+        }
+
+        const atirarLaser = () => {
+            if (nave.podeAtirar) {
+                nave.lasers = criarLaser()
+            } 
+            nave.podeAtirar = false
         }
 
         ///////////// cria os registros dos asteroides ///////////////
@@ -93,6 +119,9 @@
         //////////// Event Listeners, captura o teclado ///////////
         const keyDown = (/** @type {KeyboardEvent}*/ ev) => {
             switch(ev.keyCode) {
+                case 32: // (espaço) atira o laser
+                    atirarLaser()
+                    break;
                 case 37: // (seta esquerda) rotaciona a nave para a esquerda
                     nave.rot = velocidade_de_rotacao/FPS
                     break;
@@ -107,6 +136,9 @@
 
         const keyUp = (/** @type {KeyboardEvent}*/ ev) => {
             switch(ev.keyCode) {
+                case 32: // (espaço) permite que o laser seja atirado novamente
+                    nave.podeAtirar = true
+                    break;
                 case 37: // (seta esquerda) para a rotacao da nave para a esquerda
                     nave.rot = 0
                     break;
@@ -241,6 +273,16 @@
             nave.y = 0 + nave.r
         }
 
+        ////// desenha os lasers
+        const desenhaLasers = (laser) => {
+            context.fillStyle = "salmon"
+            context.beginPath()
+            context.arc(laser.x, laser.y, tamanho_da_nave / 15, 0, Math.PI * 2, false)
+            context.fill()
+        }
+
+        nave.lasers.map(desenhaLasers)  
+
         ////// cria o desenho dos asteroides
         // A funcão "desenhaAsteroides" recebe um registro. Aplicada essa função por um map à uma lista de registros contendo as informações dos asteroides, ela desenha um por vez.
         context.strokeStyle = "slategray"
@@ -277,7 +319,6 @@
                     return conectarLinhas(numeroVertices, controle+1)
                 }
             }
-            console.log("teste")
             conectarLinhas(vertices)
             context.closePath()
             context.stroke()
