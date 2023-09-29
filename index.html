@@ -53,10 +53,32 @@
          <span class="botoes-musica">
             <button onclick="mudarTela('gamediv')('config')" class="botao config"><i class="fa-solid fa-gear"></i></button>
              <button onclick="musicaDeFundoON()" class="botao musica"><i class="fa-solid fa-volume-high"></i></button>
-             <button onclick="musicaDeFundoOFF()" class="botao musica"><i class="fa-solid fa-volume-xmark"></i></button>
+             <button onclick="musicaDeFundoOFF()" class="botao musica"><i class="fa-solid fa-volume-xmark"></i></button>	
         </span>
+		<span class="botao-voltar">
+			 <button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="botao"><i class="fa-solid fa-arrow-left"></i></button>
+		 </span>
 
-        <div id="config">
+        <div id="config" class="gamediv">
+			<div id="saveslots">
+				<span>Slot 1</span>
+				<button class="botao">Save</button>
+				<button class="botao">Load</button>
+				
+				<br>
+				<br>
+				
+				<span>Slot 2</span>
+				<button class="botao">Save</button>
+				<button class="botao">Load</button>
+				
+				<br>
+				<br>
+				<span>Slot 3</span>
+				<button class="botao">Save</button>
+				<button class="botao">Load</button>
+				
+			</div>
 
         </div>
              
