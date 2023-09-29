@@ -19,9 +19,10 @@
         const duracao_do_pisca = 0.7 // durante a invisibilidade
         const maximo_de_lasers = 10 // numero maximo de lasers na tela  !!!!! por algum motivo, apenas 1 laser está sendo definido na tela
         const velocidade_do_laser = 50
+        const distancia_do_laser = 0.35 // maxima distancia que o laser pode se movimentar
         const friccao = 0.3
         const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
-        const numero_de_asteroides = 8 // numero inicial de asteroides
+        const numero_de_asteroides = 4 // numero inicial de asteroides
         const velocidade_dos_asteroides = 5
         const vertices_dos_asteroides = 8 // quantidade padrao de vertices dos asteroides
         
@@ -67,7 +68,8 @@
                     x: nave.x + nave.r * Math.cos(nave.a),
                     y: nave.y - nave.r * Math.sin(nave.a),
                     velocidade_x: velocidade_do_laser * Math.cos(nave.a) / FPS,
-                    velocidade_y: -velocidade_do_laser * Math.sin(nave.a) / FPS
+                    velocidade_y: -velocidade_do_laser * Math.sin(nave.a) / FPS,
+                    distancia: 0
                 }
                 return [...lasers, novoLaser]
             }
@@ -81,13 +83,13 @@
         }
 
         ///////////// cria os registros dos asteroides ///////////////
-        const criarNovoAsteroide = (x, y) => {
+        const criarNovoAsteroide = (x, y, r) => {
             const novoAsteroide = {
                 x: x,
                 y: y,
                 velocidade_x: Math.random() * velocidade_dos_asteroides / FPS * (Math.random() < 0.5 ? 1 : -1),
                 velocidade_y: Math.random() * velocidade_dos_asteroides / FPS * (Math.random() < 0.5 ? 1 : -1),
-                r: tamanho_do_asteroide / 2,
+                r: r,
                 a: Math.random() * Math.PI * 2,
                 vertices: Math.floor(Math.random() * (vertices_dos_asteroides + 1) + vertices_dos_asteroides/2)
             }
@@ -105,7 +107,7 @@
             if (controle >= numero_de_asteroides) 
                 return cinturaoDeAsteroides
             else {
-                const asteroideTemp = criarNovoAsteroide(x,y)
+                const asteroideTemp = criarNovoAsteroide(x,y, Math.ceil(tamanho_do_asteroide / 2))
                     if (distanciaEntreObjetos(nave.x, nave.y, asteroideTemp.x, asteroideTemp.y) < tamanho_do_asteroide * 2 + tamanho_da_nave)
                         return criarCinturaoDeAsteroides()
                     else
@@ -115,6 +117,26 @@
 
         /////// armazena os registros dos asteroides
         const asteroides = criarCinturaoDeAsteroides()
+
+        ////// destruição de asteroides
+        const destruirAsteroide = (index) => {
+            const x = asteroides[index].x
+            const y = asteroides[index].x
+            const r = asteroides[index].r
+
+            // divide o asteroide em 2 (se possível)
+            if (r == Math.ceil(tamanho_do_asteroide / 2)) {
+                asteroides.push(criarNovoAsteroide(x, y, Math.ceil(tamanho_do_asteroide / 4)))
+                asteroides.push(criarNovoAsteroide(x, y, Math.ceil(tamanho_do_asteroide / 4)))
+            }
+            else if (r == Math.ceil(tamanho_do_asteroide / 4)) {
+                asteroides.push(criarNovoAsteroide(x, y, Math.ceil(tamanho_do_asteroide / 8)))
+                asteroides.push(criarNovoAsteroide(x, y, Math.ceil(tamanho_do_asteroide / 8)))
+            }
+
+            // destroi o asteroide
+            asteroides.splice[index, 1]
+        }
         
         //////////// Event Listeners, captura o teclado ///////////
         const keyDown = (/** @type {KeyboardEvent}*/ ev) => {
@@ -285,8 +307,31 @@
 
         ////// movimento dos lasers
         const movimentoLasers = (laser) => {
+            // checa a distacia do movimento do laser
+            if (laser.distancia > distancia_do_laser * canvas.width) {
+                nave.lasers.splice(nave.lasers.indexOf(laser), 1)
+            }
+
+            // movimenta o laser
             laser.x += laser.velocidade_x
             laser.y += laser.velocidade_y
+
+            // calcula a distancia do movimento dos lasers
+            laser.distancia += Math.sqrt(Math.pow(laser.velocidade_x, 2) + Math.pow(laser.velocidade_y, 2))
+
+            // borda do jogo, impede que os lasers saiam do frame
+            if (laser.x < 0) {
+                laser.x = canvas.width
+            }
+            else if (laser.x > canvas.width){
+                laser.x = 0
+            } 
+            if (laser.y < 0) {
+                laser.y = canvas.height
+            }
+            else if (laser.y > canvas.height){
+                laser.y = 0
+            } 
         }
 
         nave.lasers.map(movimentoLasers)
@@ -381,6 +426,33 @@
                     nave = novaNave()
                 }
             }
+
+            ////// detectar colisoes de lasers e asteroides
+            // Utilizei de laços para facilitar na detecção
+            for (var i = asteroides.length - 1; i >= 0; i--) {
+                // recebe as coordenadas dos asteroides
+                var ax = asteroides[i].x
+                var ay = asteroides[i].y
+                var ar = asteroides[i].r
+
+                // loop de analise dos lasers
+                for (var j = nave.lasers.length - 1; j >= 0; j--) {
+                    // recebe as coordenadas dos lasers
+                    var lx = nave.lasers[j].x
+                    var ly = nave.lasers[j].y
+
+                    // detectar as colisões
+                    if (distanciaEntreObjetos(ax, ay, lx, ly) < ar) {
+                        // deleta o laser
+                        nave.lasers.splice(j, 1)
+                        // deleta o asteroide
+                        destruirAsteroide(i)
+                        break;
+                    }
+                }
+            } 
+
+
         } 
 
         setInterval(atualizacao, 1/FPS)
