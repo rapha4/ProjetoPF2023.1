@@ -43,6 +43,14 @@ img{
     pointer-events: none;
 } 
 
+/*Gamediv display padrão none */
+.gamediv {
+	display:none;
+}
+#paginaInicial{
+	display:flex;
+}
+
 /* Estilização dos botões */
 
 .botao{
@@ -74,6 +82,19 @@ img{
   left: 15px;
 }
 
+/*Botão de voltar*/
+.botao-voltar {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	min-width: 37px;
+}
+
+#voltar {
+	padding: 6px 8px;
+    font-size: 1.25rem;
+}
+
 /*Botão de iniciar*/
 
 #play {
@@ -84,11 +105,19 @@ img{
     bottom: 125px;
 }
 
-/* Botão de pausa */
+/* Botão de configurações */
 
 .config{
     padding: 6px 8px;
     font-size: 1.25rem;
+}
+
+/* Tela de configurações */
+
+#saveslots{
+	position:absolute;
+	right: 10px;
+	top: 10px;
 }
 
 /* Tela de escolha dos cursos */
