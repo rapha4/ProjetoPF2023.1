@@ -69,13 +69,13 @@
                     velocidade_x: velocidade_do_laser * Math.cos(nave.a) / FPS,
                     velocidade_y: -velocidade_do_laser * Math.sin(nave.a) / FPS
                 }
-                return criarLaser([...lasers, novoLaser])
+                return [...lasers, novoLaser]
             }
         }
 
         const atirarLaser = () => {
             if (nave.podeAtirar) {
-                nave.lasers = criarLaser()
+                nave.lasers = criarLaser(nave.lasers)
             } 
             nave.podeAtirar = false
         }
