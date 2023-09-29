@@ -17,7 +17,7 @@
         const duracao_da_explosao_da_nave = 3
         const duracao_da_invisibilidade = 15
         const duracao_do_pisca = 0.7 // durante a invisibilidade
-        const maximo_de_lasers = 10 // numero maximo de lasers na tela
+        const maximo_de_lasers = 10 // numero maximo de lasers na tela  !!!!! por algum motivo, apenas 1 laser está sendo definido na tela
         const velocidade_do_laser = 50
         const friccao = 0.3
         const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
@@ -284,11 +284,12 @@
         nave.lasers.map(desenhaLasers)  
 
         ////// movimento dos lasers
-        // precisei usar o "for" para fazer o movimento das balas
-        for (var i = 0; i < nave.lasers.length; i++) {
-            nave.lasers[i].x += nave.lasers[i].velocidade_x
-            nave.lasers[i].y += nave.lasers[i].velocidade_y
+        const movimentoLasers = (laser) => {
+            laser.x += laser.velocidade_x
+            laser.y += laser.velocidade_y
         }
+
+        nave.lasers.map(movimentoLasers)
 
         ////// cria o desenho dos asteroides
         // A funcão "desenhaAsteroides" recebe um registro. Aplicada essa função por um map à uma lista de registros contendo as informações dos asteroides, ela desenha um por vez.
@@ -385,6 +386,7 @@
         setInterval(atualizacao, 1/FPS)
 
     </script>
+
    
 </body>
 </html>
