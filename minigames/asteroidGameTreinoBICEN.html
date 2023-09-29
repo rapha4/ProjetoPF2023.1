@@ -121,7 +121,7 @@
         ////// destruição de asteroides
         const destruirAsteroide = (index) => {
             const x = asteroides[index].x
-            const y = asteroides[index].x
+            const y = asteroides[index].y
             const r = asteroides[index].r
 
             // divide o asteroide em 2 (se possível)
@@ -135,7 +135,7 @@
             }
 
             // destroi o asteroide
-            asteroides.splice[index, 1]
+            asteroides.splice(index, 1)
         }
         
         //////////// Event Listeners, captura o teclado ///////////
