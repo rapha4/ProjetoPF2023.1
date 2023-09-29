@@ -20,9 +20,10 @@
         const maximo_de_lasers = 10 // numero maximo de lasers na tela  !!!!! por algum motivo, apenas 1 laser está sendo definido na tela
         const velocidade_do_laser = 50
         const distancia_do_laser = 0.35 // maxima distancia que o laser pode se movimentar
+        const duracao_da_explosao_do_laser = 1
         const friccao = 0.3
         const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
-        const numero_de_asteroides = 4 // numero inicial de asteroides
+        const numero_de_asteroides = 6 // numero inicial de asteroides
         const velocidade_dos_asteroides = 5
         const vertices_dos_asteroides = 8 // quantidade padrao de vertices dos asteroides
         
@@ -69,7 +70,8 @@
                     y: nave.y - nave.r * Math.sin(nave.a),
                     velocidade_x: velocidade_do_laser * Math.cos(nave.a) / FPS,
                     velocidade_y: -velocidade_do_laser * Math.sin(nave.a) / FPS,
-                    distancia: 0
+                    distancia: 0,
+                    tempoDeExplosao: 0
                 }
                 return [...lasers, novoLaser]
             }
@@ -297,10 +299,28 @@
 
         ////// desenha os lasers
         const desenhaLasers = (laser) => {
-            context.fillStyle = "salmon"
-            context.beginPath()
-            context.arc(laser.x, laser.y, tamanho_da_nave / 15, 0, Math.PI * 2, false)
-            context.fill()
+            if (laser.tempoDeExplosao == 0) {
+                context.fillStyle = "salmon"
+                context.beginPath()
+                context.arc(laser.x, laser.y, tamanho_da_nave / 15, 0, Math.PI * 2, false)
+                context.fill()
+            }
+            else {
+                context.fillStyle = "orangered"
+                context.beginPath()
+                context.arc(laser.x, laser.y, nave.r * 0.75, 0, Math.PI * 2, false)
+                context.fill()
+
+                context.fillStyle = "salmon"
+                context.beginPath()
+                context.arc(laser.x, laser.y, nave.r * 0.5, 0, Math.PI * 2, false)
+                context.fill()
+
+                context.fillStyle = "pink"
+                context.beginPath()
+                context.arc(laser.x, laser.y, nave.r * 0.25, 0, Math.PI * 2, false)
+                context.fill()
+            }
         }
 
         nave.lasers.map(desenhaLasers)  
@@ -313,11 +333,29 @@
             }
 
             // movimenta o laser
-            laser.x += laser.velocidade_x
-            laser.y += laser.velocidade_y
+            //laser.x += laser.velocidade_x
+            //laser.y += laser.velocidade_y
+
+            // explosao do laser
+            if (laser.tempoDeExplosao > 0) {
+                laser.tempoDeExplosao--
+
+                // destruir o laser depois do tempo de explosão ter sido percorrido
+                if (laser.tempoDeExplosao == 0) {
+                    nave.lasers.splice(nave.lasers.indexOf(laser), 1)
+                }
+            }
+            else {
+                // movimenta o laser
+                laser.x += laser.velocidade_x
+                laser.y += laser.velocidade_y
+
+                 // calcula a distancia do movimento dos lasers
+                laser.distancia += Math.sqrt(Math.pow(laser.velocidade_x, 2) + Math.pow(laser.velocidade_y, 2))
+            }
 
             // calcula a distancia do movimento dos lasers
-            laser.distancia += Math.sqrt(Math.pow(laser.velocidade_x, 2) + Math.pow(laser.velocidade_y, 2))
+            //laser.distancia += Math.sqrt(Math.pow(laser.velocidade_x, 2) + Math.pow(laser.velocidade_y, 2))
 
             // borda do jogo, impede que os lasers saiam do frame
             if (laser.x < 0) {
@@ -442,11 +480,10 @@
                     var ly = nave.lasers[j].y
 
                     // detectar as colisões
-                    if (distanciaEntreObjetos(ax, ay, lx, ly) < ar) {
-                        // deleta o laser
-                        nave.lasers.splice(j, 1)
-                        // deleta o asteroide
+                    if (nave.lasers[j].tempoDeExplosao == 0 && distanciaEntreObjetos(ax, ay, lx, ly) < ar) {
+                        // deleta o asteroide e ativa a explosao do laser
                         destruirAsteroide(i)
+                        nave.lasers[j].tempoDeExplosao = Math.ceil(duracao_da_explosao_do_laser * FPS)
                         break;
                     }
                 }
