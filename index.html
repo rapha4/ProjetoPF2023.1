@@ -16,9 +16,7 @@
         </div> 
 
         <div class="gamediv" id = "cursos" > 
-            <p> <span class="especial">PARABÉNS!</span> Você foi selecionado na chamada regular. 
-                 Escolha uma área do conhecimento para se matricular.
-            </p>
+            <img id="cursosImg" class="img-de-fundo" src="./imagens/interface-parabens.png">
             <div id="botoesCursos">
                 <div class="cursoind">
                     <!-- A ideia aqui seria adicionar uma imagem/ícone para representar cada área -->
@@ -26,13 +24,76 @@
                 </div>
                 <div class="cursoind">
                     
-                    <button id="humanas" class="botao btncursos" >...</button>
+                    <button id="humanas" class="botao btncursos" >Em breve...</button>
                 </div>
                 <div class="cursoind">
                     
-                    <button id="biologicas" class="botao btncursos" >...</button>
+                    <button id="biologicas" class="botao btncursos" >Em breve...</button>
                 </div>                
 
+            </div>
+        </div>
+
+        <div class="gamediv" id="personagem">
+            <img id="personagemImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
+           <p class="texto">ESCOLHA SEU PERSONAGEM</p>
+           <div class="cards">
+                <div class="card-gameplay">
+                        <img src="./imagens/personagem 1.png" class="imgCard">
+                        <button class="botao opcao">Opção 1</button>
+                </div>
+                <div class="card-gameplay">
+                    <img src="./imagens/personagem 2.png" class="imgCard">
+                    <button class="botao opcao">Opção 2</button>
+                </div>
+             </div>
+        </div>
+
+        <div class="gamediv" id="nome">
+            <img id="nomeImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
+            <div class="nome-card">
+            <p class="texto">Insira seu nome</p>
+            <input type="text" class="input-nome" id="nomeInput" maxlength="16">
+            <button class="botao continuar" id="botaoNome">Continuar</button>
+            </div>
+        </div>
+
+        <div class="gamediv" id="gameplay">
+            <p class="texto">MES:<span class="meses">1/4</span></p>
+            <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
+            <div class="botoes">
+                <button class="amarelo botao-principal">
+                    <p class="texto principal sombravermelha">RESUN</p>
+                    <p class="texto descricao">Gaste suas moedas no RESUN para recuperar HP.</p>
+                </button>
+                <button class="amarelo botao-principal">
+                    <p class="texto principal sombravermelha">BICEN</p>
+                    <p class="texto descricao">Frequente a BICEN para treinar suas habilidades e ganhar XP e moedas.</p>
+                </button>
+                <button class="vermelho botao-principal">
+                    <p class="texto principal sombrapreta">PROVA</p>
+                    <p class="texto descricao">Enfrente a PROVA para passar para o próximo mês. Esteja preparado.</p>
+                    <p class="alerta texto">Nível <br>recomendado: <span id='nivel-rec'>5</span></p>
+                </button>
+            </div>
+           <div class="icones">
+                 <img src="imagens/personagem 1.png" class="personagemGameplay " id="opcao1">
+                <img src="imagens/personagem 2.png" class="personagemGameplay" id="opcao2">
+            </div>
+            <div class="barrastatus" id="barrastatus">
+                <div class="atributos">
+                <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
+                    <div class="atributos-mutaveis">
+                <p class="status-texto">HP:<span id='hp' class="vermelho-txt">100</span></p>
+                <p class="status-texto ">NV:<span id='nivel' class="ciano">10</span></p>
+                <p class="status-texto ">XP:<span id='xp' class='ciano'>109</span></p> 
+                <div class="moedasdiv">
+                    <img src="imagens/moedas.png" class="img-moedas">
+                    <p id="moedas-txt" class="amarelo-txt">200</p>
+                    </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
 
@@ -51,12 +112,12 @@
         </div> -->
         
          <span class="botoes-musica">
-            <button onclick="mudarTela('gamediv')('config')" class="botao config"><i class="fa-solid fa-gear"></i></button>
-             <button onclick="musicaDeFundoON()" class="botao musica"><i class="fa-solid fa-volume-high"></i></button>
-             <button onclick="musicaDeFundoOFF()" class="botao musica"><i class="fa-solid fa-volume-xmark"></i></button>	
+            <button onclick="mudarTela('gamediv')('config')" class="opacidade botao config"><i class="fa-solid fa-gear"></i></button>
+             <button onclick="musicaDeFundoON()" class="opacidade botao musica"><i class="fa-solid fa-volume-high"></i></button>
+             <button onclick="musicaDeFundoOFF()" class="opacidade botao musica"><i class="fa-solid fa-volume-xmark"></i></button>	
         </span>
 		<span class="botao-voltar">
-			 <button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="botao"><i class="fa-solid fa-arrow-left"></i></button>
+			 <button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao"><i class="fa-solid fa-arrow-left"></i></button>
 		 </span>
 
         <div id="config" class="gamediv">

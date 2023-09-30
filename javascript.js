@@ -31,12 +31,12 @@ const mudarTela = (classe) => (tela) => {
 }
 
 
-const xp = document.querySelector('#valorXP')
+/* const xp = document.querySelector('#valorXP')
 const moedas = document.querySelector('#valorMoeda')
 const hp = document.querySelector('#valorHP')
 const resunbtn1 = document.querySelector('#resunbtn1')
 const resunbtn2 = document.querySelector('#resunbtn2') 
-const resunbtn3 = document.querySelector('#resunbtn3') 
+const resunbtn3 = document.querySelector('#resunbtn3')  */
 
 
 // Logística do RESUN
@@ -242,3 +242,22 @@ function desviar() {
 function derrotarBoss() {
 
 }*/
+
+
+
+  /* Feito com auxílio do ChatGPT 
+  Tratamento do input do nome */
+
+/* Uso de regex (Regular Expressions) */
+const tratarInput = (input) => {
+        return input.replace(/</g, '&lt;') /* Impede que < e >, que determinam tags em HTML sejam utilizadas literalmente como tags de HTML. */
+                    .replace(/>/g, '&gt;') 
+                    .replace(/&/g, '&amp;') /* Substitui o & pelo seu representante no HTML */
+                    .replace(/'/g, '&#39;') /* Substitui a aspa simples por seu representante */
+                    .replace(/"/g, '&quot;'); /* Substitui a aspa dupla por seu representante */
+      }
+
+
+const botaoNome = document.getElementById('botaoNome')
+const nomeInput = document.getElementById('nomeInput')
+const nome = tratarInput(nomeInput.value)

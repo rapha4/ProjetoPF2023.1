@@ -32,6 +32,7 @@ img{
     min-width: 840px;
     max-width: 840px;
     min-height: 525px;
+    max-height: 525px;
     margin-top: 4rem;
    position: relative; 
    border: 10px solid rgb(255, 255, 255); 
@@ -56,7 +57,7 @@ img{
 .botao{
     color: #ffffff;
     background-color: #FF4958;
-    border: 2px solid #73F2EB;
+    border: 3px solid #73F2EB;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -76,23 +77,42 @@ img{
     margin-left: -10px;
 }
 
-.botoes-musica {
+ .botoes-musica {
   position: absolute;
   bottom: 15px;
   left: 15px;
+}  
+
+.botoes-musica-modificados{
+    position: absolute;
+    top: 20px;
+    left: 82px;
 }
 
 /*Botão de voltar*/
-.botao-voltar {
+ .botao-voltar {
 	position: absolute;
 	top: 15px;
 	left: 15px;
+	min-width: 37px;
+}  
+
+.botao-voltar-modificados{
+    position: absolute;
+	top: 15px;
+	left: 25px;
 	min-width: 37px;
 }
 
 #voltar {
 	padding: 6px 8px;
     font-size: 1.25rem;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.opacidade:hover{
+    opacity: 0.8;
 }
 
 /*Botão de iniciar*/
@@ -122,46 +142,275 @@ img{
 
 /* Tela de escolha dos cursos */
 
+
+#cursosImg{
+   height: 525px;
+   width: 100%;
+}
+
 #cursos {
-   
-    background-color: #b4c474;
-    position: relative;
     min-height: 525px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#botoesCursos {
+    margin-top: 150px;
+    width: fit-content;
+    display: flex;
+    gap: 20px;
+    justify-self: center;
+}
+
+.btncursos{
+    font-size: 15px;
+    padding: 20px 30px;
+    
+}
+
+/* Tela de Escolha do personagem */
+
+#personagem{
+    display: none;
+    min-height: 525px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+#personagemImg{
+    height: 525px;
+}
+
+#personagem > p {
+    font-size: 2.125rem;
+}
+
+.texto{
+    color: #fff;
+}
+
+.cards{
+    display: flex;
+    gap: 50px;
+}
+
+.card-gameplay{
+    scale: 88%;
+    display: flex;
+    flex-direction: column;
+}
+
+.imgCard{
+    z-index: -1;
+}
+
+.imgCard:hover{
+    filter: drop-shadow(5px 10px 15px #FF4958);
+}
+
+.opcao{
+    font-size: 1.25rem;
+    z-index: 2;
+    padding: 20px 40px;
+    margin-top: -10px;
+}
+
+/* Tela do nome */
+
+#nome{
+    display: none;
+}
+
+.nome-card > p {
+    font-size: 2.5rem;
+    border-bottom: 3px solid #ffffff;
+}
+
+
+.nome-card{
+    width: 100%;
+    height: 525px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-nome{
+    margin-top: 10px;
+    outline: 0;
+    width: 400px;
+    height: 40px;
+    font-size: 1.5rem;
+}
+
+.continuar{
+    margin-top: 10px;
+    padding: 10px 40px;
+    font-size: 1rem;
+}
+
+/* Tela gameplay principal */
+
+#gameplay{
     display: none;
     flex-direction: column;
     align-items: center;
 }
 
-#cursos > p {
-    color: #fff;
-    line-height: 20px;
-    text-align: center;
+#gameplayImg{
+    min-height: 525px;
+}
+
+#gameplay > p {
+    font-size: 1.3rem;
     margin-top: 30px;
-    padding-bottom: 20px;
-    font-style: italic;
-    text-shadow: 1px 1px 2px rgb(26, 14, 16);
-    justify-self: flex-start;
+    margin-right: 29px;
+    align-self: end;
 }
 
+.botoes{
+    margin-top: 30px;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    height: 325px;
+    scale: 105%;
+}
 
+.botao-principal:hover{
+    font-weight: bold;
+}
 
-#botoesCursos {
-    margin-top: 220px; /* Com certeza mudará */
-    width: fit-content;
+.botao-principal{
     display: flex;
-    gap: 50px;
-    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+   box-shadow: 1px 2px 3px #000;
+   width: 225px;
 }
 
-.btncursos{
-    padding: 20px 50px;
-    width: 200px;
+.amarelo{
+    background-color: #ffc55b;
+    border: none;
+    
 }
+
+.vermelho{
+    background-color: #FF4958;
+    border: none;
+}
+
+.sombravermelha{
+    filter: drop-shadow(5px 5px 10px #ff4958a2);
+}
+
+.sombrapreta{
+    filter: drop-shadow(5px 5px 10px #00000085);
+}
+
+.principal{
+    margin-top: 55px;
+    margin-bottom: 50px;
+    font-size: 2rem;
+    justify-self: start;
+}
+
+.descricao{
+    font-size: 0.9rem;
+    justify-self: center;
+    line-height: 18px;
+}
+
+.alerta{
+    font-size: 0.7rem;
+    margin-top: 20px;
+}
+
+.icones{
+    position: absolute;
+    z-index: 2;
+    width: 200px;
+    height: 200px;
+    bottom: 0px;
+    left: -20px;
+    filter: drop-shadow(5px 5px 10px #fff)
+}
+
+.personagemGameplay{
+    position:absolute;
+}
+
+.barrastatus{
+    position: absolute;
+    bottom: 10px;
+    left: 50px;
+    box-shadow: 3px 4px 4px #00000063;
+    z-index: -99;
+    width: 738px;
+    height: 40px;
+    background-color: #ffe29b;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: end;
+}
+
+.atributos{
+    width: 630px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between
+}
+
+.atributos-mutaveis{
+    display: flex;
+    align-items: center;
+}
+
+.status-texto{
+    color: #484742;
+    margin-right: 10px;
+}
+
+.ciano{
+    color: #237d72;
+}
+
+.amarelo-txt{
+    color: hsl(39, 100%, 50%);
+}
+
+.vermelho-txt{
+    color: #FF4958;
+}
+
+.moedasdiv{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.img-moedas{
+    height: 30px;
+}
+
+#moedas-txt{
+    margin-left: 5px;
+    font-size: 0.9rem;
+}
+
 /* Tela do resun */
 
 #resun{
     display: none;
 }
+
 
 
 /* Animação retirada do stackoverflow https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
