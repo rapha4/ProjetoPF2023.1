@@ -50,7 +50,6 @@ const criarEstadoInicial = () => {
 }
 }
 
-
 // Fazendo uso de variável para atualizar o estado atual. Tentamos de vários modos fazer por funcional, mas não conseguimos achar uma solução efetiva.
 let estadoAtual = criarEstadoInicial()
 
@@ -116,14 +115,13 @@ const deletarSave=slot=>{
 }
 //Funcionalidades posteriores: caso julgado necessário, dar aviso ao usuário: exemplo: "Jogo salvo!"
 
-/*
-let hpBoss; 
-
-
 const batalhaBoss = document.querySelector("#batalhaBoss");
 const nomeBossTxt = document.querySelector("#nomeBoss");
 const hpBossTxt = document.querySelector("#hpBoss");
-const valorAlea = Math.random()
+const texto = document.querySelector("#texto"); 
+
+
+// Os dados básicos de cada boss
 
 const boss = [
     {
@@ -147,7 +145,8 @@ const boss = [
         hp: 100
       }
   ];
-// Os textos ainda vão ser modificados 
+
+// diferentes estados da batalha: descrição do estado, botões disponiveis para o usuário, funções de cada botão e o texto que acompanha o estado da luta
   const areaBatalha = [
     {
 		nome: "luta",
@@ -163,86 +162,85 @@ const boss = [
 	},
 	{
 		nome: "derrota",
-		"botao de acao": ["JOGAR DE NOVO?", "SAIR DO JOGO", ""],
-		"funcao botao": [jogarDeNovo, sairDoJogo],
-		texto: "TIROU 0!!!"
+		"botao de acao": ["JOGAR DE NOVO?", "SAIR DO JOGO", "SAIR DO JOGO"],
+		"funcao botao": [jogarDeNovo, sairDoJogo, sairDoJogo],
+		texto: "VOCÊ TIROU 0!!!"
 	},
 	{
 		nome: "vitoria",
 		"botao de acao": ["JOGAR DE NOVO", "SAIR DO JOGO", ""],
-		"funcao botao": [jogarDeNovo, sairDoJogo, restart],
+		"funcao botao": [restart, sairDoJogo, restart],
 		texto: "Você sobreviveu o semestre! Ganhou o título de veterano 🎉"
     }
   ]
+  
+  const bossVetores = boss[0]
+  const bossCalculo = boss[1]
+  const bossDioglos = boss[2]
+  const bossCirdLil = boss[3]
 
-  function lutarVetores() {
-	const batalha = 0;
-    const hpBoss =  boss[batalha].hp;
-	return irLutar(batalha, hpBoss)
+  const atualizarDOMboss = (boss) => {
+    hpBossTxt.textContent = boss.hp
+}
+ function gerarValorAlea (min, max){
+    const valorAlea = Math.random(min,max)
+    return valorAlea
+ }
+  //função que pega as informações de cada boss
+  function irLutar(boss){
+    hpBossTxt.innerText = boss.hp
+    nomeBossTxt.innerText = boss.nome;
   }
-    function lutarCalculo() {
-	const batalha = 1;
-    const hpBoss =  boss[batalha].hp;
-	return irLutar(batalha, hpBoss)
-  }
-    function lutarDioglos() {
-	const batalha = 2;
-    const hpBoss =  boss[batalha].hp;
-	return irLutar(batalha, hpBoss)
-  }
-    function lutarCirdLil() {
-	const batalha = 3;
-    const hpBoss =  boss[batalha].hp;
-	return irLutar(batalha, hpBoss)
-  }
-
-  function irLutar(){
-    nomeBossTxt.innerText = boss[batalha].nome;
-	hpBossTxt.innerText = hpBoss;
-  }
-
-  function atacar() {
-    text.innerText = "O " + boss[batalha].nome + "atacou."
-    if (ataqueDoBoss()){
-        const novoHp = estado.hp - pegarValorAtaqueBoss(boss[batalha].nivel);
-        //rever essa aplicação de função
-        atualizarDOM(...estado, hp: novoHp)
-                return {
-            ...estado,
-            hp: novoHP
-        }
+ //função usada para mudar o hp do usuário ou do boss a depender de quem for atacado 
+  function atacar(boss, estado) {
+    texto.innerText = "O " + boss.nome + "atacou."
+    //caso o ataque seja bem-sucedido, o hpdoBoss será alterado
+    if (bossAtacado()){
+        texto.innerText += "Você acertou o"+boss.nome+".";
+        const novohpBoss= boss.hp - ((estado.nivel * 2)+ Math.floor(gerarValorAlea(0,1) * estado.xp) + 1);//decidir quanto de dano
+        return atualizarDOMboss({...boss, hp:novohpBoss})
+    //caso o ataque falhe, o usuário perde hp
     }else{
         texto.innerText += "Você errou o ataque";
+        const novoHp = estado.hp - pegarValorAtaqueBoss(boss.nivel)//decidir dano
+        return  atualizarDOM({...estado, hp: novoHp})
     }
     
-    if (hp <= 0) {
+    if (estado.hp <= 0) {
         derrota()
-    } else if (hpBoss <= 0){
-        batalha === 3 ? vitoria() : bossDerrotado()
+    } else if (boss.hp <= 0){
+        boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado()
     }
   }
-
-  function pegarValorAtaqueBoss (nivel) {
-    //function getValorAtaqueBoss (nivel, xp, valorAlea){
-    //    return (level * 5) - (Math.floor(valorAle * xp)
-    //}  depois criava uma constante para receber os valores
-
-    let hit = (level * 5) - (Math.floor(Math.random() * xp));
-    console.log(hit);
-    return hit;
+  // Valor do ataque do Boss
+  function pegarValorAtaqueBoss (boss,estado) {
+    const ataque = (boss.nivel*5)-(Math.floor(gerarValorAlea(0,1)*estado.xp))//decidir dano
+        return ataque
   }
-  //fazer a implementação para se o ataque será efetivo ou n, no jogo original é de 80% de chance de acertar
-function bossAtacado (){
-    return Math.random() > .2 || hp < 20
+ // Gera um valor aleatorio e depois da verificação retorna true ou false e decidindo se o ataque será efetivo ou não
+function bossAtacado (boss, estado){
+    return gerarValorAlea(0,1) > (estado.nivel/10) || boss.hp < 20
 }  
-// fazer a implementação de se ele vai conseguir desviar ou n baseado no bossAtacado()
-function desviar() {
-    texto.innerText = "Você desviou do ataque do " + boss[batalha].nome + "."
+
+function desviar(boss) {
+    texto.innerText = "Você desviou do ataque do " + boss.nome + "."
 }
-function derrotarBoss() {
 
-}*/
+//adequar depois
+function derrotarBoss(boss, estado) {
+    const maisMoedas = estado.moedas + Math.floor(boss.nivel * 6.7)
+    const novoXp = estado.xp + boss.nivel;
+    atualizarDOM({...estado, moedas: maisMoedas, xp: novoXp})
+    update(areaBatalha[1]);
+}
 
+function derrota() {
+    update(areaBatalha[2]);
+}
+
+function vitoria() {
+  update(areaBatalha[3]);
+}
 
 
   /* Feito com auxílio do ChatGPT 

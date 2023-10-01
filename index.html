@@ -20,7 +20,7 @@
             <div id="botoesCursos">
                 <div class="cursoind">
                     <!-- A ideia aqui seria adicionar uma imagem/ícone para representar cada área -->
-                    <button id="exatas" class="botao btncursos" >Exatas</button>
+                    <button onclick="mudarTela('gamediv')('gameplay')" id="exatas" class="botao btncursos" >Exatas</button>
                 </div>
                 <div class="cursoind">
                     
@@ -106,10 +106,11 @@
             <button id="resunbtn3" class="botao">Feijoada (+60 HP por 30 moedas) </button>
         </div>
 
-       <!--<div id="batalhaBoss">
-            <span class="stat">Nome do boss:<strong><span id=""></span></strong></span>
-            <span class="stat">HP:<strong><span id="monsterHealth"></span></strong></span>
-        </div> -->
+        <div class="gamediv" id="batalhaBoss">
+            <span class="stat">Nome do boss:<span id="nomeBoss"></span></span>
+            <span class="stat">HP:<span id="hpBoss"></span></span>
+            <span class="stat">Nivel:</span><span id="nivelBoss"></span>
+        </div>
         
          <span class="botoes-musica">
             <button onclick="mudarTela('gamediv')('config')" class="opacidade botao config"><i class="fa-solid fa-gear"></i></button>
