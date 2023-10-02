@@ -20,7 +20,7 @@
             <div id="botoesCursos">
                 <div class="cursoind">
                     <!-- A ideia aqui seria adicionar uma imagem/ícone para representar cada área -->
-                    <button onclick="mudarTela('gamediv')('gameplay')" id="exatas" class="botao btncursos" >Exatas</button>
+                    <button onclick="mudarTela('gamediv')('personagem')" id="exatas" class="botao btncursos" >Exatas</button>
                 </div>
                 <div class="cursoind">
                     
@@ -40,11 +40,11 @@
            <div class="cards">
                 <div class="card-gameplay">
                         <img src="./imagens/personagem 1.png" class="imgCard">
-                        <button class="botao opcao">Opção 1</button>
+                        <button class="botao opcao" onclick="mudarTela('gamediv')('nome')">Opção 1</button>
                 </div>
                 <div class="card-gameplay">
                     <img src="./imagens/personagem 2.png" class="imgCard">
-                    <button class="botao opcao">Opção 2</button>
+                    <button class="botao opcao" onclick="mudarTela('gamediv')('nome')" >Opção 2</button>
                 </div>
              </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="nome-card">
             <p class="texto">Insira seu nome</p>
             <input type="text" class="input-nome" id="nomeInput" maxlength="16">
-            <button class="botao continuar" id="botaoNome">Continuar</button>
+            <button class="botao continuar" id="botaoNome" onclick="mudarTela('gamediv')('gameplay')">Continuar</button>
             </div>
         </div>
 
