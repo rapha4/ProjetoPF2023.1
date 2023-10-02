@@ -21,13 +21,25 @@ const musicaDeFundoOFF = () => {
 } 
 */
 
+//Essas linhas de código permitem que a função seguinte funcione corretamente
+const redirInicial=["gameplay","cursos","personagem","nome"]; //por algum motivo, a proxima linha funciona apenas se usar ; nessa
+[...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+document.getElementById("paginaInicial").style.display="flex"
+//Essa função muda de tela do jogo e altera o funcionamento do botão de voltar correspondentemente.
 const mudarTela = (classe) => (tela) => {
 	const interface = document.getElementById('interface')
     const lista = [...document.getElementsByClassName(classe)]
     const mudar = document.getElementById(tela)
-    lista.map(elem => elem.style.display = "none")
+	const voltar = document.getElementById("voltar")
+	const original=lista.filter(elem=>elem.style.display!="none")[0]
+    original.style.display="none"
     mudar.style.display = "flex"
 	mudar.classList.add('animacao')
+	const helper= (id)=>{
+		voltar.onclick=()=>mudarTela(classe)(id)
+	}
+	if (redirInicial.indexOf(tela)!=-1) helper("paginaInicial")
+	else helper(original.id)
 }
 
 
