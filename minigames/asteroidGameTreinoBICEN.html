@@ -11,6 +11,7 @@
 
         /////// Define as configurações padrão do jogo
         const FPS = 30 // frames per second
+        const vidas_iniciais = 3
         const tamanho_da_nave = 30 // pixels
         const velocidade_de_rotacao = 0.6
         const aceleracao_da_nave = 0.1
@@ -44,6 +45,7 @@
                 numeroDoPisca: Math.ceil(duracao_da_invisibilidade / duracao_do_pisca),
                 tempoDeExplosao: 0,
                 podeAtirar: true,
+                status: true, /// se true = não ocorreu game over, se false = game over
                 lasers: [],
                 avanço: false,
                 movimento: {
@@ -55,11 +57,31 @@
 
         //////////// INFORME: precisei definir "nave" como variável para que fosse possível "ressucitar" ela após colisões.
         var nave = novaNave()
+        var vidas = vidas_iniciais
 
         const explodirNave = () => {
             nave.tempoDeExplosao = Math.ceil(duracao_da_explosao_da_nave * FPS)
         }
 
+        const desenharNave = (x, y, a) => {
+            context.strokeStyle = "white"
+            context.lineWidth = tamanho_da_nave/20
+            context.beginPath()
+            context.moveTo( // topo da nave
+                x + nave.r * Math.cos(a),
+                y - nave.r *Math.sin(a)
+            )
+            context.lineTo( // lado esquerdo da nave
+                x - nave.r * (Math.cos(a) + Math.sin(a)),
+                y + nave.r * (Math.sin(a) - Math.cos(a))
+            )
+            context.lineTo( // trás da nave
+                x - nave.r * (Math.cos(a) - Math.sin(a)),
+                y + nave.r * (Math.sin(a) + Math.cos(a))
+            )
+            context.closePath() // lado direito da nave
+            context.stroke()
+        }
         ////////////// cria os lasers /////////////////
         const criarLaser = (lasers = []) => {
             if (lasers.length >= maximo_de_lasers)
@@ -144,7 +166,9 @@
         const keyDown = (/** @type {KeyboardEvent}*/ ev) => {
             switch(ev.keyCode) {
                 case 32: // (espaço) atira o laser
-                    atirarLaser()
+                    if (nave.status) {
+                        atirarLaser()
+                    }
                     break;
                 case 37: // (seta esquerda) rotaciona a nave para a esquerda
                     nave.rot = velocidade_de_rotacao/FPS
@@ -174,6 +198,16 @@
                     break;
             }
         }
+        
+        const gameOver = () => {
+            nave.status = false
+             // adicionar botao para recomeçar o jogo e voltar ao menu principal
+             /// recomeçar
+                // nave = novanave()
+                // vidas = vidas_iniciais
+            /// voltar ao menu principal
+        }
+
 
         document.addEventListener("keydown", keyDown)
         document.addEventListener("keyup", keyUp)
@@ -193,23 +227,7 @@
         ////// cria o desenho da nave
         if (!naveExplodindo) {
             if (piscaAtivado) {
-                context.strokeStyle = "white"
-                context.lineWidth = tamanho_da_nave/20
-                context.beginPath()
-                context.moveTo( // topo da nave
-                    nave.x + nave.r * Math.cos(nave.a),
-                    nave.y - nave.r *Math.sin(nave.a)
-                )
-                context.lineTo( // lado esquerdo da nave
-                    nave.x - nave.r * (Math.cos(nave.a) + Math.sin(nave.a)),
-                    nave.y + nave.r * (Math.sin(nave.a) - Math.cos(nave.a))
-                )
-                context.lineTo( // trás da nave
-                    nave.x - nave.r * (Math.cos(nave.a) - Math.sin(nave.a)),
-                    nave.y + nave.r * (Math.sin(nave.a) + Math.cos(nave.a))
-                )
-                context.closePath() // lado direito da nave
-                context.stroke()
+                desenharNave(nave.x, nave.y, nave.a)
             }
 
             if (nave.numeroDoPisca > 0) {
@@ -247,8 +265,24 @@
             context.arc(nave.x, nave.y, nave.r * 0.5, 0, Math.PI * 2, false)
             context.fill()
         }
+
+        ///// desenha as vidas
+        const desenhaVidas = (vidas,controle = 0) => {
+            if (vidas <= controle) {
+                return 0
+            }
+            else {
+                desenharNave(tamanho_da_nave + controle * tamanho_da_nave * 1.2, tamanho_da_nave, 0.5 * Math.PI)
+                return desenhaVidas(vidas, controle+1)
+            }
+        }
+
+        desenhaVidas(vidas)
+
         ////// rotacao da nave 
-        nave.a += nave.rot
+        if (nave.status) {
+              nave.a += nave.rot
+        }
 
         ////// movimento da nave
         if (nave.avanço) {
@@ -256,7 +290,7 @@
             nave.movimento.y -= aceleracao_da_nave * Math.sin(nave.a) / FPS
 
             //cria o desenho da propulsao
-            if (!naveExplodindo && piscaAtivado) {
+            if (!naveExplodindo && piscaAtivado && nave.status) {
                 context.fillStyle = "red"
                 context.strokeStyle = "yellow"
                 context.lineWidth = tamanho_da_nave/10
@@ -445,7 +479,9 @@
                     explodirNave()
             }
 
-            if (!naveExplodindo) { 
+
+            ////// nave
+            if (!naveExplodindo && nave.status) { 
                 if (nave.numeroDoPisca == 0) { // nao checa as colisoes se a nave estiver piscando(invisivel)
                     asteroides.map(checarColisoes)
                 }
@@ -460,8 +496,12 @@
             else {
                 nave.tempoDeExplosao--
 
-                if (nave.tempoDeExplosao == 0) {
+                if (nave.tempoDeExplosao == 0 && vidas > 0) {
                     nave = novaNave()
+                    vidas--
+                } 
+                else {
+                    gameOver()
                 }
             }
 
