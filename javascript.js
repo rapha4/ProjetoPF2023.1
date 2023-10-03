@@ -119,6 +119,7 @@ const load=slot=>{
 	const estado=JSON.parse(localStorage.getItem(slot))
     atualizarDOM(estado)
     estadoAtual = estado
+	//mudarTela('gamediv')('gameplay')
 }
 
 const deletarSave=slot=>{

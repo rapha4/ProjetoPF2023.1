@@ -40,11 +40,13 @@
            <div class="cards">
                 <div class="card-gameplay">
                         <img src="./imagens/personagem 1.png" class="imgCard">
-                        <button class="botao opcao" onclick="mudarTela('gamediv')('nome')">Opção 1</button>
+
+                        <button class="botao opcao" onclick="mudarTela('gamediv')('nome')>Opção 1</button>
                 </div>
                 <div class="card-gameplay">
                     <img src="./imagens/personagem 2.png" class="imgCard">
-                    <button class="botao opcao" onclick="mudarTela('gamediv')('nome')" >Opção 2</button>
+                    <button class="botao opcao" onclick="mudarTela('gamediv')('nome');document.getElementById('opcao1').style.display=none">Opção 2</button>
+
                 </div>
              </div>
         </div>
@@ -54,7 +56,7 @@
             <div class="nome-card">
             <p class="texto">Insira seu nome</p>
             <input type="text" class="input-nome" id="nomeInput" maxlength="16">
-            <button class="botao continuar" id="botaoNome" onclick="mudarTela('gamediv')('gameplay')">Continuar</button>
+            <button class="botao continuar" onclick="estadoAtual.nome=document.getElementById('botaoNome').value;mudarTela('gamediv')('gameplay')" id="botaoNome">Continuar</button>
             </div>
         </div>
 
