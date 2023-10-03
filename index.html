@@ -41,11 +41,11 @@
                 <div class="card-gameplay">
                         <img src="./imagens/personagem 1.png" class="imgCard">
 
-                        <button class="botao opcao" onclick="mudarTela('gamediv')('nome')">Opção 1</button>
+                        <button class="botao opcao" onclick="mudarTela('gamediv')('nome');estadoAtual.opcao='opcao1'">Opção 1</button>
                 </div>
                 <div class="card-gameplay">
                     <img src="./imagens/personagem 2.png" class="imgCard">
-                    <button class="botao opcao" onclick="mudarTela('gamediv')('nome');document.getElementById('opcao1').style.display=none">Opção 2</button>
+                    <button class="botao opcao" onclick="mudarTela('gamediv')('nome');estadoAtual.opcao='opcao2'">Opção 2</button>
 
                 </div>
              </div>
@@ -56,11 +56,14 @@
             <div class="nome-card">
             <p class="texto">Insira seu nome</p>
             <input type="text" class="input-nome" id="nomeInput" maxlength="16">
-            <button class="botao continuar" onclick="estadoAtual.nome=document.getElementById('botaoNome').value;mudarTela('gamediv')('gameplay')" id="botaoNome">Continuar</button>
+            <button class="botao continuar" onclick="estadoAtual.nome=document.getElementById('nomeInput').value;mudarTela('gamediv')('gameplay');atualizarDOM(estadoAtual)" id="botaoNome">Continuar</button>
             </div>
         </div>
 
         <div class="gamediv" id="gameplay">
+			<span class="botao-voltar">
+				 <button onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
+			</span>
             <p class="texto">MES:<span class="meses">1/4</span></p>
             <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
             <div class="botoes">
@@ -86,12 +89,12 @@
                 <div class="atributos">
                 <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
                     <div class="atributos-mutaveis">
-                <p class="status-texto">HP:<span id='hp' class="vermelho-txt">100</span></p>
+                <p class="status-texto">HP:<span id='valorHP' class="vermelho-txt">100</span></p>
                 <p class="status-texto ">NV:<span id='nivel' class="ciano">10</span></p>
-                <p class="status-texto ">XP:<span id='xp' class='ciano'>109</span></p> 
+                <p class="status-texto ">XP:<span id='valorXP' class='ciano'>109</span></p> 
                 <div class="moedasdiv">
                     <img src="imagens/moedas.png" class="img-moedas">
-                    <p id="moedas-txt" class="amarelo-txt">200</p>
+                    <p id="valorMoeda" class="amarelo-txt">200</p>
                     </div>
                     </div>
                     
@@ -119,9 +122,7 @@
              <button onclick="musicaDeFundoON()" class="opacidade botao musica"><i class="fa-solid fa-volume-high"></i></button>
              <button onclick="musicaDeFundoOFF()" class="opacidade botao musica"><i class="fa-solid fa-volume-xmark"></i></button>	
         </span>
-		<span class="botao-voltar">
-			 <button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao"><i class="fa-solid fa-arrow-left"></i></button>
-		 </span>
+		
 
         <div id="config" class="gamediv">
 			<div id="saveslots">

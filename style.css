@@ -104,7 +104,7 @@ img{
 	min-width: 37px;
 }
 
-#voltar {
+.voltar {
 	padding: 6px 8px;
     font-size: 1.25rem;
     margin-left: 10px;

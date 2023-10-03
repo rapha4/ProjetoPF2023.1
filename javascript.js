@@ -22,7 +22,6 @@ const musicaDeFundoOFF = () => {
 */
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
-const redirInicial=["gameplay","cursos","personagem","nome"]; //por algum motivo, a proxima linha funciona apenas se usar ; nessa
 [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
 document.getElementById("paginaInicial").style.display="flex"
 //Essa função muda de tela do jogo e altera o funcionamento do botão de voltar correspondentemente.
@@ -32,20 +31,17 @@ const mudarTela = (classe) => (tela) => {
     const mudar = document.getElementById(tela)
 	const voltar = document.getElementById("voltar")
 	const original=lista.filter(elem=>elem.style.display!="none")[0]
-    original.style.display="none"
+    lista.map(elem=>elem.style.display="none")
     mudar.style.display = "flex"
-	mudar.classList.add('animacao')
-	const helper= (id)=>{
-		voltar.onclick=()=>mudarTela(classe)(id)
-	}
-	if (redirInicial.indexOf(tela)!=-1) helper("paginaInicial")
-	else helper(original.id)
+	mudar.classList.add('animacao')	
 }
 
 
-/* const xp = document.querySelector('#valorXP')
+const xp = document.querySelector('#valorXP')
 const moedas = document.querySelector('#valorMoeda')
 const hp = document.querySelector('#valorHP')
+const nomeTxt=document.querySelector('#nome-txt')
+/*
 const resunbtn1 = document.querySelector('#resunbtn1')
 const resunbtn2 = document.querySelector('#resunbtn2') 
 const resunbtn3 = document.querySelector('#resunbtn3')  */
@@ -86,6 +82,9 @@ const atualizarDOM = (estado) => {
     xp.textContent = estado.xp
     hp.textContent = estado.hp
     moedas.textContent = estado.moedas
+	nomeTxt.textContent = estado.nome
+	mudarTela('personagemGameplay')(estado.opcao)
+	
 }
 
 // Função genérica para o clique de cada botão do RESUN
