@@ -83,10 +83,11 @@ img{
   left: 15px;
 }  
 
-.botoes-musica-modificados{
+.botoes-musica.botoes-musica-modificados{
     position: absolute;
     top: 20px;
     left: 82px;
+	max-height: 45px;
 }
 
 /*Botão de voltar*/
@@ -113,6 +114,12 @@ img{
 
 .opacidade:hover{
     opacity: 0.8;
+}
+
+#pgnIn{
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
 }
 
 /*Botão de iniciar*/
@@ -290,8 +297,9 @@ img{
     display: flex;
     align-items: center;
     flex-direction: column;
-   box-shadow: 1px 2px 3px #000;
-   width: 225px;
+	box-shadow: 1px 2px 3px #000;
+	width: 225px;
+	cursor: pointer;
 }
 
 .amarelo{

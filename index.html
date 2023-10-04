@@ -12,7 +12,7 @@
         <div class="gamediv" id="paginaInicial">
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/interface.png"> 
         <!-- img é 1680 x 1050-->
-            <button onclick = "mudarTela('gamediv')('cursos')" class="botao" id="play">Play</button>
+            <button onclick = "iniciarJogo()" class="botao" id="play">Play</button>
 			<!-- mudar btn play para função iniciarJogo com funcionamento adequado-->
         </div> 
 
@@ -61,10 +61,7 @@
             </div>
         </div>
 
-        <div class="gamediv" id="gameplay">
-			<span class="botao-voltar">
-				<button onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
-			</span>
+        <div class="gamediv" id="gameplay">			
             <p class="texto">MES:<span class="meses">1/4</span></p>
             <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
             <div class="botoes">
@@ -105,7 +102,7 @@
 
         <div class="gamediv" id="resun">
 			<span class="botao-voltar">
-				<button onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
+				<button onclick="mudarTela('gamediv')('gameplay')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
 			</span>
             <p id = "xp" >XP: <span id="valorXP">0</span></p>
              <p id = "moeda" >HP:<span id="valorHP">100</span></p>
@@ -121,7 +118,7 @@
             <span class="stat">Nivel:</span><span id="nivelBoss"></span>
         </div>
         
-         <span class="botoes-musica">
+         <span id="musica" class="botoes-musica">
             <button onclick="mudarTela('gamediv')('config')" class="opacidade botao config"><i class="fa-solid fa-gear"></i></button>
              <button onclick="musicaDeFundoON()" class="opacidade botao musica"><i class="fa-solid fa-volume-high"></i></button>
              <button onclick="musicaDeFundoOFF()" class="opacidade botao musica"><i class="fa-solid fa-volume-xmark"></i></button>	
@@ -131,6 +128,9 @@
         <div id="config" class="gamediv">
 			<span class="botao-voltar">
 				<button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
+			</span>
+			<span id="pgnIn">
+				<button onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar">Voltar para página inicial</button>
 			</span>
 			<div id="saveslots">
 				<span>Autosave</span>

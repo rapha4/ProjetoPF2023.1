@@ -24,9 +24,9 @@ const musicaDeFundoOFF = () => {
 //Essas linhas de código permitem que a função seguinte funcione corretamente
 [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
 document.getElementById("paginaInicial").style.display="flex"
-//Essa função muda de tela do jogo e altera o funcionamento do botão de voltar correspondentemente.
+//Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
 const mudarTela = (classe) => (tela) => {
-	const interface = document.getElementById('interface')
+	const musica = document.getElementById('musica')
     const lista = [...document.getElementsByClassName(classe)]
     const mudar = document.getElementById(tela)
 	const voltar = document.getElementById("voltar")
@@ -35,6 +35,12 @@ const mudarTela = (classe) => (tela) => {
     mudar.style.display = "flex"
 	mudar.classList.add('animacao')	
 	voltar.onclick=()=>mudarTela('gamediv')(original.id)
+	
+	if (classe=='gamediv'){
+		if (tela=='gameplay') musica.classList.add("botoes-musica-modificados")
+		else musica.classList.remove("botoes-musica-modificados")
+	}
+	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
 }
 
 
@@ -119,7 +125,16 @@ const load=slot=>{
 	const estado=JSON.parse(localStorage.getItem(slot))
     atualizarDOM(estado)
     estadoAtual = estado
-	//mudarTela('gamediv')('gameplay')
+	mudarTela('gamediv')('gameplay')
+}
+
+const iniciarJogo=()=>{
+	const autosave=localStorage.getItem("autosave")
+	if (autosave==null){
+		mudarTela('gamediv')('cursos')
+	}
+	else load('autosave')
+	
 }
 
 const deletarSave=slot=>{
