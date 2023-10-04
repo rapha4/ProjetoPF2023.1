@@ -34,6 +34,7 @@ const mudarTela = (classe) => (tela) => {
     lista.map(elem=>elem.style.display="none")
     mudar.style.display = "flex"
 	mudar.classList.add('animacao')	
+	voltar.onclick=()=>mudarTela('gamediv')(original.id)
 }
 
 
