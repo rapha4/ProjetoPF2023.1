@@ -12,7 +12,8 @@
         <div class="gamediv" id="paginaInicial">
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/interface.png"> 
         <!-- img é 1680 x 1050-->
-            <button onclick = "mudarTela('gamediv')('cursos')" class="botao" id="play">Play</button>
+            <button onclick = "iniciarJogo()" class="botao" id="play">Play</button>
+			<!-- mudar btn play para função iniciarJogo com funcionamento adequado-->
         </div> 
 
         <div class="gamediv" id = "cursos" > 
@@ -40,11 +41,13 @@
            <div class="cards">
                 <div class="card-gameplay">
                         <img src="./imagens/personagem 1.png" class="imgCard">
-                        <button class="botao opcao" onclick="mudarTela('gamediv')('nome')">Opção 1</button>
+
+                        <button class="botao opcao" onclick="mudarTela('gamediv')('nome');estadoAtual.opcao='opcao1'">Opção 1</button>
                 </div>
                 <div class="card-gameplay">
                     <img src="./imagens/personagem 2.png" class="imgCard">
-                    <button class="botao opcao" onclick="mudarTela('gamediv')('nome')" >Opção 2</button>
+                    <button class="botao opcao" onclick="mudarTela('gamediv')('nome');estadoAtual.opcao='opcao2'">Opção 2</button>
+
                 </div>
              </div>
         </div>
@@ -54,15 +57,15 @@
             <div class="nome-card">
             <p class="texto">Insira seu nome</p>
             <input type="text" class="input-nome" id="nomeInput" maxlength="16">
-            <button class="botao continuar" id="botaoNome" onclick="mudarTela('gamediv')('gameplay')">Continuar</button>
+            <button class="botao continuar" onclick="estadoAtual.nome=document.getElementById('nomeInput').value;mudarTela('gamediv')('gameplay');atualizarDOM(estadoAtual)" id="botaoNome">Continuar</button>
             </div>
         </div>
 
-        <div class="gamediv" id="gameplay">
+        <div class="gamediv" id="gameplay">			
             <p class="texto">MES:<span class="meses">1/4</span></p>
             <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
             <div class="botoes">
-                <button class="amarelo botao-principal" onclick="mudarTela('gamediv')('resun')">
+                <button onclick="mudarTela('gamediv')('resun')" class="amarelo botao-principal" onclick="mudarTela('gamediv')('resun')">
                     <p class="texto principal sombravermelha">RESUN</p>
                     <p class="texto descricao">Gaste suas moedas no RESUN para recuperar HP.</p>
                 </button>
@@ -88,12 +91,12 @@
                     <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
 
                     <div class="atributos-mutaveis">
-                    <p class="status-texto">HP:<span id='hp' class="vermelho-txt">100</span></p>
+                    <p class="status-texto">HP:<span id='valorHP' class="vermelho-txt">100</span></p>
                     <p class="status-texto ">NV:<span id='nivel' class="ciano">10</span></p>
-                    <p class="status-texto ">XP:<span id='xp' class='ciano'>109</span></p> 
+                    <p class="status-texto ">XP:<span id='valorXP' class='ciano'>109</span></p> 
                         <div class="moedasdiv">
                         <img src="imagens/moedas.png" class="img-moedas">
-                        <p id="moedas-txt" class="amarelo-txt">200</p>
+                        <p id="valorMoeda" class="amarelo-txt">200</p>
                         </div>
                     </div> 
                 </div>
@@ -101,6 +104,9 @@
         </div>
 
         <div class="gamediv" id="resun">
+			<span class="botao-voltar">
+				<button onclick="mudarTela('gamediv')('gameplay')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
+			</span>
             <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
             <div class="resun-botoes">
             <button id="resunbtn1" class="resun-botao">
@@ -176,33 +182,45 @@
             
         </div>
         
-         <span class="botoes-musica">
+         <span id="musica" class="botoes-musica">
             <button onclick="mudarTela('gamediv')('config')" class="opacidade botao config"><i class="fa-solid fa-gear"></i></button>
              <button onclick="musicaDeFundoON()" class="opacidade botao musica"><i class="fa-solid fa-volume-high"></i></button>
              <button onclick="musicaDeFundoOFF()" class="opacidade botao musica"><i class="fa-solid fa-volume-xmark"></i></button>	
         </span>
-		<span class="botao-voltar">
-			 <button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao"><i class="fa-solid fa-arrow-left"></i></button>
-		 </span>
+		
 
         <div id="config" class="gamediv">
+			<span class="botao-voltar">
+				<button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
+			</span>
+			<span id="pgnIn">
+				<button onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar">Voltar para página inicial</button>
+			</span>
 			<div id="saveslots">
+				<span>Autosave</span>
+				<button class="botao" onclick="deletarSave('autosave')">Delete</button>
+				<br>
+				<br>
+			
 				<span>Slot 1</span>
-				<button class="botao">Save</button>
-				<button class="botao">Load</button>
+				<button class="botao" onclick="save(estadoAtual)('slot1')">Save</button>
+				<button class="botao" onclick="load('slot1')">Load</button>
+				<button class="botao" onclick="deletarSave('slot1')">Delete</button>
 				
 				<br>
 				<br>
 				
 				<span>Slot 2</span>
-				<button class="botao">Save</button>
-				<button class="botao">Load</button>
+				<button class="botao" onclick="save(estadoAtual)('slot2')">Save</button>
+				<button class="botao" onclick="load('slot2')">Load</button>
+				<button class="botao" onclick="deletarSave('slot2')">Delete</button>
 				
 				<br>
 				<br>
 				<span>Slot 3</span>
-				<button class="botao">Save</button>
-				<button class="botao">Load</button>
+				<button class="botao" onclick="save(estadoAtual)('slot3')">Save</button>
+				<button class="botao" onclick="load('slot3')">Load</button>
+				<button class="botao" onclick="deletarSave('slot3')">Delete</button>
 				
 			</div>
 

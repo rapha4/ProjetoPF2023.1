@@ -22,33 +22,36 @@ const musicaDeFundoOFF = () => {
 */
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
-/* const redirInicial=["gameplay","cursos","personagem","nome"]; //por algum motivo, a proxima linha funciona apenas se usar ; nessa
-[...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none")  *///dando um style a cada elemento cuja class é gamediv
-/* document.getElementById("paginaInicial").style.display="flex" */
-//Essa função muda de tela do jogo e altera o funcionamento do botão de voltar correspondentemente.
+[...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+document.getElementById("paginaInicial").style.display="flex"
+//Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
 const mudarTela = (classe) => (tela) => {
-	const interface = document.getElementById('interface')
+	const musica = document.getElementById('musica')
     const lista = [...document.getElementsByClassName(classe)]
     const mudar = document.getElementById(tela)
 	const voltar = document.getElementById("voltar")
 	const original=lista.filter(elem=>elem.style.display!="none")[0]
-    original.style.display="none"
+    lista.map(elem=>elem.style.display="none")
     mudar.style.display = "flex"
-	mudar.classList.add('animacao')
-	const helper= (id)=>{
-		voltar.onclick=()=>mudarTela(classe)(id)
+	mudar.classList.add('animacao')	
+	voltar.onclick=()=>mudarTela('gamediv')(original.id)
+	
+	if (classe=='gamediv'){
+		if (tela=='gameplay') musica.classList.add("botoes-musica-modificados")
+		else musica.classList.remove("botoes-musica-modificados")
 	}
-	if (redirInicial.indexOf(tela)!=-1) helper("paginaInicial")
-	else helper(original.id)
+	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
 }
 
 
-const xp = document.querySelector('#xp')
-const moedas = document.querySelector('#moedas-txt')
-const hp = document.querySelector('#hp')
-const resunbtn1 = document.getElementById('resunbtn1')
-const resunbtn2 = document.getElementById('resunbtn2') 
-const resunbtn3 = document.getElementById('resunbtn3')  
+const xp = document.querySelector('#valorXP')
+const moedas = document.querySelector('#valorMoeda')
+const hp = document.querySelector('#valorHP')
+const nomeTxt=document.querySelector('#nome-txt')
+/*
+const resunbtn1 = document.querySelector('#resunbtn1')
+const resunbtn2 = document.querySelector('#resunbtn2') 
+const resunbtn3 = document.querySelector('#resunbtn3')  */
 
 
 // Logística do RESUN
@@ -86,6 +89,9 @@ const atualizarDOM = (estado) => {
     xp.textContent = estado.xp
     hp.textContent = estado.hp
     moedas.textContent = estado.moedas
+	nomeTxt.textContent = estado.nome
+	mudarTela('personagemGameplay')(estado.opcao)
+	
 }
 
 // Função genérica para o clique de cada botão do RESUN
@@ -119,6 +125,16 @@ const load=slot=>{
 	const estado=JSON.parse(localStorage.getItem(slot))
     atualizarDOM(estado)
     estadoAtual = estado
+	mudarTela('gamediv')('gameplay')
+}
+
+const iniciarJogo=()=>{
+	const autosave=localStorage.getItem("autosave")
+	if (autosave==null){
+		mudarTela('gamediv')('cursos')
+	}
+	else load('autosave')
+	
 }
 
 const deletarSave=slot=>{
