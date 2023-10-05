@@ -382,7 +382,7 @@ img{
 }
 
 .amarelo-txt{
-    color: hsl(39, 100%, 50%);
+    color: #ffb813;
 }
 
 .vermelho-txt{
@@ -406,12 +406,173 @@ img{
 }
 
 /* Tela do resun */
+#paginaInicial{display:none;}
 
 #resun{
-    display: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.resun-botoes{
+    display:flex;
+    gap: 20px;
+    width: 750px;
+    height: 350px;
+    margin-top: 70px;
+    background-color: #ffc55b;
+    align-items: center;
+    padding: 0px 2rem;
+}
+
+.resun-botao{
+    color: #fff;
+    height: 250px;
+    width: 250px;
+    border: none;
+    background-color:#ffe29b ;
+    box-shadow: 1px 2px 5px #4F4537;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.resun-botao:hover{
+    font-weight: bold;
+}
+
+.barrastatus-resun{
+    box-shadow: 3px 4px 4px #00000063;
+    z-index: -99;
+    width: 250px;
+    height: 60px;
+    background-color: #ffe29b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custosdiv{
+    display: flex;
+    align-items: center;
+}
+
+.nome-resun-div{
+    margin-top: 60px;
+    width: 100%;
+}
+
+.nome-resun{
+    font-size: 1.7rem;
+}
+
+.legenda-resun{
+    width: 100%;
+    line-height: 20px;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 150px;
+}
+
+.menormoedas{
+    height: 20px;
+    margin-right: 5px;
+}
+
+.custo{
+    display: flex;
+    justify-content: center;
+}
+
+.menor{
+    font-size: 1.6rem;
 }
 
 
+/* Tela da prova */
+#batalhaBoss{
+    display: none;
+    position: relative;
+    height: 525px;
+    flex-direction: column;
+}
+
+.barraboss, .barraplayer{
+    width: fit-content;
+    padding: 0rem 1rem ;
+    height: 40px;
+    background-color: #fcc94a;
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+    position: absolute;
+    top: 30px;
+}
+
+.barraboss{
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.bossfinal{
+    display: none;
+    position: absolute;
+    right: -20px;
+    bottom: 80px;
+    width: fit-content;
+    height: 400px;
+    filter: drop-shadow(5px 5px 10px #ff49589f);
+}
+
+.boss1{
+    display: none;
+    position: absolute;
+    width: 400px;
+    right: -20px;
+    bottom: 80px;
+    filter: drop-shadow(5px 5px 10px #ff49589f);
+}
+
+
+.botao-boss{
+    padding: 1rem 1.4rem;
+    color: #fff;
+    border: none;
+    font-size: 1.5rem;
+    box-shadow: 1px 2px 15px #000;
+    
+}
+
+.botoesboss{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    gap: 15px;
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.botao-boss:hover{
+    font-weight: bold;
+}
+
+.posicao-boss{
+    position: absolute;
+    left: -20px;
+    bottom: 15px;
+    z-index: 2;
+    filter: drop-shadow(5px 5px 10px #d8caca60)
+}
+
+.verde{
+    background-color: #1a7f78;
+}
 
 /* Animação retirada do stackoverflow https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
 

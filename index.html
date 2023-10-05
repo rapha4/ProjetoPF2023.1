@@ -62,7 +62,7 @@
             <p class="texto">MES:<span class="meses">1/4</span></p>
             <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
             <div class="botoes">
-                <button class="amarelo botao-principal">
+                <button class="amarelo botao-principal" onclick="mudarTela('gamediv')('resun')">
                     <p class="texto principal sombravermelha">RESUN</p>
                     <p class="texto descricao">Gaste suas moedas no RESUN para recuperar HP.</p>
                 </button>
@@ -76,40 +76,104 @@
                     <p class="alerta texto">Nível <br>recomendado: <span id='nivel-rec'>5</span></p>
                 </button>
             </div>
+
            <div class="icones">
                  <img src="imagens/personagem 1.png" class="personagemGameplay " id="opcao1">
                 <img src="imagens/personagem 2.png" class="personagemGameplay" id="opcao2">
             </div>
+
             <div class="barrastatus" id="barrastatus">
+
                 <div class="atributos">
-                <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
+                    <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
+
                     <div class="atributos-mutaveis">
-                <p class="status-texto">HP:<span id='hp' class="vermelho-txt">100</span></p>
-                <p class="status-texto ">NV:<span id='nivel' class="ciano">10</span></p>
-                <p class="status-texto ">XP:<span id='xp' class='ciano'>109</span></p> 
-                <div class="moedasdiv">
-                    <img src="imagens/moedas.png" class="img-moedas">
-                    <p id="moedas-txt" class="amarelo-txt">200</p>
-                    </div>
-                    </div>
-                    
+                    <p class="status-texto">HP:<span id='hp' class="vermelho-txt">100</span></p>
+                    <p class="status-texto ">NV:<span id='nivel' class="ciano">10</span></p>
+                    <p class="status-texto ">XP:<span id='xp' class='ciano'>109</span></p> 
+                        <div class="moedasdiv">
+                        <img src="imagens/moedas.png" class="img-moedas">
+                        <p id="moedas-txt" class="amarelo-txt">200</p>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
 
         <div class="gamediv" id="resun">
-            <p id = "xp" >XP: <span id="valorXP">0</span></p>
-             <p id = "moeda" >HP:<span id="valorHP">100</span></p>
-            <p id = "hp" >Moedas:<span id="valorMoeda">50</span></p>
-            <button id="resunbtn1" class="botao">Bolo de pote (+10 HP por 5 moedas)</button>
-             <button id="resunbtn2" class="botao">Cuscuz (+30 HP por 15 moedas)</button>
-            <button id="resunbtn3" class="botao">Feijoada (+60 HP por 30 moedas) </button>
+            <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
+            <div class="resun-botoes">
+            <button id="resunbtn1" class="resun-botao">
+                <div class="nome-resun-div">
+                <span class="nome-resun">Bolo de pote</span>
+                </div>
+                <div class="legenda-resun">
+                Recupera:<span class="vermelho-txt">10 HP</span>
+                    <div class="custo">
+                Custo:<span class="amarelo-txt custosdiv"><img src="imagens/moedas.png" class="menormoedas">5</span>
+                    </div>
+                </div>
+            </button>
+             <button id="resunbtn2" class="resun-botao"><div class="nome-resun-div">
+                <span class="nome-resun">Frango</span>
+                </div>
+                <div class="legenda-resun">
+                Recupera:<span class="vermelho-txt">30 HP</span>
+                    <div class="custo">
+                Custo:<span class="amarelo-txt custosdiv"><img src="imagens/moedas.png" class="menormoedas">15</span>
+                    </div>
+                </div></button>
+            <button id="resunbtn3" class="resun-botao"><div class="nome-resun-div">
+                <span class="nome-resun menor">Feijoada</span>
+                </div>
+                <div class="legenda-resun">
+                Recupera:<span class="vermelho-txt">60 HP</span>
+                    <div class="custo">
+                Custo:<span class="amarelo-txt custosdiv"><img src="imagens/moedas.png" class="menormoedas">30</span>
+                    </div>
+                </div></button>
+            </div>
+
+           <div class="barrastatus-resun" id="barrastatus-resun">
+                   <p class="status-texto ">HP:<span id='hp' class="vermelho-txt">100</span></p>
+                       <div class="moedasdiv">
+                       <img src="imagens/moedas.png" class="img-moedas ">
+                       <p id="moedas-txt" class="amarelo-txt ">200</p>
+                       </div>
+           </div>
         </div>
 
         <div class="gamediv" id="batalhaBoss">
-            <span class="stat">Nome do boss:<span id="nomeBoss"></span></span>
-            <span class="stat">HP:<span id="hpBoss"></span></span>
-            <span class="stat">Nivel:</span><span id="nivelBoss"></span>
+            <img id = "inicioImg" class="img-de-fundo" src="./imagens/fundo-boss.png"> 
+            
+            <div class="barraplayer">
+                <span id='nome-txt'>fulano</span>
+                <p>HP:<span id="hp" class="vermelho-txt">100</span></p>
+            </div>
+
+            <div class="barraboss">
+            
+            <span class="stat">HP:<span class="vermelho-txt" id="hpBoss">100</span></span>
+            <span class="stat"><span id="nomeBoss">Cálculo A</span></span>
+            </div>
+
+            
+            <img src="imagens/personagem 1.png" class="personagemGameplay posicao-boss " id="opcao1">
+                <img src="imagens/personagem 2.png" class="personagemGameplay posicao-boss" id="opcao2">
+
+            <div class="imgboss">
+                <img src="">
+            </div>
+            <div class="botoesboss">
+                <button class="vermelho botao-boss">Atacar</button>
+                <button class="vermelho botao-boss">Desviar</button>
+                <button class="botao-boss verde">Fugir</button>
+            </div>
+            <img src="imagens/stewart.png" class="boss1" id="boss1">
+            <img src="" class="boss2" id="boss2">
+            <img src="" class="boss3" id="boss3">
+            <img src="imagens/bossfinal.png" class="bossfinal" id="boss4">
+            
         </div>
         
          <span class="botoes-musica">
