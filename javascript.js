@@ -39,7 +39,7 @@ const mudarTela = (classe) => (tela) => {
 
 const criarEstadoInicial = () => {
     return { nome: '',
-    nivel: 0,
+    nivel: 1,
     xp: 0,
     hp: 100,
     moedas: 100, 
@@ -172,40 +172,40 @@ const texto = document.querySelector("#texto");
 
 const boss = [
     {
-      nome: "Vetores e Geometria Analítica",
-      nivel: 2,
-      hp: 45
+      nome: "Vetores",
+      nivel: 5,
+      hp: 100
     },
     {
         nome: "Cálculo A",
-        nivel: 3,
-        hp: 60
+        nivel: 6,
+        hp: 100
     },
     {
       nome: "Dioglos",
-      nivel: 6,
-      hp: 85
+      nivel: 9,
+      hp: 100
     },
     {
         nome: "Cirdneh e Lilak",
-        nivel: 9,
+        nivel: 12,
         hp: 100
       }
   ];
 
 // diferentes estados da batalha: descrição do estado, botões disponiveis para o usuário, funções de cada botão e o texto que acompanha o estado da luta
-  const areaBatalha = [
+ /* const areaBatalha = [
     {
 		nome: "luta",
-		"botao de acao": ["ATACAR", "DESVIAR", "CORRER"],
-		"funcao botao": [atacar, desviar, correr],
+		"botao de acao": ["ATACAR", "DESVIAR", "],
+		"funcao botao": [atacar, desviar, mudarTela('gamediv')('gameplay')],
 		texto: "Você está lutando com o boss"
 	},
 	{
 		nome: "boss derrotado",
 		"botao de acao": ["Próximo mês", "Próximo mês", "Próximo mês"],
 		"funcao botao": [proxMes, proxMes, proxMes],
-		texto: 'O boss grita "Arg!" enquanto te dá um 10. Você ganha experiência'
+		texto: 'O boss grita "Arg!" enquanto te dá um 10. Você ganhou experiência e moedas!'
 	},
 	{
 		nome: "derrota",
@@ -219,8 +219,8 @@ const boss = [
 		"funcao botao": [restart, sairDoJogo, restart],
 		texto: "Você sobreviveu o semestre! Ganhou o título de veterano 🎉"
     }
-  ]
-  
+  ]*/
+
   const bossVetores = boss[0]
   const bossCalculo = boss[1]
   const bossDioglos = boss[2]
@@ -229,64 +229,80 @@ const boss = [
   const atualizarDOMboss = (boss) => {
     hpBossTxt.textContent = boss.hp
 }
- function gerarValorAlea (min, max){
+ const gerarValorAlea = (min, max) => {
     const valorAlea = Math.random(min,max)
     return valorAlea
  }
   //função que pega as informações de cada boss
-  function irLutar(boss){
+ const irLutar = (boss) => {
     hpBossTxt.innerText = boss.hp
     nomeBossTxt.innerText = boss.nome;
   }
  //função usada para mudar o hp do usuário ou do boss a depender de quem for atacado 
-  function atacar(boss, estado) {
-    texto.innerText = "O " + boss.nome + "atacou."
-    //caso o ataque seja bem-sucedido, o hpdoBoss será alterado
-    if (bossAtacado()){
-        texto.innerText += "Você acertou o"+boss.nome+".";
-        const novohpBoss= boss.hp - ((estado.nivel * 2)+ Math.floor(gerarValorAlea(0,1) * estado.xp) + 1);//decidir quanto de dano
-        return atualizarDOMboss({...boss, hp:novohpBoss})
-    //caso o ataque falhe, o usuário perde hp
-    }else{
-        texto.innerText += "Você errou o ataque";
-        const novoHp = estado.hp - pegarValorAtaqueBoss(boss.nivel)//decidir dano
-        return  atualizarDOM({...estado, hp: novoHp})
-    }
-    
-    if (estado.hp <= 0) {
-        derrota()
-    } else if (boss.hp <= 0){
-        boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado()
+  const atacar = (boss, estado) => {
+        //caso o ataque seja bem-sucedido, o hpdoBoss será alterado
+        if (bossAtacado(boss, estado)){
+            const novohpBoss = boss.hp - (estado.nivel + Math.floor(gerarValorAlea(0,5) * estado.xp) + 1);// dano baseado no seu nivel e em xp
+            boss.hp = novohpBoss
+            atualizarDOMboss({...boss, hp:novohpBoss})
+        //caso o ataque falhe, o usuário perde hp
+        }else{
+            console.log(estado.hp)
+            const novoHp = estado.hp - pegarValorAtaqueBoss(boss, estado)
+            estado.hp = novoHp
+            atualizarDOM({...estado, hp: novoHp})
+        }
+        if (estado.hp <= 0) {
+            derrota()
+        } else if (boss.hp <= 0){
+            boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado()
     }
   }
   // Valor do ataque do Boss
-  function pegarValorAtaqueBoss (boss,estado) {
-    const ataque = (boss.nivel*5)-(Math.floor(gerarValorAlea(0,1)*estado.xp))//decidir dano
+const pegarValorAtaqueBoss = (boss,estado) => {
+    const ataque = (boss.nivel*3)-(Math.floor(gerarValorAlea(0,1)*(estado.xp/10)))//dano baseado no nivel do boss e no xp do usuário
         return ataque
   }
- // Gera um valor aleatorio e depois da verificação retorna true ou false e decidindo se o ataque será efetivo ou não
-function bossAtacado (boss, estado){
-    return gerarValorAlea(0,1) > (estado.nivel/10) || boss.hp < 20
-}  
 
-function desviar(boss) {
-    texto.innerText = "Você desviou do ataque do " + boss.nome + "."
+ // Gera um valor aleatorio para comparar com o nivel do usuário ou o hp do boss. Depois da verificação retorna true ou false e decidi se o ataque será efetivo ou não
+ // código de dificuldade do boss feito com auxílio do chatgpt
+ const bossAtacado = (boss, estado) => {
+    const valorAlea = gerarValorAlea(0,1)
+    const diferencaNiveis = estado.nivel - boss.nivel
+    const dificuldade = Math.max(0, 1 - Math.min(10, diferencaNiveis) * 0.1);
+    return valorAlea > dificuldade || boss.hp < 20
+    }
+
+// Nem o boss nem o usuário perdem hp
+const desviar = (boss, estado) => {
+    texto.innerText = "Você desviou do ataque do " + boss.nome + " com alguns arranhões."
+    const novoHp = estado.hp - boss.nivel
+        estado.hp = novoHp
+        console.log(estado.hp)
+        console.log("desviou")
+        atualizarDOM({...estado, hp: novoHp})
+        if (estado.hp <= 0) {
+            derrota()
+        } else if (boss.hp <= 0){
+            boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado()
+    }
 }
 
-//adequar depois
-function derrotarBoss(boss, estado) {
+const derrotarBoss = (boss, estado) => {
     const maisMoedas = estado.moedas + Math.floor(boss.nivel * 6.7)
     const novoXp = estado.xp + boss.nivel;
+    estado.moedas = maisMoedas
+    estado.xp = novoXp
     atualizarDOM({...estado, moedas: maisMoedas, xp: novoXp})
-    update(areaBatalha[1]);
+    window.alert("Você passou em "+boss.nome+"!!!");;
 }
 
-function derrota() {
-    update(areaBatalha[2]);
+const derrota = () => {
+    window.alert("Você foi reprovado");
 }
 
-function vitoria() {
-  update(areaBatalha[3]);
+const vitoria = () => {
+    window.alert("Você passou");;
 }
 
 
@@ -305,4 +321,5 @@ const tratarInput = (input) => {
 
 const botaoNome = document.getElementById('botaoNome')
 const nomeInput = document.getElementById('nomeInput')
-const nome = tratarInput(nomeInput.value)
+const nome = tratarInput(nomeInput.value).trim()
+
