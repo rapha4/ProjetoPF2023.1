@@ -155,6 +155,10 @@ const iniciarJogo=()=>{
 const deletarSave=slot=>{
     //Apaga os dados do jogo de um slot do armazenamento local
     localStorage.removeItem(slot)
+	if (slot="autosave") {
+		estadoAtual=criarEstadoInicial()
+		mudarTela('gamediv')('paginaInicial')
+	}
 } 
 //Funcionalidades posteriores: caso julgado necessário, dar aviso ao usuário: exemplo: "Jogo salvo!"
 
