@@ -10,7 +10,7 @@
     <div id="interface" > 
         
         <div class="gamediv" id="paginaInicial">
-            <img id = "inicioImg" class="img-de-fundo" src="./imagens/interface.png"> 
+            <img id="inicioImg" class="img-de-fundo" src="./imagens/interface.png"> 
         <!-- img é 1680 x 1050-->
             <button onclick = "iniciarJogo()" class="botao" id="play">Play</button>
 			<!-- mudar btn play para função iniciarJogo com funcionamento adequado-->
@@ -87,15 +87,15 @@
             <div class="barrastatus" id="barrastatus">
 
                 <div class="atributos">
-                    <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
+                    <p class="status-texto nome-txt">NOME:<span class='nome-txt'>fulano</span></p>
 
                     <div class="atributos-mutaveis">
-                    <p class="status-texto">HP:<span id='valorHP' class="vermelho-txt">0</span></p>
-                    <p class="status-texto ">NV:<span id='nivel' class="ciano">0</span></p>
-                    <p class="status-texto ">XP:<span id='valorXP' class='ciano'>0</span></p> 
+                    <p class="status-texto">HP:<span class="vermelho-txt valorHP">0</span></p>
+                    <p class="status-texto ">NV:<span class="ciano nivel">0</span></p>
+                    <p class="status-texto ">XP:<span class='ciano valorXP'>0</span></p> 
                         <div class="moedasdiv">
                         <img src="imagens/moedas.png" class="img-moedas">
-                        <p id="valorMoeda" class="amarelo-txt">100</p>
+                        <p class="amarelo-txt valorMoeda">100</p>
                         </div>
                     </div> 
                 </div>
@@ -140,10 +140,10 @@
             </div>
 
            <div class="barrastatus-resun" id="barrastatus-resun">
-                   <p class="status-texto ">HP:<span id='hp' class="vermelho-txt">100</span></p>
+                   <p class="status-texto ">HP:<span class="vermelho-txt valorHP">100</span></p>
                        <div class="moedasdiv">
                        <img src="imagens/moedas.png" class="img-moedas ">
-                       <p id="moedas-txt" class="amarelo-txt ">100</p>
+                       <p class="amarelo-txt valorMoeda">100</p>
                        </div>
            </div>
         </div>
@@ -154,8 +154,8 @@
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/fundo-boss.png"> 
             
             <div class="barraplayer">
-                <span id='nome-txt'>fulano</span>
-                <p>HP:<span id="hp" class="vermelho-txt">100</span></p>
+                <span class='nome-txt'>fulano</span>
+                <p>HP:<span class="vermelho-txt valorHP">100</span></p>
             </div>
 
             <div class="barraboss">

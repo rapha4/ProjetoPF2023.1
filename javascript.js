@@ -47,11 +47,11 @@ const criarEstadoInicial = () => {
 }
 
 let estadoAtual = criarEstadoInicial()
-const xp = document.querySelectorAll('#valorXP')
-const moedas = document.querySelectorAll('#valorMoeda')
-const hp = document.querySelectorAll('#valorHP')
-const nomeTxt=document.querySelectorAll('#nome-txt')
-const nivel = document.querySelectorAll('#nivel')
+const xp = document.querySelectorAll('.valorXP')
+const moedas = document.querySelectorAll('.valorMoeda')
+const hp = document.querySelectorAll('.valorHP')
+const nomeTxt=document.querySelectorAll('.nome-txt')
+const nivel = document.querySelectorAll('.nivel')
 
 // Botão de continuar na tela 'nome'
 const continuar = () => {
@@ -101,6 +101,7 @@ const atualizarDOM = (estado) => {
 
     helper(hp)("hp")
     helper(moedas)("moedas")
+	helper(nomeTxt)("nome")
 	mudarTela('personagemGameplay')(estado.opcao)
 }
 
