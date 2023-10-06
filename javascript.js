@@ -8,19 +8,6 @@ const musicaDeFundoOFF = () => {
     musica.pause()
 }
 
-// Precisa ajustar essa mudarTela() para ser mais genérica, no momento ela só muda da tela principal para a próxima
-/*
- const mudarTela = () =>  {
-    const paginaInicial = document.getElementById("paginaInicial")
-    const cursos = document.getElementById("cursos")
-    const interface = document.getElementById('interface')
-    paginaInicial.style.display = "none"
-    cursos.style.display = 'flex'
-    cursos.classList.add(`animacao`)
-    interface.style.backgroundColor = '#b4c474'
-} 
-*/
-
 //Essas linhas de código permitem que a função seguinte funcione corretamente
 [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
 document.getElementById("paginaInicial").style.display="flex"
@@ -36,37 +23,51 @@ const mudarTela = (classe) => (tela) => {
 	mudar.classList.add('animacao')	
 	voltar.onclick=()=>mudarTela('gamediv')(original.id)
 	
-	if (classe=='gamediv'){
+	if (classe=='gamediv'){ // Ajuste de localização dos botões de acordo com algumas telas.
 		if (tela=='gameplay') musica.classList.add("botoes-musica-modificados")
 		else musica.classList.remove("botoes-musica-modificados")
+        if(tela == 'resun') { 
+            musica.classList.add('botoes-musica-modificados-2')
+            voltar.classList.add('botao-voltar-modificado')
+        }else {
+            musica.classList.remove("botoes-musica-modificados-2")
+            voltar.classList.remove('botao-voltar-modificado')    
+    }
 	}
 	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
 }
 
+const criarEstadoInicial = () => {
+    return { nome: '',
+    nivel: 0,
+    xp: 0,
+    hp: 100,
+    moedas: 50, 
+}
+}
 
-const xp = document.querySelector('#valorXP')
-const moedas = document.querySelector('#valorMoeda')
-const hp = document.querySelector('#valorHP')
-const nomeTxt=document.querySelector('#nome-txt')
-/*
-const resunbtn1 = document.querySelector('#resunbtn1')
-const resunbtn2 = document.querySelector('#resunbtn2') 
-const resunbtn3 = document.querySelector('#resunbtn3')  */
+let estadoAtual = criarEstadoInicial()
+const xp = document.querySelectorAll('#valorXP')
+const moedas = document.querySelectorAll('#valorMoeda')
+const hp = document.querySelectorAll('#valorHP')
+const nomeTxt=document.querySelectorAll('#nome-txt')
+const nivel = document.querySelectorAll('#nivel')
+
+// Botão de continuar na tela 'nome'
+const continuar = () => {
+    estadoAtual.nome=document.getElementById('nomeInput').value
+    mudarTela('gamediv')('gameplay');atualizarDOM(estadoAtual)
+}
 
 
 // Logística do RESUN
 // Feito com auxílio do Chat GPT
 // Baseado em https://replit.com/@BeauCarnes/JavaScript-RPG#script.js
 
-const criarEstadoInicial = () => {
-    return { xp: 0,
-    hp: 100,
-    moedas: 50 
-}
-}
+
 
 // Fazendo uso de variável para atualizar o estado atual. Tentamos de vários modos fazer por funcional, mas não conseguimos achar uma solução efetiva.
-let estadoAtual = criarEstadoInicial()
+
 
 
 const comprarHP = (estado, qtdeDeHP) => {
@@ -79,43 +80,59 @@ const comprarHP = (estado, qtdeDeHP) => {
         }
     }
     else {
+        const alerta = document.querySelector('#alerta')
+        alerta.style.display = 'block'
         // Se não tem moedas suficientes para comprar HP, retorne a mesma coisa
         // Colocar um pop-up que avise 'Você não tem moedas suficientes'
         return estado
+        
     }
 }
 // Função para atualizar a interface
 const atualizarDOM = (estado) => {
-    xp.textContent = estado.xp
-    hp.textContent = estado.hp
-    moedas.textContent = estado.moedas
-	nomeTxt.textContent = estado.nome
+    const helper = ([x,...xs]) => (valor) => {
+        if([x,...xs].length = 0) x.textContent = estado[valor]
+        else {
+            x.textContent = estado[valor]
+            return helper(xs)(valor)
+        } 
+        
+            }
+
+    helper(hp)("hp")
+    helper(moedas)("moedas")
+    helper(nomeTxt)("nome")
 	mudarTela('personagemGameplay')(estado.opcao)
 	
 }
 
 // Função genérica para o clique de cada botão do RESUN
-const comprarClique = (estado, qtdeDeHP) => {
+const comprarClique = (estado) => (qtdeDeHP) => {
     estadoAtual = comprarHP(estado,qtdeDeHP)
     atualizarDOM(estadoAtual)
     return estadoAtual
 }
 
 // Funcionalidade dos botões (Execução da função dependente do clique)
-resunbtn1.addEventListener('click', () => {
-    estadoAtual = comprarClique(estadoAtual, 10)
-})
+const bolodepote = () => {
+    estadoAtual = comprarClique(estadoAtual)(10)
+}
 
-resunbtn2.addEventListener('click', () => {
-    estadoAtual = comprarClique(estadoAtual, 30)
-})
+const frango = () => {
+    estadoAtual = comprarClique(estadoAtual)(30)
+}
 
-resunbtn3.addEventListener('click', () => {
-    estadoAtual = comprarClique(estadoAtual, 60)
-})
+const feijoada = () => {
+    estadoAtual = comprarClique(estadoAtual)(60)
+}
+
+// Progressão de nível
+
+
+
 
 //Funcionalidade de save e load.
-const save=estado=>slot=>{
+/* const save=estado=>slot=>{
 	//Essa função armazena os dados do jogo no armazenamento local.
 	localStorage.setItem(slot,JSON.stringify(estado))	
 }
@@ -126,13 +143,13 @@ const load=slot=>{
     atualizarDOM(estado)
     estadoAtual = estado
 	mudarTela('gamediv')('gameplay')
-}
+} */
 
 const iniciarJogo=()=>{
-	const autosave=localStorage.getItem("autosave")
-	if (autosave==null){
+/* 	const autosave=localStorage.getItem("autosave")
+	if (autosave==null){ */
 		mudarTela('gamediv')('cursos')
-	}
+	}/* 
 	else load('autosave')
 	
 }
@@ -140,7 +157,7 @@ const iniciarJogo=()=>{
 const deletarSave=slot=>{
     //Apaga os dados do jogo de um slot do armazenamento local
     localStorage.removeItem(slot)
-}
+} */
 //Funcionalidades posteriores: caso julgado necessário, dar aviso ao usuário: exemplo: "Jogo salvo!"
 
 const batalhaBoss = document.querySelector("#batalhaBoss");

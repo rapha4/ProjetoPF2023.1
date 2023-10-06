@@ -57,8 +57,7 @@
             <div class="nome-card">
             <p class="texto">Insira seu nome</p>
             <input type="text" class="input-nome" id="nomeInput" maxlength="16">
-            <button class="botao continuar" onclick="estadoAtual.nome=document.getElementById('nomeInput').value;mudarTela('gamediv')('gameplay');atualizarDOM(estadoAtual)" id="botaoNome">Continuar</button>
-            </div>
+            <button class="botao continuar" onclick="continuar()" id="botaoNome">Continuar</button>            </div>
         </div>
 
         <div class="gamediv" id="gameplay">			
@@ -69,7 +68,7 @@
                     <p class="texto principal sombravermelha">RESUN</p>
                     <p class="texto descricao">Gaste suas moedas no RESUN para recuperar HP.</p>
                 </button>
-                <button class="amarelo botao-principal">
+                <button class="amarelo botao-principal" onclick="mudarTela('gamediv')('bicen')">
                     <p class="texto principal sombravermelha">BICEN</p>
                     <p class="texto descricao">Frequente a BICEN para treinar suas habilidades e ganhar XP e moedas.</p>
                 </button>
@@ -87,6 +86,7 @@
                 <div class="atributos">
                 <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
                     <div class="atributos-mutaveis">
+<<<<<<< Updated upstream
                 <p class="status-texto">HP:<span id='valorHP' class="vermelho-txt">100</span></p>
                 <p class="status-texto ">NV:<span id='nivel' class="ciano">10</span></p>
                 <p class="status-texto ">XP:<span id='valorXP' class='ciano'>109</span></p> 
@@ -96,6 +96,16 @@
                     </div>
                     </div>
                     
+=======
+                    <p class="status-texto">HP:<span id='valorHP' class="vermelho-txt">100</span></p>
+                    <p class="status-texto ">NV:<span id='nivel' class="ciano">0</span></p>
+                    <p class="status-texto ">XP:<span id='valorXP' class='ciano'>0</span></p> 
+                        <div class="moedasdiv">
+                        <img src="imagens/moedas.png" class="img-moedas">
+                        <p id="valorMoeda" class="amarelo-txt">200</p>
+                        </div>
+                    </div> 
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -104,13 +114,59 @@
 			<span class="botao-voltar">
 				<button onclick="mudarTela('gamediv')('gameplay')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
 			</span>
+<<<<<<< Updated upstream
             <p id = "xp" >XP: <span id="valorXP">0</span></p>
              <p id = "moeda" >HP:<span id="valorHP">100</span></p>
             <p id = "hp" >Moedas:<span id="valorMoeda">50</span></p>
             <button id="resunbtn1" class="botao">Bolo de pote (+10 HP por 5 moedas)</button>
              <button id="resunbtn2" class="botao">Cuscuz (+30 HP por 15 moedas)</button>
             <button id="resunbtn3" class="botao">Feijoada (+60 HP por 30 moedas) </button>
+=======
+            <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
+            <div class="resun-botoes">
+            <button id="resunbtn1" onclick="bolodepote()" class="resun-botao">
+                <div class="nome-resun-div">
+                <span class="nome-resun">Bolo de pote</span>
+                </div>
+                <div class="legenda-resun">
+                Recupera:<span class="vermelho-txt">10 HP</span>
+                    <div class="custo">
+                Custo:<span class="amarelo-txt custosdiv"><img src="imagens/moedas.png" class="menormoedas">5</span>
+                    </div>
+                </div>
+            </button>
+             <button id="resunbtn2" onclick="frango()" class="resun-botao"><div class="nome-resun-div">
+                <span class="nome-resun">Frango</span>
+                </div>
+                <div class="legenda-resun">
+                Recupera:<span class="vermelho-txt">30 HP</span>
+                    <div class="custo">
+                Custo:<span class="amarelo-txt custosdiv"><img src="imagens/moedas.png" class="menormoedas">15</span>
+                    </div>
+                </div></button>
+            <button id="resunbtn3" class="resun-botao" onclick="feijoada()" ><div class="nome-resun-div">
+                <span class="nome-resun menor">Feijoada</span>
+                </div>
+                <div class="legenda-resun">
+                Recupera:<span class="vermelho-txt">60 HP</span>
+                    <div class="custo">
+                Custo:<span class="amarelo-txt custosdiv"><img src="imagens/moedas.png" class="menormoedas">30</span>
+                    </div>
+                </div></button>
+                <p class="vermelho-txt" id="alerta">Oops! Você não possui moedas suficientes.</p>
+            </div>
+
+           <div class="barrastatus-resun" id="barrastatus-resun">
+                   <p class="status-texto ">HP:<span id='valorHP' class="vermelho-txt">100</span></p>
+                       <div class="moedasdiv">
+                       <img src="imagens/moedas.png" class="img-moedas margin-right ">
+                       <p id="valorMoeda" class="amarelo-txt ">200</p>
+                       </div>
+           </div>
+>>>>>>> Stashed changes
         </div>
+
+        <canvas width="830" height="505" id="bicen" class="gamediv"></canvas>
 
         <div class="gamediv" id="batalhaBoss">
             <span class="stat">Nome do boss:<span id="nomeBoss"></span></span>
@@ -170,5 +226,6 @@
         <source src="./soundtrack/Life Is Strange Soundtrack.mp3">
     </audio>
     <script src="./javascript.js"></script>
+    <script src="./minigame.js"></script>
 </body>
 </html>

@@ -27,6 +27,12 @@ img{
     src: url(./font/Press_Start_2P/PressStart2P-Regular.ttf);
 }
 
+.canvas{
+    width: 820px;
+    height: 505px;
+    background-color: red;
+    border: 2px solid red;
+}
 
 #interface {
     min-width: 840px;
@@ -86,6 +92,13 @@ img{
 .botoes-musica.botoes-musica-modificados{
     position: absolute;
     top: 20px;
+    left: 34px;
+	max-height: 45px;
+}
+
+.botoes-musica.botoes-musica-modificados-2 {
+    position: absolute;
+    top: 20px;
     left: 82px;
 	max-height: 45px;
 }
@@ -98,10 +111,10 @@ img{
 	min-width: 37px;
 }  
 
-.botao-voltar-modificados{
+.botao-voltar.botao-voltar-modificado{
     position: absolute;
 	top: 15px;
-	left: 25px;
+	left: 35px;
 	min-width: 37px;
 }
 
@@ -416,6 +429,106 @@ img{
 /* Tela do resun */
 
 #resun{
+<<<<<<< Updated upstream
+=======
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.resun-botoes{
+    display:flex;
+    gap: 20px;
+    width: 750px;
+    height: 350px;
+    margin-top: 70px;
+    background-color: #ffc55b;
+    align-items: center;
+    padding: 0px 2rem;
+}
+
+.resun-botao{
+    color: #fff;
+    height: 250px;
+    width: 250px;
+    border: none;
+    background-color:#ffe29b ;
+    box-shadow: 1px 2px 5px #4F4537;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.resun-botao:hover{
+    font-weight: bold;
+}
+
+.barrastatus-resun{
+    box-shadow: 3px 4px 4px #00000063;
+    z-index: -99;
+    width: 250px;
+    height: 60px;
+    background-color: #ffe29b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custosdiv{
+    display: flex;
+    align-items: center;
+}
+
+.nome-resun-div{
+    margin-top: 60px;
+    width: 100%;
+}
+
+.nome-resun{
+    font-size: 1.7rem;
+}
+
+.legenda-resun{
+    width: 100%;
+    line-height: 20px;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 150px;
+}
+
+.menormoedas{
+    height: 20px;
+    margin-right: 15px;
+}
+
+.margin-right{
+    margin-right: 5px;
+}
+
+.custo{
+    display: flex;
+    justify-content: center;
+}
+
+.menor{
+    font-size: 1.6rem;
+}
+
+
+
+#alerta{
+    display: none;
+    position: absolute;
+    bottom: 100px;
+    left: 170px;
+    font-size: 0.8rem;
+}
+
+/* Tela da prova */
+#batalhaBoss{
+>>>>>>> Stashed changes
     display: none;
 }
 
