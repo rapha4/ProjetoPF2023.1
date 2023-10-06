@@ -9,8 +9,8 @@ const musicaDeFundoOFF = () => {
 }
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
-[...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
-document.getElementById("paginaInicial").style.display="flex"
+ [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+document.getElementById("paginaInicial").style.display="flex" 
 //Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
 const mudarTela = (classe) => (tela) => {
 	const musica = document.getElementById('musica')
@@ -28,10 +28,8 @@ const mudarTela = (classe) => (tela) => {
 		else musica.classList.remove("botoes-musica-modificados")
         if(tela == 'resun') { 
             musica.classList.add('botoes-musica-modificados-2')
-            voltar.classList.add('botao-voltar-modificado')
         }else {
             musica.classList.remove("botoes-musica-modificados-2")
-            voltar.classList.remove('botao-voltar-modificado')    
     }
 	}
 	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
@@ -50,15 +48,37 @@ let estadoAtual = criarEstadoInicial()
 const xp = document.querySelectorAll('#valorXP')
 const moedas = document.querySelectorAll('#valorMoeda')
 const hp = document.querySelectorAll('#valorHP')
-const nomeTxt=document.querySelectorAll('#nome-txt')
+const nomeTxt=document.querySelector('#nome-txt')
 const nivel = document.querySelectorAll('#nivel')
 
 // Botão de continuar na tela 'nome'
 const continuar = () => {
-    estadoAtual.nome=document.getElementById('nomeInput').value
-    mudarTela('gamediv')('gameplay');atualizarDOM(estadoAtual)
-}
+    estadoAtual.nome=document.getElementById('nomeInput').value.trim()
+    if (estadoAtual.nome.length == 0){ window.alert('Insira um nome válido')} 
+    else{
+    mudarTela('gamediv')('gameplay')
+    atualizarDOM(estadoAtual)
+    }}
 
+// Função para atualizar a interface
+const atualizarDOM = (estado) => {
+    // Como o querySelectorAll retorna um nodeList, utilizamos da recursão para atualizar cada valor do nodelist
+    const helper = ([x,...xs]) => (valor) => {
+        if(xs.length == 0) { x.textContent = estado[valor] 
+        console.log(xs)}
+        else {
+            x.textContent = estado[valor] // Atualiza o primeiro item
+            return helper(xs)(valor) // Manda o segundo item pra ser atualizado
+        } 
+            }
+    
+    helper([...hp])("hp")
+    helper([...moedas])("moedas")
+    helper([...xp])("xp")
+    helper([...nivel])("nivel")
+    nomeTxt.textContent = estado.nome
+	mudarTela('personagemGameplay')(estado.opcao)
+}
 
 // Logística do RESUN
 // Feito com auxílio do Chat GPT
@@ -88,21 +108,7 @@ const comprarHP = (estado, qtdeDeHP) => {
         
     }
 }
-// Função para atualizar a interface
-const atualizarDOM = (estado) => {
-    // Como o querySelectorAll retorna um nodeList, utilizamos da recursão para atualizar cada valor do nodelist
-    const helper = ([x,...xs]) => (valor) => {
-        if(xs.length == 0) x.textContent = estado[valor]
-        else {
-            x.textContent = estado[valor]
-            return helper(xs)(valor)
-        } 
-            }
 
-    helper(hp)("hp")
-    helper(moedas)("moedas")
-	mudarTela('personagemGameplay')(estado.opcao)
-}
 
 // Função genérica para o clique de cada botão do RESUN
 const comprarClique = (estado) => (qtdeDeHP) => {
@@ -278,8 +284,6 @@ const desviar = (boss, estado) => {
     texto.innerText = "Você desviou do ataque do " + boss.nome + " com alguns arranhões."
     const novoHp = estado.hp - boss.nivel
         estado.hp = novoHp
-        console.log(estado.hp)
-        console.log("desviou")
         atualizarDOM({...estado, hp: novoHp})
         if (estado.hp <= 0) {
             derrota()
@@ -306,20 +310,4 @@ const vitoria = () => {
 }
 
 
-  /* Feito com auxílio do ChatGPT 
-  Tratamento do input do nome */
-
-/* Uso de regex (Regular Expressions) */
-const tratarInput = (input) => {
-        return input.replace(/</g, '&lt;') /* Impede que < e >, que determinam tags em HTML sejam utilizadas literalmente como tags de HTML. */
-                    .replace(/>/g, '&gt;') 
-                    .replace(/&/g, '&amp;') /* Substitui o & pelo seu representante no HTML */
-                    .replace(/'/g, '&#39;') /* Substitui a aspa simples por seu representante */
-                    .replace(/"/g, '&quot;'); /* Substitui a aspa dupla por seu representante */
-      }
-
-
-const botaoNome = document.getElementById('botaoNome')
-const nomeInput = document.getElementById('nomeInput')
-const nome = tratarInput(nomeInput.value).trim()
 

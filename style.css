@@ -58,6 +58,7 @@ img{
 .gamediv {
 	display:none;
 }
+
 #paginaInicial{
 	display:flex;
 }
@@ -111,16 +112,9 @@ img{
  .botao-voltar {
 	position: absolute;
 	top: 15px;
-	left: 15px;
+	left: 25px;
 	min-width: 37px;
 }  
-
-.botao-voltar.botao-voltar-modificado{
-    position: absolute;
-	top: 15px;
-	left: 35px;
-	min-width: 37px;
-}
 
 .voltar {
 	padding: 6px 8px;
@@ -580,7 +574,7 @@ img{
 }
 
 .boss3{
-    display: block;
+    display: none;
     width: 280px;
     position: absolute;
     right: 20px;
@@ -623,8 +617,68 @@ img{
     background-color: #1a7f78;
 }
 
+/* Tela de vitória */
+#paginaInicial{display: none;}
 
+.vitoria{
+    width: 820px;
+    display: none;
+    flex-direction: column;
+    height: 505px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
 
+.resultado-txt{
+    color: #fff;
+    font-size: 5rem;
+    margin: 80px 0 0 40px;
+}
+
+.resultado-subtxt-vitoria{
+    color: #fff;
+    text-align: center;
+}
+
+.botao-progressao{
+    font-size: 1.8rem;
+    padding: 2rem;
+}   
+
+/* Tela de derrota */
+
+.derrota{
+    width: 820px;
+    display: flex;
+    flex-direction: column;
+    height: 505px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.resultado-subtxt-derrota{
+    color: #fff;
+    text-align: center;
+    width: 600px;
+    line-height: 25px;
+    
+}
+
+.tentarnovamente{
+    margin-top: 0;
+    font-size: 1.5rem;
+    padding: 2rem;
+}
+
+.reprovacao{
+    filter: drop-shadow(5px 5px 10px #ff49589f);
+}
+
+.aprovacao{
+    filter: drop-shadow(5px 5px 10px #27d4049f);
+}
 /* Animação retirada do stackoverflow https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
 
  .animacao {
