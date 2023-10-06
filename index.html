@@ -57,8 +57,7 @@
             <div class="nome-card">
             <p class="texto">Insira seu nome</p>
             <input type="text" class="input-nome" id="nomeInput" maxlength="16">
-            <button class="botao continuar" onclick="estadoAtual.nome=document.getElementById('nomeInput').value;mudarTela('gamediv')('gameplay');atualizarDOM(estadoAtual)" id="botaoNome">Continuar</button>
-            </div>
+            <button class="botao continuar" onclick="continuar()" id="botaoNome">Continuar</button>            </div>
         </div>
 
         <div class="gamediv" id="gameplay">			
@@ -69,11 +68,11 @@
                     <p class="texto principal sombravermelha">RESUN</p>
                     <p class="texto descricao">Gaste suas moedas no RESUN para recuperar HP.</p>
                 </button>
-                <button class="amarelo botao-principal">
+                <button class="amarelo botao-principal" onclick="mudarTela('gamediv')('bicen')">
                     <p class="texto principal sombravermelha">BICEN</p>
                     <p class="texto descricao">Frequente a BICEN para treinar suas habilidades e ganhar XP e moedas.</p>
                 </button>
-                <button class="vermelho botao-principal">
+                <button class="vermelho botao-principal" onclick="mudarTela('gamediv')('batalhaBoss')">
                     <p class="texto principal sombrapreta">PROVA</p>
                     <p class="texto descricao">Enfrente a PROVA para passar para o próximo mês. Esteja preparado.</p>
                     <p class="alerta texto">Nível <br>recomendado: <span id='nivel-rec'>5</span></p>
@@ -91,12 +90,12 @@
                     <p class="status-texto nome-txt">NOME:<span id='nome-txt'>fulano</span></p>
 
                     <div class="atributos-mutaveis">
-                    <p class="status-texto">HP:<span id='valorHP' class="vermelho-txt">100</span></p>
-                    <p class="status-texto ">NV:<span id='nivel' class="ciano">10</span></p>
-                    <p class="status-texto ">XP:<span id='valorXP' class='ciano'>109</span></p> 
+                    <p class="status-texto">HP:<span id='valorHP' class="vermelho-txt">0</span></p>
+                    <p class="status-texto ">NV:<span id='nivel' class="ciano">0</span></p>
+                    <p class="status-texto ">XP:<span id='valorXP' class='ciano'>0</span></p> 
                         <div class="moedasdiv">
                         <img src="imagens/moedas.png" class="img-moedas">
-                        <p id="valorMoeda" class="amarelo-txt">200</p>
+                        <p id="valorMoeda" class="amarelo-txt">100</p>
                         </div>
                     </div> 
                 </div>
@@ -109,7 +108,7 @@
 			</span>
             <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
             <div class="resun-botoes">
-            <button id="resunbtn1" class="resun-botao">
+            <button id="resunbtn1" onclick="bolodepote()" class="resun-botao">
                 <div class="nome-resun-div">
                 <span class="nome-resun">Bolo de pote</span>
                 </div>
@@ -120,7 +119,7 @@
                     </div>
                 </div>
             </button>
-             <button id="resunbtn2" class="resun-botao"><div class="nome-resun-div">
+             <button id="resunbtn2" class="resun-botao" onclick="frango()"><div class="nome-resun-div">
                 <span class="nome-resun">Frango</span>
                 </div>
                 <div class="legenda-resun">
@@ -129,7 +128,7 @@
                 Custo:<span class="amarelo-txt custosdiv"><img src="imagens/moedas.png" class="menormoedas">15</span>
                     </div>
                 </div></button>
-            <button id="resunbtn3" class="resun-botao"><div class="nome-resun-div">
+            <button id="resunbtn3" class="resun-botao" onclick="feijoada()"><div class="nome-resun-div">
                 <span class="nome-resun menor">Feijoada</span>
                 </div>
                 <div class="legenda-resun">
@@ -144,10 +143,12 @@
                    <p class="status-texto ">HP:<span id='hp' class="vermelho-txt">100</span></p>
                        <div class="moedasdiv">
                        <img src="imagens/moedas.png" class="img-moedas ">
-                       <p id="moedas-txt" class="amarelo-txt ">200</p>
+                       <p id="moedas-txt" class="amarelo-txt ">100</p>
                        </div>
            </div>
         </div>
+
+        <canvas width="830" height="505" id="bicen" class="gamediv"></canvas>
 
         <div class="gamediv" id="batalhaBoss">
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/fundo-boss.png"> 
@@ -176,8 +177,8 @@
                 <button class="botao-boss verde">Fugir</button>
             </div>
             <img src="imagens/stewart.png" class="boss1" id="boss1">
-            <img src="" class="boss2" id="boss2">
-            <img src="" class="boss3" id="boss3">
+            <img src="imagens/boss2.png" class="boss2" id="boss2">
+            <img src="imagens/boss3.png" class="boss3" id="boss3">
             <img src="imagens/bossfinal.png" class="bossfinal" id="boss4">
             
         </div>
@@ -234,5 +235,6 @@
         <source src="./soundtrack/Life Is Strange Soundtrack.mp3">
     </audio>
     <script src="./javascript.js"></script>
+    <script src="./minigame.js"></script>
 </body>
 </html>

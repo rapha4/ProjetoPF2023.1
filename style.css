@@ -17,6 +17,10 @@ p{
     margin: 0;
 }
 
+button{
+    cursor: pointer;
+}
+
 img{
     display: block;
     max-width: 100%;
@@ -27,6 +31,12 @@ img{
     src: url(./font/Press_Start_2P/PressStart2P-Regular.ttf);
 }
 
+.canvas{
+    width: 820px;
+    height: 505px;
+    background-color: red;
+    border: 2px solid red;
+}
 
 #interface {
     min-width: 840px;
@@ -86,6 +96,13 @@ img{
 .botoes-musica.botoes-musica-modificados{
     position: absolute;
     top: 20px;
+    left: 34px;
+	max-height: 45px;
+}
+
+.botoes-musica.botoes-musica-modificados-2 {
+    position: absolute;
+    top: 20px;
     left: 82px;
 	max-height: 45px;
 }
@@ -98,10 +115,10 @@ img{
 	min-width: 37px;
 }  
 
-.botao-voltar-modificados{
+.botao-voltar.botao-voltar-modificado{
     position: absolute;
 	top: 15px;
-	left: 25px;
+	left: 35px;
 	min-width: 37px;
 }
 
@@ -414,10 +431,9 @@ img{
 }
 
 /* Tela do resun */
-#paginaInicial{display:none;}
 
 #resun{
-    display: flex;
+    display: none;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -498,6 +514,13 @@ img{
     font-size: 1.6rem;
 }
 
+#alerta{
+    display: none;
+    position: absolute;
+    bottom: 100px;
+    left: 170px;
+    font-size: 0.8rem;
+}
 
 /* Tela da prova */
 #batalhaBoss{
@@ -540,10 +563,28 @@ img{
 
 .boss1{
     display: none;
-    position: absolute;
     width: 400px;
-    right: -20px;
-    bottom: 80px;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    filter: drop-shadow(5px 5px 10px #ff49589f);
+}
+
+.boss2{
+    display: none;
+    width: 300px;
+    position: absolute;
+    right: 20px;
+    bottom: 70px;
+    filter: drop-shadow(5px 5px 10px #ff49589f);
+}
+
+.boss3{
+    display: block;
+    width: 280px;
+    position: absolute;
+    right: 20px;
+    bottom: 90px;
     filter: drop-shadow(5px 5px 10px #ff49589f);
 }
 
@@ -581,6 +622,8 @@ img{
 .verde{
     background-color: #1a7f78;
 }
+
+
 
 /* Animação retirada do stackoverflow https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
 
