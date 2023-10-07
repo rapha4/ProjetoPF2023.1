@@ -109,6 +109,7 @@ const atualizarDOM = (estado) => {
     helper([...nivel])("nivel")
     helper([...nomeTxt])("nome")
 	mudarTela('personagemGameplay')(estado.opcao)
+	mudarTela('bossPersonagem')(`boss${estado.opcao}`)
 }
 
 
