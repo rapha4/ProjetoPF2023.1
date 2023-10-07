@@ -9,8 +9,8 @@ const musicaDeFundoOFF = () => {
 }
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
-/*  [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
-document.getElementById("paginaInicial").style.display="flex"  */
+  [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+document.getElementById("paginaInicial").style.display="flex" 
 //Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
 const mudarTela = (classe) => (tela) => {
 	const musica = document.getElementById('musica')
@@ -49,12 +49,6 @@ const criarEstadoInicial = () => {
 }
 
 let estadoAtual = criarEstadoInicial()
-const xp = document.querySelectorAll('#valorXP')
-const moedas = document.querySelectorAll('#valorMoeda')
-const hp = document.querySelectorAll('#valorHP')
-const nomeTxt=document.querySelectorAll('#nome-txt')
-const nivel = document.querySelectorAll('#nivel')
-
 const xp = document.querySelectorAll('.valorXP')
 const moedas = document.querySelectorAll('.valorMoeda')
 const hp = document.querySelectorAll('.valorHP')

@@ -678,7 +678,7 @@ img{
 /* Tela de config */
 
 #config{
-    display: flex;
+    display: none;
     height: 505px;
     width: 820px;
     flex-direction: column;
