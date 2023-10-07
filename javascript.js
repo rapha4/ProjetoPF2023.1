@@ -94,8 +94,7 @@ const nivel = document.querySelectorAll('.nivel')
 const atualizarDOM = (estado) => {
     // Como o querySelectorAll retorna um nodeList, utilizamos da recursão para atualizar cada valor do nodelist
     const helper = ([x,...xs]) => (valor) => {
-        if(xs.length == 0) { x.textContent = estado[valor] 
-        console.log(xs)}
+        if(xs.length == 0) { x.textContent = estado[valor] }
         else {
             x.textContent = estado[valor] // Atualiza o primeiro item
             return helper(xs)(valor) // Manda o segundo item pra ser atualizado
