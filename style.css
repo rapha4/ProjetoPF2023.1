@@ -562,7 +562,7 @@ img{
 }
 
 .boss2{
-    display: none;
+    display: block;
     width: 300px;
     position: absolute;
     right: 20px;

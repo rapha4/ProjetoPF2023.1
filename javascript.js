@@ -24,8 +24,8 @@ const musicaBatalhaOFF = () => {
 
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
-[...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
-document.getElementById("paginaInicial").style.display="flex"
+  [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+document.getElementById("paginaInicial").style.display="flex" 
 //Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
 const mudarTela = (classe) => (tela) => {
 	const musica = document.getElementById('musica')
@@ -253,7 +253,7 @@ const boss = [
         //Caso o ataque seja bem-sucedido, o hpdoBoss será alterado
         if (bossAtacado(boss, estado)){
             texto.innerText += " Você acertou o "+boss.nome+".";
-            const novohpBoss = boss.hp - (estado.nivel + Math.floor(gerarValorAlea(0,5) * estado.xp) + 1);// dano baseado no seu nivel e em xp
+            const novohpBoss = boss.hp - ((estado.nivel*2) + Math.floor(estado.xp/5) + 1);// dano baseado no seu nivel e em xp
             boss.hp = novohpBoss
             atualizarDOMboss({...boss, hp:novohpBoss})
         //Caso o ataque falhe, o usuário perde hp
@@ -295,69 +295,95 @@ const pegarValorAtaqueBoss = (boss,estado) => {
 
 // Serve para desviar do ataque do boss, mas perdendo um valor mínimo
 const desviar = (boss, estado) => {
-    texto.innerText = "Você desviou do ataque de " + boss.nome + " com alguns arranhões."
-    const novoHp = estado.hp - boss.nivel
+    if (conseguiuDesviar(boss,estado)){
+        texto.innerText = "Você desviou do ataque de " + boss.nome + " com alguns arranhões."
+    } else {
+        texto.innerText = "Você não conseguiu desviar do ataque a tempo."
+        const novoHp = estado.hp - pegarValorAtaqueBoss(boss, estado)
         estado.hp = novoHp
         atualizarDOM({...estado, hp: novoHp})
-        if (estado.hp <= 0) {
-            derrota()
-        } else if (boss.hp <= 0){
+    }
+    if (estado.hp <= 0) {
+        derrota()
+    } else if (boss.hp <= 0){
             boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado()
     }
 }
-
+const conseguiuDesviar = (boss, estado) =>{
+    const valorAlea = gerarValorAlea(0,1)
+    const diferencaNiveis = estado.nivel - boss.nivel
+    const chance = (diferenca) => {
+        if (diferenca < 0) {return 0.4}
+        else if (diferenca == 0) {return 0.6}
+        else {return 0.8}
+    }
+    return valorAlea < chance(diferencaNiveis) || boss.hp < 20
+}
 const fugir = (tela1,tela2) => {
-    texto.innerText = "Você está lustando com o Boss"
+    texto.innerText = "Você está lutando com o Boss!"
     mudarTela(tela1)(tela2)
 }
 
 //Caso o hpBoss<0 e ele n seja o Boss final, ele será recompensado com xp, moedas 
-const derrotarBoss = (boss, estado) => {
-    const maisMoedas = estado.moedas + Math.floor(boss.nivel * 6.7)
-    const novoXp = estado.xp + (boss.nivel*9);
+const bossDerrotado = (boss, estado) => {
+    texto.innerText = "Você está lutando com o Boss!"
+    const maisMoedas = estado.moedas + 50
+    const novoXp = estado.xp + 100
     estado.moedas = maisMoedas
     estado.xp = novoXp
     atualizarDOM({...estado, moedas: maisMoedas, xp: novoXp})
     mudarBtnOnClick(boss,estado)
+    mudarTela('gamediv')('vitoria gamediv')
 }
 
+// Função que muda as funções do onclick da área de batalha e a imagem
 const mudarBtnOnClick = (boss, estado) =>{
-    const telaBatalha = document.getElementById('batalhaBoss');
-    telaBatalha.style.display = 'block';
+    const telaBatalha = document.getElementById('batalhaBoss')
+    telaBatalha.style.display = 'block'
     const btnBatalha = document.getElementById('btnBatalha')
     const btnAtacar = document.getElementById('btnAtacar')
-    const btnDesviar = document.getElementById('btnDesviar')
+    const btnDesviar = document.getElementById('btnDesviar') 
+    const boss1 = document.getElementById('boss1')
+    const boss2 = document.getElementById('boss2')
+    const boss3 = document.getElementById('boss3')
+    const boss4 = document.getElementById('boss4')
+
 
     if ( boss.nome === "Vetores"){
-        btnBatalha.onclick = ()=>mudarTela('gamediv')('batalhaBoss');irLutar(bossCalculo, estado) 
-        btnAtacar.onclick = ()=>atacar(bossCalculo,estado)
-        btnDesviar.onclick = ()=>desviar(bossCalculo, estado)
+        boss2.style.display = "none" 
+        boss1.style.display = "flex"  
+        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado) 
+        btnAtacar.onclick = atacar(bossCalculo,estado)
+        btnDesviar.onclick = desviar(bossCalculo, estado)
         console.log('mudou para calculo')
     }else if(boss.nome === "Cálculo A"){
-        btnBatalha.onclick = ()=>mudarTela('gamediv')('batalhaBoss');irLutar(bossDioglos, estado) 
-        btnAtacar.onclick = ()=>atacar(bossDioglos,estado)
-        btnDesviar.onclick = ()=>desviar(bossDioglos, estado)
+        boss1.style.display = "none" 
+        boss3.style.display = "flex"          
+        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado) 
+        btnAtacar.onclick = atacar(bossDioglos,estado)
+        btnDesviar.onclick = desviar(bossDioglos, estado)
         console.log('mudou para dioglos')
+       
     }else{
-        btnBatalha.onclick = ()=>mudarTela('gamediv')('batalhaBoss');irLutar(bossCirdLil, estado)
-        btnAtacar.onclick = ()=>atacar(bossCirdLil,estado)
-        btnDesviar.onclick = ()=>desviar(bossCirdLil, estado)
+        boss3.style.display = "none" 
+        boss4.style.display = "flex"          
+        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossCirdLil, estado)
+        btnAtacar.onclick = atacar(bossCirdLil,estado)
+        btnDesviar.onclick = desviar(bossCirdLil, estado)
         console.log('mudou para cirdlil')
     }
 }
 
 const derrota = () => {
+    texto.innerText = "Você está lutando com o Boss!"
+    mudarTela('gamediv')('derrota gamediv')
     console.log('derrota')
 }
 
 const vitoria = () => {
+    mudarTela('gamediv')('fimdejogo')
     console.log('vitória')
 }
 
-/*const mudarXP =(estado)=>(qt)=> {
-	estado.xp+=qt
-	estado.nivel=parseInt(estado.xp/100)
-	atualizarDOM(estado)
-}
-*/
+
 
