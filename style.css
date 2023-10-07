@@ -127,19 +127,13 @@ img{
     opacity: 0.8;
 }
 
-#pgnIn{
-	position: absolute;
-	bottom: 15px;
-	right: 15px;
-}
-
 /*Botão de iniciar*/
 
 #play {
     padding: 1rem 3rem;
     font-size: 1.55rem;
     position: absolute;
-    left: 320px;
+    left: 300px;
     bottom: 125px;
 }
 
@@ -148,14 +142,6 @@ img{
 .config{
     padding: 6px 8px;
     font-size: 1.25rem;
-}
-
-/* Tela de configurações */
-
-#saveslots{
-	position:absolute;
-	right: 10px;
-	top: 10px;
 }
 
 /* Tela de escolha dos cursos */
@@ -627,6 +613,15 @@ img{
     background-color: #1a7f78;
 }
 
+#texto{
+    color: #fff;
+    position: absolute;
+    top: 200px;
+    left: 20px;
+    width: 300px;
+    filter: drop-shadow(5px 5px 5px #1a84c293);
+}
+
 /* Tela de vitória */
 #paginaInicial{display: none;}
 
@@ -660,7 +655,7 @@ img{
 
 .derrota{
     width: 820px;
-    display: flex;
+    display: none;
     flex-direction: column;
     height: 505px;
     justify-content: center;
@@ -689,6 +684,55 @@ img{
 .aprovacao{
     filter: drop-shadow(5px 5px 10px #27d4049f);
 }
+
+/* Tela de config */
+
+#config{
+    display: none;
+    height: 505px;
+    width: 820px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.autosave{
+    color: #fff;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+}
+
+.autosave > button {
+    padding: 0.4rem;
+    font-size: 1.4rem;
+}
+
+#saveslots > p {
+    color: #fff;
+}
+
+#saveslots > p > button {
+    font-size: 1.2rem;
+    padding: 0.4rem;
+}
+
+#pgnIn{
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+
+#saveslots{
+    scale: 150%;
+    position: absolute;
+    top: 160px;
+    left: 180px;
+    display: grid;
+    gap: 30px;
+}
+
+
 /* Animação retirada do stackoverflow https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
 
  .animacao {
