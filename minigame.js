@@ -13,7 +13,7 @@
  const duracao_da_explosao_do_laser = 1
  const friccao = 0.3
  const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
- const numero_de_asteroides = 6 // numero inicial de asteroides
+ const numero_de_asteroides = 1 // numero inicial de asteroides
  const velocidade_dos_asteroides = 5
  const vertices_dos_asteroides = 8 // quantidade padrao de vertices dos asteroides
  
@@ -160,24 +160,26 @@ const iniciarMinigame = () => {
     vidas = vidas_iniciais
 }
 
-//// termina o jogo quando o jogador perde
-const gameOver = () => {
-    nave.status = false
-
-    // mostra os botoes de jogar novamente e de voltar
-    const botoes = document.getElementById("divBotoesMinigame")
-    botoes.style.display = "flex"
-}
-
 const escondeBotoes = () => {
     const botoes = document.getElementById("divBotoesMinigame")
     botoes.style.display = "none"
 }
 
-// win, pois "vitoria" já é outra função no codigo principal
-const win = () => {
+const mostraBotoes = () => {
     const botoes = document.getElementById("divBotoesMinigame")
     botoes.style.display = "flex"
+}
+
+//// termina o jogo quando o jogador perde
+const gameOver = () => {
+    nave.status = false
+    mostraBotoes()
+}
+
+// win, pois "vitoria" já é outra função no codigo principal
+const win = () => {
+    mudarXP(estadoAtual)(50)
+    gameOver()
 }
 
  //////////// Event Listeners, captura o teclado ///////////
@@ -222,7 +224,6 @@ const win = () => {
 
 
  ///////////////// frame ////////////////
-
  const atualizacao = () => {
 
  const naveExplodindo = nave.tempoDeExplosao > 0
@@ -514,7 +515,7 @@ const win = () => {
      }
 
      ////// detecta se a nave continua viva e o numero de asteroides, se o numero de asteroides for 0, o jogador ganha
-     if (asteroides.length == 0 && nave.status)
+     if (asteroides.length == 0 && nave.status) 
         win()
 
      ////// detectar colisoes de lasers e asteroides
@@ -540,8 +541,6 @@ const win = () => {
              }
          }
      } 
-
-
  } 
 
- setInterval(atualizacao, 1/FPS)
+setInterval(atualizacao, 1/FPS)

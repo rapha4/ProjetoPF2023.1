@@ -9,8 +9,7 @@ const musicaDeFundoOFF = () => {
 }
 
 const musicaBatalhaON = () => {
-    const musicaBase = document.getElementById("soundtrack")
-    musicaBase.pause()
+    musicaDeFundoOFF()
     const musica = document.getElementById("soundtrack-batalha")
     musica.play()
 }
@@ -18,8 +17,7 @@ const musicaBatalhaON = () => {
 const musicaBatalhaOFF = () => {
     const musica = document.getElementById("soundtrack-batalha")
     musica.pause()
-    const musicaBase = document.getElementById("soundtrack")
-    musicaBase.play()
+    musicaDeFundoON()
 }
 
 
@@ -387,7 +385,12 @@ const vitoria = () => {
 
 const mudarXP =(estado)=>(qt)=> {
 	estado.xp+=qt
-	estado.nivel=parseInt(estado.xp/100)
+	estado.nivel+=parseInt(estado.xp/100) 
+
+    if (estado.xp == 100) {
+        estado.xp = 0
+    }
+
 	atualizarDOM(estado)
 }
 
