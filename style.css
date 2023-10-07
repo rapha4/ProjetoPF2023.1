@@ -812,7 +812,7 @@ img{
 } 
 
 .animacao2 {
-    animation: fadeOut 3s ease-in-out forwards;
+    animation: fadeOut 2s ease-in-out forwards;
 } 
 
 @keyframes fadein {

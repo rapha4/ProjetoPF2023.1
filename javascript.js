@@ -63,6 +63,7 @@ const mudarTela = (classe) => (tela) => {
 		else musica.style.display='block'
         // Para a tela da bicen
         if (tela == 'bicen') {
+            
             voltar.style.display = "block"
             voltar.classList.remove('botao-voltar')
             voltar.classList.add('botao-voltar-bicen')
@@ -97,8 +98,7 @@ const nivel = document.querySelectorAll('.nivel')
 const atualizarDOM = (estado) => {
     // Como o querySelectorAll retorna um nodeList, utilizamos da recursão para atualizar cada valor do nodelist
     const helper = ([x,...xs]) => (valor) => {
-        if(xs.length == 0) { x.textContent = estado[valor] 
-        console.log(xs)}
+        if(xs.length == 0) { x.textContent = estado[valor] }
         else {
             x.textContent = estado[valor] // Atualiza o primeiro item
             return helper(xs)(valor) // Manda o segundo item pra ser atualizado

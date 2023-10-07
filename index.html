@@ -201,14 +201,14 @@
             <img src="imagens/fundo-padrao.png" class="img-de-fundo">
             <h2 class="resultado-txt aprovacao">APROVADO!</h2>
             <p class="resultado-subtxt-vitoria" id="resultado-boss">Bom trabalho! Você ganhou 50 moedas e 100 XP!</p>
-            <button class="botao botao-progressao" onclick="mudarTela('gamediv')('gameplay')">Continuar</button>
+            <button class="botao botao-progressao" onclick="mudarTela('gamediv')('gameplay');musicaBatalhaOFF()">Continuar</button>
         </div>
 
         <div class="derrota gamediv" id="derrota tela">
             <img src="imagens/fundo-padrao.png" class="img-de-fundo">
             <h2 class="resultado-txt reprovacao">REPROVADO.</h2>
             <p class="resultado-subtxt-derrota">Estude mais na BICEN e visite o RESUN para aumentar suas chances de passar!</p>
-            <button class="botao tentarnovamente" onclick="mudarTela('gamediv')('gameplay')">Tentar novamente</button>
+            <button class="botao tentarnovamente" onclick="mudarTela('gamediv')('gameplay');musicaBatalhaOFF()">Tentar novamente</button>
         </div>
 
         <div class="fimdejogo gamediv" id="fimdejogo">
