@@ -30,8 +30,11 @@ const mudarTela = (classe) => (tela) => {
             musica.classList.add('botoes-musica-modificados-2')
         }else {
             musica.classList.remove("botoes-musica-modificados-2")
+            voltar.classList.remove('botao-voltar-modificado')    
+		}
+		if(tela=='batalhaBoss') musica.style.display='none'
     }
-	}
+	
 	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
 }
 
@@ -51,6 +54,12 @@ const hp = document.querySelectorAll('#valorHP')
 const nomeTxt=document.querySelectorAll('#nome-txt')
 const nivel = document.querySelectorAll('#nivel')
 
+const xp = document.querySelectorAll('.valorXP')
+const moedas = document.querySelectorAll('.valorMoeda')
+const hp = document.querySelectorAll('.valorHP')
+const nomeTxt=document.querySelectorAll('.nome-txt')
+const nivel = document.querySelectorAll('.nivel')
+
 // Função para atualizar a interface
 const atualizarDOM = (estado) => {
     // Como o querySelectorAll retorna um nodeList, utilizamos da recursão para atualizar cada valor do nodelist
@@ -63,9 +72,10 @@ const atualizarDOM = (estado) => {
         } 
             }
     
-    helper([...hp])("hp")
-    helper([...moedas])("moedas")
-    helper([...xp])("xp")
+	helper(hp)("hp")
+    helper(moedas)("moedas")
+	helper(nomeTxt)("nome")
+	helper([...xp])("xp")
     helper([...nivel])("nivel")
     helper([...nomeTxt])("nome")
 	mudarTela('personagemGameplay')(estado.opcao)
