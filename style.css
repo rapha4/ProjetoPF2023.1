@@ -516,6 +516,16 @@ img{
     font-size: 0.8rem;
 }
 
+/* Tela da bicen*/
+#divBotoesMinigame { 
+    display: none;
+    position: absolute;
+    top: 400px;
+    left: 240px;
+    align-self: center;
+}
+
+
 /* Tela da prova */
 #batalhaBoss{
     display: none;
