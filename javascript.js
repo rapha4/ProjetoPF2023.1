@@ -74,7 +74,7 @@ const mudarTela = (classe) => (tela) => {
         }
     }
 	// Quando chegar na tela gameplay, dar autosave automaticamente.
-	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
+	if(tela=='gameplay') save(estadoAtual)('autosave')
 }
 
 const criarEstadoInicial = () => {
