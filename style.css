@@ -133,6 +133,14 @@ img{
     opacity: 0.8;
 }
 
+#spanVoltarBicen{
+	top:unset;
+	min-height:60px;
+	min-width:60px;
+	bottom:-2px;
+	left:5px;
+}
+
 /*Botão de iniciar*/
 
 #play {
