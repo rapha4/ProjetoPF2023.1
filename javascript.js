@@ -368,6 +368,17 @@ const bossDerrotado = (boss, estado) => {
     mudarBtnOnClick(boss,estado)
     mudarTela('gamediv')('tela vitoria')
 }
+const mudarMes =  (boss) => {
+    const mes = document.getElementById('mes')
+    if ( boss.nome === "Cálculo A"){
+        mes.innerHTML = "2/4"
+    }else if(boss.nome === "Dioglos"){    
+        mes.innerHTML = "3/4"
+    }else if (boss.nome === "Cirdneh e Lilak") {  
+        mes.innerHTML = "4/4"   
+    }
+}
+
 
 // Função que muda as funções do onclick da área de batalha e a imagem
 const mudarBtnOnClick = (boss, estado) =>{
@@ -391,6 +402,7 @@ const mudarBtnOnClick = (boss, estado) =>{
         btnAtacar.onclick = () =>atacar(bossCalculo,estado)
         btnDesviar.onclick = () =>desviar(bossCalculo, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
+        mudarMes(bossCalculo)
     }else if(boss.nome === "Cálculo A"){    
         boss1.style.display='none'
         boss3.style.display='flex'
@@ -398,7 +410,7 @@ const mudarBtnOnClick = (boss, estado) =>{
         btnAtacar.onclick = () =>atacar(bossDioglos,estado)
         btnDesviar.onclick = () =>desviar(bossDioglos, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
-        console.log('mudou para dioglos')
+        mudarMes(bossDioglos)
     }else{     
         boss3.style.display='none'
         boss4.style.display='flex'
@@ -406,7 +418,7 @@ const mudarBtnOnClick = (boss, estado) =>{
         btnAtacar.onclick = () =>atacar(bossCirdLil,estado)
         btnDesviar.onclick = () =>desviar(bossCirdLil, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
-        console.log('mudou para cirdlil')
+        mudarMes(bossCirdLil)
     }
 }
 
