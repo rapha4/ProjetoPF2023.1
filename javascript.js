@@ -33,6 +33,7 @@ const mudarTela = (classe) => (tela) => {
             voltar.classList.remove('botao-voltar-modificado')    
 		}
 		if(tela=='batalhaBoss') musica.style.display='none'
+		else musica.style.display='block'
     }
 	
 	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
