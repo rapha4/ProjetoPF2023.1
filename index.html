@@ -72,7 +72,7 @@
                     <p class="texto principal sombravermelha">BICEN</p>
                     <p class="texto descricao">Frequente a BICEN para treinar suas habilidades e ganhar XP e moedas.</p>
                 </button>
-                <button class="vermelho botao-principal" onclick="mudarTela('gamediv')('batalhaBoss'), irLutar(bossVetores)">
+                <button class="vermelho botao-principal" onclick="mudarTela('gamediv')('batalhaBoss'), irLutar(bossVetores)" id="btnBatalha">
                     <p class="texto principal sombrapreta">PROVA</p>
                     <p class="texto descricao">Enfrente a PROVA para passar para o próximo mês. Esteja preparado.</p>
                     <p class="alerta texto">Nível <br>recomendado: <span id='nivel-rec'>5</span></p>
@@ -173,9 +173,9 @@
                 <img src="">
             </div>
             <div class="botoesboss">
-                <button class="vermelho botao-boss" onclick="atacar(bossVetores, estadoAtual)">Atacar</button>
-                <button class="vermelho botao-boss" onclick="desviar(bossVetores, estadoAtual)">Desviar</button>
-                <button class="botao-boss verde" onclick="mudarTela('gamediv')('gameplay')">Fugir</button>
+                <button class="vermelho botao-boss" onclick="atacar(bossVetores, estadoAtual)" id="btnAtacar">Atacar</button>
+                <button class="vermelho botao-boss" onclick="desviar(bossVetores, estadoAtual)" id="btnDesviar">Desviar</button>
+                <button class="botao-boss verde" onclick="fugir('gamediv','gameplay')">Fugir</button>
                 <p id="texto"></p>
             </div>
             <img src="imagens/stewart.png" class="boss1" id="boss1">
