@@ -72,7 +72,7 @@
                     <p class="texto principal sombravermelha">BICEN</p>
                     <p class="texto descricao">Frequente a BICEN para treinar suas habilidades e ganhar XP e moedas.</p>
                 </button>
-                <button class="vermelho botao-principal" onclick="mudarTela('gamediv')('batalhaBoss'), irLutar(bossVetores)" id="btnBatalha">
+                <button class="vermelho botao-principal" onclick="mudarTela('gamediv')('batalhaBoss'), irLutar(bossVetores); musicaBatalhaON()" id="btnBatalha">
                     <p class="texto principal sombrapreta">PROVA</p>
                     <p class="texto descricao">Enfrente a PROVA para passar para o próximo mês. Esteja preparado.</p>
                     <p class="alerta texto">Nível <br>recomendado: <span id='nivel-rec'>5</span></p>
@@ -150,10 +150,12 @@
         </div>
 
         <!--- minigame  Bicen --> 
-        <canvas width="830" height="505" id="bicen" class="gamediv"></canvas>
-        <div id="divBotoesMinigame">
-            <button class="botaoMinigame" id="jogar-novamente" onclick="iniciarMinigame(); escondeBotoes()">Jogar Novamente</button>
-            <button class="botaoMinigame" id="voltar-gameplay" onclick="mudarTela('gamediv')('gameplay'); escondeBotoes()">Voltar</button>
+        <div id="bicen" class="gamediv"> 
+            <canvas width="830" height="520"></canvas>
+            <div id="divBotoesMinigame">
+                <button class="botao opcao" id="jogar-novamente" onclick="iniciarMinigame(); escondeBotoes()">Jogar Novamente</button>
+                <button class="botao opcao" id="voltar-gameplay" onclick="mudarTela('gamediv')('gameplay')">Voltar</button>
+            </div>
         </div>
 
         <div class="gamediv" id="batalhaBoss">
@@ -181,7 +183,7 @@
             <div class="botoesboss">
                 <button class="vermelho botao-boss" onclick="atacar(bossVetores, estadoAtual)" id="btnAtacar">Atacar</button>
                 <button class="vermelho botao-boss" onclick="desviar(bossVetores, estadoAtual)" id="btnDesviar">Desviar</button>
-                <button class="botao-boss verde" onclick="fugir('gamediv','gameplay')">Fugir</button>
+                <button class="botao-boss verde" onclick="fugir('gamediv','gameplay'), musicaBatalhaOFF()">Fugir</button>
                 <p id="texto"></p>
             </div>
             <img src="imagens/stewart.png" class="boss1" id="boss1">
@@ -251,6 +253,11 @@
     <audio loop="true" id="soundtrack">
         <source src="./soundtrack/Life Is Strange Soundtrack.mp3">
     </audio>
+
+    <audio loop="true" id="soundtrack-batalha">
+        <source src="./soundtrack/Pokemon Battle Soundtrack.mp3">
+    </audio>
+
     <script src="./javascript.js"></script>
     <script src="./minigame.js"></script>
 </body>

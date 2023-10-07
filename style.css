@@ -506,11 +506,12 @@ img{
 #divBotoesMinigame { 
     display: none;
     position: absolute;
+    gap: 30px;
     top: 400px;
-    left: 240px;
+    left: 100px;
     align-self: center;
+    height: 80px;
 }
-
 
 /* Tela da prova */
 #batalhaBoss{

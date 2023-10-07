@@ -8,6 +8,21 @@ const musicaDeFundoOFF = () => {
     musica.pause()
 }
 
+const musicaBatalhaON = () => {
+    const musicaBase = document.getElementById("soundtrack")
+    musicaBase.pause()
+    const musica = document.getElementById("soundtrack-batalha")
+    musica.play()
+}
+
+const musicaBatalhaOFF = () => {
+    const musica = document.getElementById("soundtrack-batalha")
+    musica.pause()
+    const musicaBase = document.getElementById("soundtrack")
+    musicaBase.play()
+}
+
+
 //Essas linhas de código permitem que a função seguinte funcione corretamente
   [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
 document.getElementById("paginaInicial").style.display="flex" 
