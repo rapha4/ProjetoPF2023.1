@@ -24,8 +24,8 @@ const musicaBatalhaOFF = () => {
 
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
-  [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
-document.getElementById("paginaInicial").style.display="flex" 
+[...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+document.getElementById("paginaInicial").style.display="flex"
 //Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
 const mudarTela = (classe) => (tela) => {
 	const musica = document.getElementById('musica')
