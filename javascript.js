@@ -363,7 +363,6 @@ const bossDerrotado = (boss, estado) => {
     estado.moedas = maisMoedas
     atualizarDOM({...estado, moedas: maisMoedas, xp: novoXp})
     mudarBtnOnClick(boss,estado)
-    mudarTela('gamediv')('tela vitoria')
 }
 const mudarMes =  (boss) => {
     const mes = document.getElementById('mes')
@@ -399,6 +398,7 @@ const mudarBtnOnClick = (boss, estado) =>{
         btnAtacar.onclick = () =>atacar(bossCalculo,estado)
         btnDesviar.onclick = () =>desviar(bossCalculo, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
+        mudarTela('gamediv')('tela vitoria')
         mudarMes(bossCalculo)
     }else if(boss.nome === "Cálculo A"){    
         boss1.style.display='none'
@@ -407,6 +407,7 @@ const mudarBtnOnClick = (boss, estado) =>{
         btnAtacar.onclick = () =>atacar(bossDioglos,estado)
         btnDesviar.onclick = () =>desviar(bossDioglos, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
+        mudarTela('gamediv')('tela vitoria')
         mudarMes(bossDioglos)
     }else{     
         boss3.style.display='none'
@@ -415,6 +416,7 @@ const mudarBtnOnClick = (boss, estado) =>{
         btnAtacar.onclick = () =>atacar(bossCirdLil,estado)
         btnDesviar.onclick = () =>desviar(bossCirdLil, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
+        mudarTela('gamediv')('tela vitoria')
         mudarMes(bossCirdLil)
     }
 }
