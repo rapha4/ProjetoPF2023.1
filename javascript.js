@@ -63,13 +63,8 @@ const mudarTela = (classe) => (tela) => {
 		else musica.style.display='block'
         // Para a tela da bicen
         if (tela == 'bicen') {
-            voltar.style.display = "block"
-            voltar.classList.remove('botao-voltar')
-            voltar.classList.add('botao-voltar-bicen')
             musica.style.marginLeft = "46px"
         } else {
-            voltar.classList.remove('botao-voltar-bicen')
-            voltar.classList.add('botao-voltar')
             musica.style.marginLeft = "0px"
         }
     }
