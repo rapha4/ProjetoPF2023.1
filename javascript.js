@@ -383,15 +383,22 @@ const vitoria = () => {
     console.log('vitória')
 }
 
-const mudarXP =(estado)=>(qt)=> {
-	estado.xp+=qt
-	estado.nivel+=parseInt(estado.xp/100) 
+
+const mudarXP =(estado)=>(qt)=> {  /// adiciona xp ao personagem
+	estado.xp += qt
+	estado.nivel += parseInt(estado.xp/100) 
 
     if (estado.xp == 100) {
         estado.xp = 0
     }
 
 	atualizarDOM(estado)
+}
+
+const ganharMoedas = (estado) => (qt) => {  /// adiciona moedas ao personagem
+    estado.moedas += qt
+
+    atualizarDOM(estado)
 }
 
 
