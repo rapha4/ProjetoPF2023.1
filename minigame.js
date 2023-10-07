@@ -13,7 +13,7 @@
  const duracao_da_explosao_do_laser = 1
  const friccao = 0.3
  const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
- const numero_de_asteroides = 1 // numero inicial de asteroides
+ const numero_de_asteroides = 5 // numero inicial de asteroides
  const velocidade_dos_asteroides = 5
  const vertices_dos_asteroides = 8 // quantidade padrao de vertices dos asteroides
  
