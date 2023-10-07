@@ -60,8 +60,9 @@
             <button class="botao continuar" onclick="continuar()" id="botaoNome">Continuar</button>            </div>
         </div>
 
-        <div class="gamediv" id="gameplay">			
-            <p class="texto">MES:<span class="meses">1/4</span></p>
+        <div class="gamediv" id="gameplay">	
+            <p class="aviso animacao2">Seu jogo foi salvo automaticamente.</p>		
+            <p class="meses-txt">MES:<span class="meses">1/4</span></p>
             <img id="gameplayImg" class="img-de-fundo" src="./imagens/fundo-padrao.png">
             <div class="botoes">
                 <button onclick="mudarTela('gamediv')('resun')" class="amarelo botao-principal" onclick="mudarTela('gamediv')('resun')">
@@ -150,11 +151,14 @@
         </div>
 
         <!--- minigame  Bicen --> 
-        <div id="bicen" class="gamediv"> 
+        <div id="bicen" class="gamediv">
+            <span class="botao-voltar">
+				<button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
+			</span>
             <canvas width="830" height="520"></canvas>
             <div id="divBotoesMinigame">
                 <button class="botao opcao" id="jogar-novamente" onclick="iniciarMinigame(); escondeBotoes()">Jogar Novamente</button>
-                <button class="botao opcao" id="voltar-gameplay" onclick="mudarTela('gamediv')('gameplay')">Voltar</button>
+               <!--  <button class="botao opcao" id="voltar-gameplay" onclick="mudarTela('gamediv')('gameplay')">Voltar</button> -->
             </div>
         </div>
 

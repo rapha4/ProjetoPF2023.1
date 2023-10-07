@@ -109,12 +109,18 @@ img{
 }
 
 /*Botão de voltar*/
- .botao-voltar {
+.botao-voltar {
 	position: absolute;
 	top: 15px;
 	left: 25px;
 	min-width: 37px;
 }  
+
+.botao-voltar-bicen{
+    position: absolute;
+    bottom: 15px;
+    left: 5px;
+}
 
 .voltar {
 	padding: 6px 8px;
@@ -269,7 +275,8 @@ img{
     min-height: 525px;
 }
 
-#gameplay > p {
+.meses-txt {
+    color: #fff;
     font-size: 1.3rem;
     margin-top: 30px;
     margin-right: 29px;
@@ -410,6 +417,13 @@ img{
     font-size: 0.9rem;
 }
 
+.aviso {
+    color: #fff;
+    position: absolute;
+    bottom: 60px;
+    right: 30px;
+}
+
 /* Tela do resun */
 
 #resun{
@@ -503,14 +517,32 @@ img{
 }
 
 /* Tela da bicen*/
+#bicen{
+    display: flex;
+}
+
 #divBotoesMinigame { 
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: absolute;
-    gap: 30px;
-    top: 400px;
-    left: 100px;
-    align-self: center;
-    height: 80px;
+    height: 295px;
+    gap: 20px;
+    bottom: 0px;
+    left: 250px;
+}
+
+#divBotoesMinigame > button {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+#divBotoesMinigame > button:nth-child(1){
+    width: 340px;
 }
 
 /* Tela da prova */
@@ -771,6 +803,10 @@ img{
          animation: fadein 2s; 
 } 
 
+.animacao2 {
+    animation: fadeOut 3s ease-in-out forwards;
+} 
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -792,4 +828,31 @@ img{
 @-ms-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+} 
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;
+        visibility: hidden;} 
+ } 
+
+ /* Firefox < 16 */ 
+@-moz-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;
+        visibility: hidden;} 
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;
+        visibility: hidden;} 
+}
+
+/* Internet Explorer */ 
+@-ms-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;
+        visibility: hidden;} 
 } 

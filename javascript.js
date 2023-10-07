@@ -22,33 +22,58 @@ const musicaBatalhaOFF = () => {
 
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
-  [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+/* Tudo que não for página inicial irá desaparecer e só a página principal carregará.  */
+[...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none")
 document.getElementById("paginaInicial").style.display="flex" 
-//Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
+
+
+/*Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente.
+ Caso mudar de/para tela 'gameplay', fazer autosave
+*/
 const mudarTela = (classe) => (tela) => {
+    /* Pegando todos os elementos do HTML */
 	const musica = document.getElementById('musica')
-    const lista = [...document.getElementsByClassName(classe)]
-    const mudar = document.getElementById(tela)
-	const voltar = document.getElementById("voltar")
-	const original=lista.filter(elem=>elem.style.display!="none")[0]
+    const lista = [...document.getElementsByClassName(classe)] // Todas as telas
+    const mudar = document.getElementById(tela) // Tela para qual queremos mudar (Tela de destino)
+	const voltar = document.getElementById("voltar") // Botão de voltar
+    /* */
+	const original=lista.filter(elem=>elem.style.display!="none")[0] // Pega a tela de origem, ou seja, a que atualmente está visível.
+
+    /* Manda todas as telas desaparecerem */
     lista.map(elem=>elem.style.display="none")
-    mudar.style.display = "flex"
-	mudar.classList.add('animacao')	
-	voltar.onclick=()=>mudarTela('gamediv')(original.id)
+    mudar.style.display = "flex" // Tela de destino fica visível
+	mudar.classList.add('animacao')	// Transição da tela de destino
+	voltar.onclick=()=>mudarTela('gamediv')(original.id) // Botão de voltar volta para a tela anterior à da de destino.
 	
 	if (classe=='gamediv'){ // Ajuste de localização dos botões de acordo com algumas telas.
-		if (tela=='gameplay') musica.classList.add("botoes-musica-modificados")
-		else musica.classList.remove("botoes-musica-modificados")
+        // Para a tela gameplay
+        if (tela=='gameplay'){ musica.classList.add("botoes-musica-modificados") 
+       /*  const aviso = document.querySelector('.aviso')
+        aviso.style.display = 'block' */
+    }
+        else musica.classList.remove("botoes-musica-modificados")
+        // Para a tela do resun
         if(tela == 'resun') { 
             musica.classList.add('botoes-musica-modificados-2')
         }else {
             musica.classList.remove("botoes-musica-modificados-2")
-            voltar.classList.remove('botao-voltar-modificado')    
 		}
+        // Para a tela do Boss e do Config
 		if(tela=='batalhaBoss'||tela=='config') musica.style.display='none'
 		else musica.style.display='block'
+        // Para a tela da bicen
+        if (tela == 'bicen') {
+            voltar.style.display = "block"
+            voltar.classList.remove('botao-voltar')
+            voltar.classList.add('botao-voltar-bicen')
+            musica.style.marginLeft = "46px"
+        } else {
+            voltar.classList.remove('botao-voltar-bicen')
+            voltar.classList.add('botao-voltar')
+            musica.style.marginLeft = "0px"
+        }
     }
-	
+	// Quando chegar na tela gameplay, dar autosave automaticamente.
 	if(tela=='gameplay'||original.id=='gameplay') save(estadoAtual)('autosave')
 }
 
