@@ -72,7 +72,7 @@
                     <p class="texto principal sombravermelha">BICEN</p>
                     <p class="texto descricao">Frequente a BICEN para treinar suas habilidades e ganhar XP e moedas.</p>
                 </button>
-                <button class="vermelho botao-principal" onclick="mudarTela('gamediv')('batalhaBoss')">
+                <button class="vermelho botao-principal" onclick="mudarTela('gamediv')('batalhaBoss'), irLutar(bossVetores)">
                     <p class="texto principal sombrapreta">PROVA</p>
                     <p class="texto descricao">Enfrente a PROVA para passar para o próximo mês. Esteja preparado.</p>
                     <p class="alerta texto">Nível <br>recomendado: <span id='nivel-rec'>5</span></p>
@@ -93,6 +93,7 @@
                     <p class="status-texto">HP:<span class="vermelho-txt valorHP">0</span></p>
                     <p class="status-texto ">NV:<span class="ciano nivel">0</span></p>
                     <p class="status-texto ">XP:<span class='ciano valorXP'>0</span></p> 
+
                         <div class="moedasdiv">
                         <img src="imagens/moedas.png" class="img-moedas">
                         <p class="amarelo-txt valorMoeda">100</p>
@@ -138,7 +139,7 @@
                     </div>
                 </div></button>
             </div>
-
+            <p id="alerta" class="vermelho-txt">Oops! Você não possui moedas suficientes.</p>
            <div class="barrastatus-resun" id="barrastatus-resun">
                    <p class="status-texto ">HP:<span class="vermelho-txt valorHP">100</span></p>
                        <div class="moedasdiv">
@@ -172,9 +173,10 @@
                 <img src="">
             </div>
             <div class="botoesboss">
-                <button class="vermelho botao-boss">Atacar</button>
-                <button class="vermelho botao-boss">Desviar</button>
-                <button class="botao-boss verde">Fugir</button>
+                <button class="vermelho botao-boss" onclick="atacar(bossVetores, estadoAtual)">Atacar</button>
+                <button class="vermelho botao-boss" onclick="desviar(bossVetores, estadoAtual)">Desviar</button>
+                <button class="botao-boss verde" onclick="mudarTela('gamediv')('gameplay')">Fugir</button>
+                <p id="texto"></p>
             </div>
             <img src="imagens/stewart.png" class="boss1" id="boss1">
             <img src="imagens/boss2.png" class="boss2" id="boss2">
@@ -183,6 +185,20 @@
             
         </div>
         
+        <div class="vitoria gamediv">
+            <img src="imagens/fundo-padrao.png" class="img-de-fundo">
+            <h2 class="resultado-txt aprovacao">APROVADO!</h2>
+            <p class="resultado-subtxt-vitoria" id="resultado-boss">Bom trabalho! Você ganhou 50 moedas e 100 XP!</p>
+            <button class="botao botao-progressao">Continuar</button>
+        </div>
+
+        <div class="derrota gamediv">
+            <img src="imagens/fundo-padrao.png" class="img-de-fundo">
+            <h2 class="resultado-txt reprovacao">REPROVADO.</h2>
+            <p class="resultado-subtxt-derrota">Estude mais na BICEN e visite o RESUN para aumentar suas chances de passar!</p>
+            <button class="botao tentarnovamente">Tentar novamente</button>
+        </div>
+
          <span id="musica" class="botoes-musica">
             <button onclick="mudarTela('gamediv')('config')" class="opacidade botao config"><i class="fa-solid fa-gear"></i></button>
              <button onclick="musicaDeFundoON()" class="opacidade botao musica"><i class="fa-solid fa-volume-high"></i></button>
