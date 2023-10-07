@@ -32,7 +32,7 @@ const mudarTela = (classe) => (tela) => {
             musica.classList.remove("botoes-musica-modificados-2")
             voltar.classList.remove('botao-voltar-modificado')    
 		}
-		if(tela=='batalhaBoss') musica.style.display='none'
+		if(tela=='batalhaBoss'||tela=='config') musica.style.display='none'
 		else musica.style.display='block'
     }
 	
