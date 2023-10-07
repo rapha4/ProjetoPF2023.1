@@ -12,7 +12,7 @@
         <div class="gamediv" id="paginaInicial">
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/interface.png"> 
         <!-- img é 1680 x 1050-->
-            <button onclick = "iniciarJogo()" class="botao" id="play">Play</button>
+            <button onclick = "iniciarJogo()" class="botao" id="play">Jogar</button>
 			<!-- mudar btn play para função iniciarJogo com funcionamento adequado-->
         </div> 
 
@@ -171,11 +171,12 @@
             <div class="imgboss">
                 <img src="">
             </div>
+                <p id="texto"></p>
             <div class="botoesboss">
                 <button class="vermelho botao-boss" onclick="atacar(bossVetores, estadoAtual)">Atacar</button>
                 <button class="vermelho botao-boss" onclick="desviar(bossVetores, estadoAtual)">Desviar</button>
                 <button class="botao-boss verde" onclick="mudarTela('gamediv')('gameplay')">Fugir</button>
-                <p id="texto"></p>
+                
             </div>
             <img src="imagens/stewart.png" class="boss1" id="boss1">
             <img src="imagens/boss2.png" class="boss2" id="boss2">
@@ -206,40 +207,35 @@
 		
 
         <div id="config" class="gamediv">
+            <img src="imagens/fundo-padrao.png" class="img-de-fundo">
 			<span class="botao-voltar">
 				<button id="voltar" onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
 			</span>
-			<span id="pgnIn">
-				<button onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar">Voltar para página inicial</button>
-			</span>
-			<div id="saveslots">
-				<span>Autosave</span>
+			    <p class="autosave">Autosave
 				<button class="botao" onclick="deletarSave('autosave')">Delete</button>
-				<br>
-				<br>
-			
-				<span>Slot 1</span>
+			     </p>
+			<div id="saveslots">
+				
+				<p>Slot 1
 				<button class="botao" onclick="save(estadoAtual)('slot1')">Save</button>
 				<button class="botao" onclick="load('slot1')">Load</button>
 				<button class="botao" onclick="deletarSave('slot1')">Delete</button>
-				
-				<br>
-				<br>
-				
-				<span>Slot 2</span>
+				</p>
+
+				<p>Slot 2
 				<button class="botao" onclick="save(estadoAtual)('slot2')">Save</button>
 				<button class="botao" onclick="load('slot2')">Load</button>
 				<button class="botao" onclick="deletarSave('slot2')">Delete</button>
-				
-				<br>
-				<br>
-				<span>Slot 3</span>
+				</p>
+                <p>Slot 3
 				<button class="botao" onclick="save(estadoAtual)('slot3')">Save</button>
 				<button class="botao" onclick="load('slot3')">Load</button>
 				<button class="botao" onclick="deletarSave('slot3')">Delete</button>
-				
+				</p>
 			</div>
-
+            <span id="pgnIn">
+                <button onclick="mudarTela('gamediv')('paginaInicial')" class="opacidade botao voltar">Voltar para página inicial</button>
+             </span>
         </div>
              
         

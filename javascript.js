@@ -9,8 +9,8 @@ const musicaDeFundoOFF = () => {
 }
 
 //Essas linhas de código permitem que a função seguinte funcione corretamente
- [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
-document.getElementById("paginaInicial").style.display="flex" 
+/*  [...document.getElementsByClassName("gamediv")].map(elem=>elem.style.display="none") //dando um style a cada elemento cuja class é gamediv
+document.getElementById("paginaInicial").style.display="flex"  */
 //Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente. caso mudar de/para tela 'gameplay', fazer autosave
 const mudarTela = (classe) => (tela) => {
 	const musica = document.getElementById('musica')
@@ -48,17 +48,8 @@ let estadoAtual = criarEstadoInicial()
 const xp = document.querySelectorAll('#valorXP')
 const moedas = document.querySelectorAll('#valorMoeda')
 const hp = document.querySelectorAll('#valorHP')
-const nomeTxt=document.querySelector('#nome-txt')
+const nomeTxt=document.querySelectorAll('#nome-txt')
 const nivel = document.querySelectorAll('#nivel')
-
-// Botão de continuar na tela 'nome'
-const continuar = () => {
-    estadoAtual.nome=document.getElementById('nomeInput').value.trim()
-    if (estadoAtual.nome.length == 0){ window.alert('Insira um nome válido')} 
-    else{
-    mudarTela('gamediv')('gameplay')
-    atualizarDOM(estadoAtual)
-    }}
 
 // Função para atualizar a interface
 const atualizarDOM = (estado) => {
@@ -76,9 +67,23 @@ const atualizarDOM = (estado) => {
     helper([...moedas])("moedas")
     helper([...xp])("xp")
     helper([...nivel])("nivel")
-    nomeTxt.textContent = estado.nome
+    helper([...nomeTxt])("nome")
 	mudarTela('personagemGameplay')(estado.opcao)
 }
+
+
+// Botão de continuar na tela 'nome'
+const continuar = () => {
+    estadoAtual.nome=document.getElementById('nomeInput').value.trim()
+    if (estadoAtual.nome.length == 0){ window.alert('Insira um nome válido')} 
+    else{
+    mudarTela('gamediv')('gameplay')
+    atualizarDOM(estadoAtual)
+    }}
+
+
+
+
 
 // Logística do RESUN
 // Feito com auxílio do Chat GPT
@@ -281,7 +286,7 @@ const pegarValorAtaqueBoss = (boss,estado) => {
 
 // Nem o boss nem o usuário perdem hp
 const desviar = (boss, estado) => {
-    texto.innerText = "Você desviou do ataque do " + boss.nome + " com alguns arranhões."
+    texto.innerText = "Você desviou do ataque de " + boss.nome + " com alguns arranhões."
     const novoHp = estado.hp - boss.nivel
         estado.hp = novoHp
         atualizarDOM({...estado, hp: novoHp})
