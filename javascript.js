@@ -230,7 +230,7 @@ const texto = document.querySelector("#texto");
 const boss = [
     {
       nome: "Vetores",
-      nivel: 5,
+      nivel: 4,
       hp: 100
     },
     {
@@ -288,9 +288,13 @@ const boss = [
         }
         //Analisa a situação do usuário e do boss após sofrerem ataque, determinando a vitória ou a derrota
         if (estado.hp <= 0) {
-            derrota()
+            estado.hp = 100
+            boss.hp = 100
+            atualizarDOMboss({...boss, hp: 100})
+            atualizarDOM({...estado, hp:100})
+            mudarTela('gamediv')('derrota tela')
         } else if (boss.hp <= 0){
-            boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado()
+            boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado(boss, estado)
     }
   }
   // Gera o valor do ataque do Boss
@@ -327,9 +331,13 @@ const desviar = (boss, estado) => {
         atualizarDOM({...estado, hp: novoHp})
     }
     if (estado.hp <= 0) {
-        derrota()
+        estado.hp = 100
+        boss.hp = 100
+        atualizarDOMboss({...boss, hp: 100})
+        atualizarDOM({...estado, hp:100})
+        mudarTela('gamediv')('derrota tela')
     } else if (boss.hp <= 0){
-            boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado()
+            boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado(boss, estado)
     }
 }
 const conseguiuDesviar = (boss, estado) =>{
@@ -342,21 +350,23 @@ const conseguiuDesviar = (boss, estado) =>{
     }
     return valorAlea < chance(diferencaNiveis) || boss.hp < 20
 }
-const fugir = (tela1,tela2) => {
+const fugir = (boss) => {
     texto.innerText = "Você está lutando com o Boss!"
-    mudarTela(tela1)(tela2)
+    boss.hp = 100
+    atualizarDOMboss({...boss, hp: 100})
+    mudarTela('gamediv')('gameplay')
 }
 
 //Caso o hpBoss<0 e ele n seja o Boss final, ele será recompensado com xp, moedas 
 const bossDerrotado = (boss, estado) => {
     texto.innerText = "Você está lutando com o Boss!"
-    const maisMoedas = estado.moedas + 50
     const novoXp = estado.xp + 100
-    estado.moedas = maisMoedas
+    const maisMoedas = estado.moedas + 50
     estado.xp = novoXp
+    estado.moedas = maisMoedas
     atualizarDOM({...estado, moedas: maisMoedas, xp: novoXp})
     mudarBtnOnClick(boss,estado)
-    mudarTela('gamediv')('vitoria gamediv')
+    mudarTela('gamediv')('tela vitoria')
 }
 
 // Função que muda as funções do onclick da área de batalha e a imagem
@@ -366,42 +376,40 @@ const mudarBtnOnClick = (boss, estado) =>{
     const btnBatalha = document.getElementById('btnBatalha')
     const btnAtacar = document.getElementById('btnAtacar')
     const btnDesviar = document.getElementById('btnDesviar') 
+    const btnFugir = document.getElementById('btnFugir')
     const boss1 = document.getElementById('boss1')
     const boss2 = document.getElementById('boss2')
     const boss3 = document.getElementById('boss3')
     const boss4 = document.getElementById('boss4')
 
 
+
     if ( boss.nome === "Vetores"){
-        boss2.style.display = "none" 
-        boss1.style.display = "flex"  
-        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado) 
-        btnAtacar.onclick = atacar(bossCalculo,estado)
-        btnDesviar.onclick = desviar(bossCalculo, estado)
-        console.log('mudou para calculo')
-    }else if(boss.nome === "Cálculo A"){
-        boss1.style.display = "none" 
-        boss3.style.display = "flex"          
-        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado) 
-        btnAtacar.onclick = atacar(bossDioglos,estado)
-        btnDesviar.onclick = desviar(bossDioglos, estado)
+        boss2.style.display='none'
+        boss1.style.display='flex'
+        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado) 
+        btnAtacar.onclick = () =>atacar(bossCalculo,estado)
+        btnDesviar.onclick = () =>desviar(bossCalculo, estado)
+        btnFugir.onclick = () =>fugir(bossCalculo)
+    }else if(boss.nome === "Cálculo A"){    
+        boss1.style.display='none'
+        boss3.style.display='flex'
+        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado) 
+        btnAtacar.onclick = () =>atacar(bossDioglos,estado)
+        btnDesviar.onclick = () =>desviar(bossDioglos, estado)
+        btnFugir.onclick = () =>fugir(bossCalculo)
         console.log('mudou para dioglos')
-       
-    }else{
-        boss3.style.display = "none" 
-        boss4.style.display = "flex"          
-        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossCirdLil, estado)
-        btnAtacar.onclick = atacar(bossCirdLil,estado)
-        btnDesviar.onclick = desviar(bossCirdLil, estado)
+    }else{     
+        boss3.style.display='none'
+        boss4.style.display='flex'
+        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCirdLil, estado)
+        btnAtacar.onclick = () =>atacar(bossCirdLil,estado)
+        btnDesviar.onclick = () =>desviar(bossCirdLil, estado)
+        btnFugir.onclick = () =>fugir(bossCalculo)
         console.log('mudou para cirdlil')
     }
 }
 
-const derrota = () => {
-    texto.innerText = "Você está lutando com o Boss!"
-    mudarTela('gamediv')('derrota gamediv')
-    console.log('derrota')
-}
 
 const vitoria = () => {
     mudarTela('gamediv')('fimdejogo')
