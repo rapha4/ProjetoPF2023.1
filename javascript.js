@@ -38,7 +38,8 @@ const mudarTela = (classe) => (tela) => {
 	const voltar = document.getElementById("voltar") // Botão de voltar
     /* */
 	const original=lista.filter(elem=>elem.style.display!="none")[0] // Pega a tela de origem, ou seja, a que atualmente está visível.
-
+	const alerta=document.getElementById('alerta')//Pegando o texto de alerta do resun
+	
     /* Manda todas as telas desaparecerem */
     lista.map(elem=>elem.style.display="none")
     mudar.style.display = "flex" // Tela de destino fica visível
@@ -46,6 +47,7 @@ const mudarTela = (classe) => (tela) => {
 	voltar.onclick=()=>mudarTela('gamediv')(original.id) // Botão de voltar volta para a tela anterior à da de destino.
 	
 	if (classe=='gamediv'){ // Ajuste de localização dos botões de acordo com algumas telas.
+		alerta.style.display="none" //faz o alerta do resun ficar invisível
         // Para a tela gameplay
         if (tela=='gameplay'){ musica.classList.add("botoes-musica-modificados") 
        /*  const aviso = document.querySelector('.aviso')
