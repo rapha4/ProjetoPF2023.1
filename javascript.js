@@ -314,19 +314,19 @@ const mudarBtnOnClick = (boss, estado) =>{
     const btnDesviar = document.getElementById('btnDesviar')
 
     if ( boss.nome === "Vetores"){
-        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado) 
-        btnAtacar.onclick = atacar(bossCalculo,estado)
-        btnDesviar.onclick = desviar(bossCalculo, estado)
+        btnBatalha.onclick = ()=>mudarTela('gamediv')('batalhaBoss');irLutar(bossCalculo, estado) 
+        btnAtacar.onclick = ()=>atacar(bossCalculo,estado)
+        btnDesviar.onclick = ()=>desviar(bossCalculo, estado)
         console.log('mudou para calculo')
     }else if(boss.nome === "Cálculo A"){
-        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado) 
-        btnAtacar.onclick = atacar(bossDioglos,estado)
-        btnDesviar.onclick = desviar(bossDioglos, estado)
+        btnBatalha.onclick = ()=>mudarTela('gamediv')('batalhaBoss');irLutar(bossDioglos, estado) 
+        btnAtacar.onclick = ()=>atacar(bossDioglos,estado)
+        btnDesviar.onclick = ()=>desviar(bossDioglos, estado)
         console.log('mudou para dioglos')
     }else{
-        btnBatalha.onclick = mudarTela('gamediv')('batalhaBoss'),irLutar(bossCirdLil, estado)
-        btnAtacar.onclick = atacar(bossCirdLil,estado)
-        btnDesviar.onclick = desviar(bossCirdLil, estado)
+        btnBatalha.onclick = ()=>mudarTela('gamediv')('batalhaBoss');irLutar(bossCirdLil, estado)
+        btnAtacar.onclick = ()=>atacar(bossCirdLil,estado)
+        btnDesviar.onclick = ()=>desviar(bossCirdLil, estado)
         console.log('mudou para cirdlil')
     }
 }
@@ -339,5 +339,10 @@ const vitoria = () => {
     console.log('vitória')
 }
 
-
+/*const mudarXP =(estado)=>(qt)=> {
+	estado.xp+=qt
+	estado.nivel=parseInt(estado.xp/100)
+	atualizarDOM(estado)
+}
+*/
 
