@@ -722,6 +722,33 @@ img{
     gap: 30px;
 }
 
+/* Tela do fim do jogo */
+.fimdejogo{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.fimdejogo > h2 {
+    color: #fff;
+    font-size: 5rem;
+    margin: 110px 0 20px 0px;
+    filter: drop-shadow(2px 5px 0px #000);
+}
+
+.fimdejogo > p {
+    color: #fff;
+    text-align: center;
+    filter: drop-shadow(2px 2px 0px #000);
+}
+
+.fimdejogo > button {
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
 
 /* Animação retirada do stackoverflow https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
 
