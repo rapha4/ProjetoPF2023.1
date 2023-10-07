@@ -385,5 +385,10 @@ const vitoria = () => {
     console.log('vitória')
 }
 
+const mudarXP =(estado)=>(qt)=> {
+	estado.xp+=qt
+	estado.nivel=parseInt(estado.xp/100)
+	atualizarDOM(estado)
+}
 
 
