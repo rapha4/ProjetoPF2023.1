@@ -129,7 +129,8 @@
      }
 
  /////// armazena os registros dos asteroides
- const asteroides = criarCinturaoDeAsteroides()
+ // precisei utilizar de variavel para recriar os asteroides na funcao jogar novamente
+ var asteroides = criarCinturaoDeAsteroides()
 
  ////// destruição de asteroides
  const destruirAsteroide = (index) => {
@@ -151,6 +152,34 @@
      asteroides.splice(index, 1)
  }
  
+
+//// essa funcao começa um jogo novo, restaurando o numero de asteroides e vidas iniciais da nave
+const iniciarMinigame = () => {
+    nave = novaNave()
+    asteroides = criarCinturaoDeAsteroides()
+    vidas = vidas_iniciais
+}
+
+//// termina o jogo quando o jogador perde
+const gameOver = () => {
+    nave.status = false
+
+    // mostra os botoes de jogar novamente e de voltar
+    const botoes = document.getElementById("divBotoesMinigame")
+    botoes.style.display = "flex"
+}
+
+const escondeBotoes = () => {
+    const botoes = document.getElementById("divBotoesMinigame")
+    botoes.style.display = "none"
+}
+
+// win, pois "vitoria" já é outra função no codigo principal
+const win = () => {
+    const botoes = document.getElementById("divBotoesMinigame")
+    botoes.style.display = "flex"
+}
+
  //////////// Event Listeners, captura o teclado ///////////
  const keyDown = (/** @type {KeyboardEvent}*/ ev) => {
      switch(ev.keyCode) {
@@ -187,16 +216,6 @@
              break;
      }
  }
- 
- const gameOver = () => {
-     nave.status = false
-      // adicionar botao para recomeçar o jogo e voltar ao menu principal
-      /// recomeçar
-         // nave = novanave()
-         // vidas = vidas_iniciais
-     /// voltar ao menu principal
- }
-
 
  document.addEventListener("keydown", keyDown)
  document.addEventListener("keyup", keyUp)
@@ -486,13 +505,17 @@
          nave.tempoDeExplosao--
 
          if (nave.tempoDeExplosao == 0 && vidas > 0) {
-             nave = novaNave()
-             vidas--
+            nave = novaNave()
+            vidas--
          } 
-         else {
-             gameOver()
+         else if (vidas == 0) {
+            gameOver()
          }
      }
+
+     ////// detecta se a nave continua viva e o numero de asteroides, se o numero de asteroides for 0, o jogador ganha
+     if (asteroides.length == 0 && nave.status)
+        win()
 
      ////// detectar colisoes de lasers e asteroides
      // Utilizei de laços para facilitar na detecção

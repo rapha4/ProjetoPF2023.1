@@ -68,7 +68,7 @@
                     <p class="texto principal sombravermelha">RESUN</p>
                     <p class="texto descricao">Gaste suas moedas no RESUN para recuperar HP.</p>
                 </button>
-                <button class="amarelo botao-principal" onclick="mudarTela('gamediv')('bicen')">
+                <button class="amarelo botao-principal" onclick="mudarTela('gamediv')('bicen'); iniciarMinigame()">
                     <p class="texto principal sombravermelha">BICEN</p>
                     <p class="texto descricao">Frequente a BICEN para treinar suas habilidades e ganhar XP e moedas.</p>
                 </button>
@@ -149,7 +149,12 @@
            </div>
         </div>
 
+        <!--- minigame  Bicen --> 
         <canvas width="830" height="505" id="bicen" class="gamediv"></canvas>
+        <div id="divBotoesMinigame">
+            <button class="botaoMinigame" id="jogar-novamente" onclick="iniciarMinigame(); escondeBotoes()">Jogar Novamente</button>
+            <button class="botaoMinigame" id="voltar-gameplay" onclick="mudarTela('gamediv')('gameplay'); escondeBotoes()">Voltar</button>
+        </div>
 
         <div class="gamediv" id="batalhaBoss">
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/fundo-boss.png"> 
