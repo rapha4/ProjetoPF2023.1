@@ -318,7 +318,7 @@ const pegarValorAtaqueBoss = (boss,estado) => {
     return valorAlea < chance(diferencaNiveis) || boss.hp < 20
     }
 
-// Serve para desviar do ataque do boss, mas perdendo um valor mínimo
+// Serve para fazer as alterações caso o usuário consiga desviar ou não e analisa se ele foi derrotado ou não
 const desviar = (boss, estado) => {
     if (conseguiuDesviar(boss,estado)){
         texto.innerText = "Você desviou do ataque de " + boss.nome + " com alguns arranhões."
@@ -338,6 +338,7 @@ const desviar = (boss, estado) => {
             boss.nome === "Cirdneh e Lilak" ? vitoria() : bossDerrotado(boss, estado)
     }
 }
+//Aleatoriza se o usuário vai conseguir desviar do ataque ou n
 const conseguiuDesviar = (boss, estado) =>{
     const valorAlea = gerarValorAlea(0,1)
     const diferencaNiveis = estado.nivel - boss.nivel
@@ -348,6 +349,7 @@ const conseguiuDesviar = (boss, estado) =>{
     }
     return valorAlea < chance(diferencaNiveis) || boss.hp < 20
 }
+//Faz com que o usuário retorne a tela de gameplay e atualiza o hp do boss
 const fugir = (boss) => {
     texto.innerText = "Você está lutando com o Boss!"
     boss.hp = 100
@@ -355,13 +357,16 @@ const fugir = (boss) => {
     mudarTela('gamediv')('gameplay')
 }
 
-//Caso o hpBoss<0 e ele n seja o Boss final, ele será recompensado com xp, moedas 
+/*Caso o hp do boss < 0 e ele n seja o Boss final, ele será recompensado com xp e moedas. 
+As funções dos botões na área de Batalha tbm são atualizadas*/ 
 const bossDerrotado = (boss, estado) => {
     texto.innerText = "Você está lutando com o Boss!"
     mudarXP(estado)(100)
     ganharMoedas(estado)(50)
     mudarBtnOnClick(boss,estado)
 }
+
+//Serve para atualizar o mês de acordo com o boss
 const mudarMes =  (boss) => {
     const mes = document.getElementById('mes')
     if ( boss.nome === "Cálculo A"){
@@ -376,7 +381,7 @@ const mudarMes =  (boss) => {
 }
 
 
-// Função que muda as funções do onclick da área de batalha e a imagem
+// Muda as funções do onclick da área de batalha e a imagem, atualiza o mês e muda a tela
 const mudarBtnOnClick = (boss, estado) =>{
     const telaBatalha = document.getElementById('batalhaBoss')
     telaBatalha.style.display = 'block'
@@ -421,7 +426,7 @@ const mudarBtnOnClick = (boss, estado) =>{
     }
 }
 
-
+//Passa para a última tela do jogo 
 const vitoria = () => {
     mudarTela('gamediv')('fimdejogo')
     console.log('vitória')
