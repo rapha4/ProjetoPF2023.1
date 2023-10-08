@@ -364,14 +364,18 @@ const bossDerrotado = (boss, estado) => {
 }
 const mudarMes =  (boss) => {
     const mes = document.getElementById('mes')
+    const nivelRecomendado = document.getElementById('nivel-rec')
     if ( boss.nome === "Cálculo A"){
-        mes.innerHTML = "2/4"
+        mes.innerHTML = "MES: 2/4"
+        nivelRecomendado.innerHTML = "7"
     }else if(boss.nome === "Dioglos"){    
-        mes.innerHTML = "3/4"
+        mes.innerHTML = "MES: 3/4"
+        nivelRecomendado.innerHTML = "10"
     }else if (boss.nome === "Cirdneh e Lilak") {  
-        mes.innerHTML = "4/4"   
+        mes.innerHTML = "MES: 4/4"   
+        nivelRecomendado.innerHTML = "13"
     }else if (boss.nome === "Vetores") {
-        mes.innerHTML = "1/4"
+        mes.innerHTML = "MES: 1/4"
     }
 }
 
@@ -406,16 +410,16 @@ const mudarBtnOnClick = (boss, estado) =>{
         btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado)
         btnAtacar.onclick = () =>atacar(bossDioglos,estado)
         btnDesviar.onclick = () =>desviar(bossDioglos, estado)
-        btnFugir.onclick = () =>fugir(bossCalculo)
+        btnFugir.onclick = () =>fugir(bossDioglos)
         mudarTela('gamediv')('tela vitoria')
         mudarMes(bossDioglos)
-    }else{     
+    }else if (boss.nome === "Dioglos") {     
         boss3.style.display='none'
         boss4.style.display='flex'
         btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCirdLil, estado)
         btnAtacar.onclick = () =>atacar(bossCirdLil,estado)
         btnDesviar.onclick = () =>desviar(bossCirdLil, estado)
-        btnFugir.onclick = () =>fugir(bossCalculo)
+        btnFugir.onclick = () =>fugir(bossCirdLil)
         mudarTela('gamediv')('tela vitoria')
         mudarMes(bossCirdLil)
     }
