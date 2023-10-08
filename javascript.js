@@ -1,23 +1,32 @@
+var musicaEstaOn=false //variavel para trackear se musica está on
+
 const musicaDeFundoON = () => {
     const musica = document.getElementById("soundtrack")
+	musicaEstaOn=true
     musica.play()
 }
 
 const musicaDeFundoOFF = () => {
     const musica = document.getElementById("soundtrack")
+	musicaEstaOn=false
     musica.pause()
 }
 
 const musicaBatalhaON = () => {
+	if (musicaEstaOn){
     musicaDeFundoOFF()
     const musica = document.getElementById("soundtrack-batalha")
     musica.play()
+	musicaEstaOn=true
+	}
 }
 
 const musicaBatalhaOFF = () => {
+	if (musicaEstaOn){
     const musica = document.getElementById("soundtrack-batalha")
     musica.pause()
     musicaDeFundoON()
+	}
 }
 
 
@@ -402,7 +411,7 @@ const mudarBtnOnClick = (bossnum, estado) =>{
 	btnBatalha.onclick = () =>{mudarTela('gamediv')('batalhaBoss');irLutar(bossEsc, estado)}
 	btnAtacar.onclick = () =>atacar(bossEsc,estado)
 	btnDesviar.onclick = () =>desviar(bossEsc, estado)
-	btnFugir.onclick = () =>fugir(bossEsc)
+	btnFugir.onclick = () =>{fugir(bossEsc);musicaBatalhaOFF()}
 	mudarMes(bossEsc)    
 }
 
