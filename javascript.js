@@ -276,7 +276,7 @@ const boss = [
         //Caso o ataque seja bem-sucedido, o hpdoBoss será alterado
         if (bossAtacado(boss, estado)){
             texto.innerText += " Você acertou o "+boss.nome+".";
-            const novohpBoss = boss.hp - ((estado.nivel*2) + Math.floor(estado.xp/5) + 1);// dano baseado no seu nivel e em xp
+            const novohpBoss = boss.hp - ((estado.nivel*2) + 1);// dano baseado no seu nivel
             boss.hp = novohpBoss
             atualizarDOMboss({...boss, hp:novohpBoss})
         //Caso o ataque falhe, o usuário perde hp
@@ -399,7 +399,7 @@ const mudarBtnOnClick = (bossnum, estado) =>{
     const bossEsc = boss[bossnum]
 	mudarTela('bossImagem')('boss'+(bossnum+1))
 	
-	btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss');irLutar(bossEsc, estado)
+	btnBatalha.onclick = () =>{mudarTela('gamediv')('batalhaBoss');irLutar(bossEsc, estado)}
 	btnAtacar.onclick = () =>atacar(bossEsc,estado)
 	btnDesviar.onclick = () =>desviar(bossEsc, estado)
 	btnFugir.onclick = () =>fugir(bossEsc)
