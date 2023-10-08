@@ -395,7 +395,6 @@ const mudarBtnOnClick = (boss, estado) =>{
         boss2.style.display='none'
         boss1.style.display='flex'
         btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado)
-        musicaBatalhaON()
         btnAtacar.onclick = () =>atacar(bossCalculo,estado)
         btnDesviar.onclick = () =>desviar(bossCalculo, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
