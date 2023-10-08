@@ -7,6 +7,7 @@ const musicaDeFundoON = () => {
 }
 
 const musicaDeFundoOFF = () => {
+	musicaBatalhaOFF()
     const musica = document.getElementById("soundtrack")
 	musicaEstaOn=false
     musica.pause()
