@@ -80,6 +80,7 @@ const criarEstadoInicial = () => {
     xp: 0,
     hp: 100,
     moedas: 100, 
+	boss: 0,
 }
 }
 
@@ -109,6 +110,7 @@ const atualizarDOM = (estado) => {
     helper([...nomeTxt])("nome")
 	mudarTela('personagemGameplay')(estado.opcao)
 	mudarTela('bossPersonagem')(`boss${estado.opcao}`)
+	mudarBtnOnClick(estado.boss,estado)
 }
 
 
@@ -358,12 +360,14 @@ const fugir = (boss) => {
 }
 
 /*Caso o hp do boss < 0 e ele n seja o Boss final, ele será recompensado com xp e moedas. 
-As funções dos botões na área de Batalha tbm são atualizadas*/ 
+As funções dos botões na área de Batalha tbm são atualizadas*/ // e muda a tela
 const bossDerrotado = (boss, estado) => {
     texto.innerText = "Você está lutando com o Boss!"
     mudarXP(estado)(100)
     ganharMoedas(estado)(50)
-    mudarBtnOnClick(boss,estado)
+	mudarTela('gamediv')('tela vitoria')
+	estado.boss+=1
+	atualizarDOM(estado)	
 }
 
 //Serve para atualizar o mês de acordo com o boss
@@ -381,53 +385,25 @@ const mudarMes =  (boss) => {
         nivelRecomendado.innerHTML = "13"
     }else if (boss.nome === "Vetores") {
         mes.innerHTML = "MES: 1/4"
+		nivelRecomendado.innerHTML = "5"
     }
 }
 
 
-// Muda as funções do onclick da área de batalha e a imagem, atualiza o mês e muda a tela
-const mudarBtnOnClick = (boss, estado) =>{
-    const telaBatalha = document.getElementById('batalhaBoss')
-    telaBatalha.style.display = 'block'
+// Muda as funções do onclick da área de batalha e a imagem, atualiza o mês
+const mudarBtnOnClick = (bossnum, estado) =>{
     const btnBatalha = document.getElementById('btnBatalha')
     const btnAtacar = document.getElementById('btnAtacar')
     const btnDesviar = document.getElementById('btnDesviar') 
     const btnFugir = document.getElementById('btnFugir')
-    const boss1 = document.getElementById('boss1')
-    const boss2 = document.getElementById('boss2')
-    const boss3 = document.getElementById('boss3')
-    const boss4 = document.getElementById('boss4')
-
-
-
-    if ( boss.nome === "Vetores"){
-        boss2.style.display='none'
-        boss1.style.display='flex'
-        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado)
-        btnAtacar.onclick = () =>atacar(bossCalculo,estado)
-        btnDesviar.onclick = () =>desviar(bossCalculo, estado)
-        btnFugir.onclick = () =>fugir(bossCalculo)
-        mudarTela('gamediv')('tela vitoria')
-        mudarMes(bossCalculo)
-    }else if(boss.nome === "Cálculo A"){    
-        boss1.style.display='none'
-        boss3.style.display='flex'
-        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado)
-        btnAtacar.onclick = () =>atacar(bossDioglos,estado)
-        btnDesviar.onclick = () =>desviar(bossDioglos, estado)
-        btnFugir.onclick = () =>fugir(bossDioglos)
-        mudarTela('gamediv')('tela vitoria')
-        mudarMes(bossDioglos)
-    }else if (boss.nome === "Dioglos") {     
-        boss3.style.display='none'
-        boss4.style.display='flex'
-        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCirdLil, estado)
-        btnAtacar.onclick = () =>atacar(bossCirdLil,estado)
-        btnDesviar.onclick = () =>desviar(bossCirdLil, estado)
-        btnFugir.onclick = () =>fugir(bossCirdLil)
-        mudarTela('gamediv')('tela vitoria')
-        mudarMes(bossCirdLil)
-    }
+    const bossEsc = boss[bossnum]
+	mudarTela('bossImagem')('boss'+(bossnum+1))
+	
+	btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss');irLutar(bossEsc, estado)
+	btnAtacar.onclick = () =>atacar(bossEsc,estado)
+	btnDesviar.onclick = () =>desviar(bossEsc, estado)
+	btnFugir.onclick = () =>fugir(bossEsc)
+	mudarMes(bossEsc)    
 }
 
 //Passa para a última tela do jogo 
