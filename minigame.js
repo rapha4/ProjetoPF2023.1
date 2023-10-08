@@ -5,13 +5,13 @@
  const velocidade_de_rotacao = 0.3
  const aceleracao_da_nave = 0.1
  const duracao_da_explosao_da_nave = 3
- const duracao_da_invisibilidade = 15
+ const duracao_da_invisibilidade = 15 // parametro de tempo em que a nave nao é atingida por asteroides
  const duracao_do_pisca = 0.7 // durante a invisibilidade
  const maximo_de_lasers = 10 // numero maximo de lasers na tela  !!!!! por algum motivo, apenas 1 laser está sendo definido na tela
  const velocidade_do_laser = 50
  const distancia_do_laser = 0.35 // maxima distancia que o laser pode se movimentar
  const duracao_da_explosao_do_laser = 1
- const friccao = 0.3
+ const friccao = 0.3 // parametro que define a velocidade com qual a nave para no espaço após avançar
  const tamanho_do_asteroide = 100 // tamanho inicial dos asteroides
  const numero_de_asteroides = 5 // numero inicial de asteroides
  const velocidade_dos_asteroides = 5
@@ -158,6 +158,7 @@ const iniciarMinigame = () => {
     nave = novaNave()
     asteroides = criarCinturaoDeAsteroides()
     vidas = vidas_iniciais
+    document.getElementById('txt-vitoria').style.display = 'none' // esconde o txt "+100 XP" na tela
 }
 
 const escondeBotoes = () => {
@@ -170,7 +171,7 @@ const mostraBotoes = () => {
     botoes.style.display = "flex"
 }
 
-//// termina o jogo quando o jogador perde
+//// termina o jogo quando o jogador perde todas as suas vidas
 const gameOver = () => {
     nave.status = false
     mostraBotoes()
@@ -178,9 +179,10 @@ const gameOver = () => {
 
 // win, pois "vitoria" já é outra função no codigo principal
 const win = () => {
-    mudarXP(estadoAtual)(50)
+    mudarXP(estadoAtual)(100)
     ganharMoedas(estadoAtual)(10)
     gameOver()
+    document.getElementById('txt-vitoria').style.display = 'block' // mostra o txt "+100 XP" na tela
 }
 
  //////////// Event Listeners, captura o teclado ///////////
