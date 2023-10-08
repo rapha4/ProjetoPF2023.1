@@ -36,7 +36,7 @@ const mudarTela = (classe) => (tela) => {
     const lista = [...document.getElementsByClassName(classe)] // Todas as telas
     const mudar = document.getElementById(tela) // Tela para qual queremos mudar (Tela de destino)
 	const voltar = document.getElementById("voltar") // Botão de voltar
-    /* */
+    const instrucoes = document.getElementById('instrucoes')
 	const original=lista.filter(elem=>elem.style.display!="none")[0] // Pega a tela de origem, ou seja, a que atualmente está visível.
 	const alerta=document.getElementById('alerta')//Pegando o texto de alerta do resun
 	
@@ -65,8 +65,10 @@ const mudarTela = (classe) => (tela) => {
 		else musica.style.display='block'
         // Para a tela da bicen
         if (tela == 'bicen') {
+            instrucoes.style.display = 'block'
             musica.style.marginLeft = "46px"
         } else {
+            instrucoes.style.display = 'none'
             musica.style.marginLeft = "0px"
         }
     }

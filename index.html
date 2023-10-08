@@ -156,11 +156,13 @@
 				<button onclick="mudarTela('gamediv')('gameplay')" class="opacidade botao voltar"><i class="fa-solid fa-arrow-left"></i></button>
 			</span>
             <canvas width="830" height="520"></canvas>
+           
             <div id="divBotoesMinigame">
                 <button class="botao opcao" id="jogar-novamente" onclick="iniciarMinigame(); escondeBotoes()">Jogar Novamente</button>
-               <!--  <button class="botao opcao" id="voltar-gameplay" onclick="mudarTela('gamediv')('gameplay')">Voltar</button> -->
             </div>
+            <p class="txt-vitoria" id="txt-vitoria">+100 XP</p>
         </div>
+        
 
         <div class="gamediv" id="batalhaBoss">
             <img id = "inicioImg" class="img-de-fundo" src="./imagens/fundo-boss.png"> 
@@ -261,7 +263,7 @@
         
           
     </div>
-
+    <p class="instrucoes animacao" id="instrucoes">Use as setas ESQUERDA e DIREITA para rotacionar a "caneta" e CIMA para movimentá-la. Pressione ESPAÇO para destruir os "exercícios". Finalize todos para conseguir experiência!<br>PS: Não procrastine e deixe os "exercícios" te surpreenderem!</p>
     <audio loop="true" id="soundtrack">
         <source src="./soundtrack/Life Is Strange Soundtrack.mp3">
     </audio>

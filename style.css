@@ -553,6 +553,23 @@ img{
     width: 340px;
 }
 
+.instrucoes{
+    display: none;
+    color: #fff;
+    width: 840px;
+    font-size: 0.8rem;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.txt-vitoria{
+    display: none;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+}
 /* Tela da prova */
 #batalhaBoss{
     display: none;
