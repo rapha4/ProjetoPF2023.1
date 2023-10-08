@@ -379,7 +379,8 @@ const bossDerrotado = (boss, estado) => {
     ganharMoedas(estado)(50)
 	mudarTela('gamediv')('tela vitoria')
 	estado.boss+=1
-	atualizarDOM(estado)	
+	atualizarDOM(estado)
+	musicaBatalhaOFF()
 }
 
 //Serve para atualizar o mês de acordo com o boss
