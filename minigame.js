@@ -179,7 +179,7 @@ const gameOver = () => {
 // win, pois "vitoria" já é outra função no codigo principal
 const win = () => {
     mudarXP(estadoAtual)(50)
-    ganharMoedas(estadoAtual)(5)
+    ganharMoedas(estadoAtual)(10)
     gameOver()
 }
 

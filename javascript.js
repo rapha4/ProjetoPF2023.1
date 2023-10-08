@@ -266,6 +266,7 @@ const boss = [
  const irLutar = (boss) => {
     hpBossTxt.innerText = boss.hp
     nomeBossTxt.innerText = boss.nome;
+    musicaBatalhaON()
   }
  //Função usada para mudar o hp do usuário ou do boss a depender de quem for atacado 
   const atacar = (boss, estado) => {
@@ -369,6 +370,8 @@ const mudarMes =  (boss) => {
         mes.innerHTML = "3/4"
     }else if (boss.nome === "Cirdneh e Lilak") {  
         mes.innerHTML = "4/4"   
+    }else if (boss.nome === "Vetores") {
+        mes.innerHTML = "1/4"
     }
 }
 
@@ -391,7 +394,8 @@ const mudarBtnOnClick = (boss, estado) =>{
     if ( boss.nome === "Vetores"){
         boss2.style.display='none'
         boss1.style.display='flex'
-        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado) 
+        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossCalculo, estado)
+        musicaBatalhaON()
         btnAtacar.onclick = () =>atacar(bossCalculo,estado)
         btnDesviar.onclick = () =>desviar(bossCalculo, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
@@ -400,7 +404,7 @@ const mudarBtnOnClick = (boss, estado) =>{
     }else if(boss.nome === "Cálculo A"){    
         boss1.style.display='none'
         boss3.style.display='flex'
-        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado) 
+        btnBatalha.onclick = () =>mudarTela('gamediv')('batalhaBoss'),irLutar(bossDioglos, estado)
         btnAtacar.onclick = () =>atacar(bossDioglos,estado)
         btnDesviar.onclick = () =>desviar(bossDioglos, estado)
         btnFugir.onclick = () =>fugir(bossCalculo)
