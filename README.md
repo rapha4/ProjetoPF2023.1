@@ -11,16 +11,16 @@ Vida Universitária RPG foi desenvolvido com HTML, CSS e Javascript utilizando-s
 ## Inspirações/Créditos
 
 - Trilha sonora retirada de Life is Strange:
-      > Syd Matters - Obstacles
-      > Syd Matters - To all of you
-      > Jose Gonzalez - Crosses
-      > Angus and Julia Stone - Santa Monica Dream
-      > Alt-J - Something good
-      > Darren Loveday and Stephen Loveday - Power To Progress
-      > Amanda Palmer - In my mind
-      > Local Natives - Mt. Washington
+      - Syd Matters - Obstacles
+      - Syd Matters - To all of you
+      - Jose Gonzalez - Crosses
+      - Angus and Julia Stone - Santa Monica Dream
+      - Alt-J - Something good
+      - Darren Loveday and Stephen Loveday - Power To Progress
+      - Amanda Palmer - In my mind
+      - Local Natives - Mt. Washington
 - Trilha sonora da batalha retirada de Pokemon FireRed and LeafGreen
-      > Pokemon FireRed & LeafGreen OST by Junichi Masuda
+      - Pokemon FireRed & LeafGreen OST by Junichi Masuda
 - Funções do RESUN e Provas baseadas em [RPG Game por Beau Carnes & freecodecamp](https://replit.com/@BeauCarnes/JavaScript-RPG#script.js)
 - Minigame da BICEN baseado em [Code Asteroids in JavaScript (1979 Atari game)](https://youtu.be/H9CSWMxJx84?si=T2ghbnRl3JNYxFpI)
 - Animação retirada do [stackoverflow](https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load)
