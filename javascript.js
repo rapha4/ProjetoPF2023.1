@@ -1,19 +1,19 @@
 var musicaEstaOn=false //variavel para trackear se musica está on
 
-const musicaDeFundoON = () => {
+const musicaDeFundoON = () => {//ativa a música de fundo
     const musica = document.getElementById("soundtrack")
 	musicaEstaOn=true
     musica.play()
 }
 
-const musicaDeFundoOFF = () => {
+const musicaDeFundoOFF = () => {//desativa a música de fundo
 	musicaBatalhaOFF()
     const musica = document.getElementById("soundtrack")
 	musicaEstaOn=false
     musica.pause()
 }
 
-const musicaBatalhaON = () => {
+const musicaBatalhaON = () => {//ativa a música do boss
 	if (musicaEstaOn){
     musicaDeFundoOFF()
     const musica = document.getElementById("soundtrack-batalha")
@@ -22,7 +22,7 @@ const musicaBatalhaON = () => {
 	}
 }
 
-const musicaBatalhaOFF = () => {
+const musicaBatalhaOFF = () => {//desativa a música do boss
 	if (musicaEstaOn){
     const musica = document.getElementById("soundtrack-batalha")
     musica.pause()
@@ -38,7 +38,7 @@ document.getElementById("paginaInicial").style.display="flex"
 
 
 /*Essa função muda de tela do jogo e altera o funcionamento dos botões correspondentemente.
- Caso mudar de/para tela 'gameplay', fazer autosave
+ Caso mudar para tela 'gameplay', fazer autosave
 */
 const mudarTela = (classe) => (tela) => {
     /* Pegando todos os elementos do HTML */
@@ -86,7 +86,7 @@ const mudarTela = (classe) => (tela) => {
 	if(tela=='gameplay') save(estadoAtual)('autosave')
 }
 
-const criarEstadoInicial = () => {
+const criarEstadoInicial = () => {//Cria o estado inicial de jogo.
     return { nome: '',
     nivel: 1,
     xp: 0,
@@ -209,6 +209,7 @@ const load=slot=>{
 } 
 
 const iniciarJogo=()=>{
+	//Caso houver autosave, carrega autosave. Senão, leva o jogador à criação de personagem.
  	const autosave=localStorage.getItem("autosave")
 	if (autosave==null){ 
 		mudarTela('gamediv')('cursos')
