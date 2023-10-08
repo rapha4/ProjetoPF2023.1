@@ -357,11 +357,8 @@ const fugir = (boss) => {
 //Caso o hpBoss<0 e ele n seja o Boss final, ele será recompensado com xp, moedas 
 const bossDerrotado = (boss, estado) => {
     texto.innerText = "Você está lutando com o Boss!"
-    const novoXp = estado.xp + 100
-    const maisMoedas = estado.moedas + 50
-    estado.xp = novoXp
-    estado.moedas = maisMoedas
-    atualizarDOM({...estado, moedas: maisMoedas, xp: novoXp})
+    mudarXP(estado)(100)
+    ganharMoedas(estado)(50)
     mudarBtnOnClick(boss,estado)
 }
 const mudarMes =  (boss) => {
@@ -434,6 +431,9 @@ const mudarXP =(estado)=>(qt)=> {  /// adiciona xp ao personagem
 
     if (estado.xp == 100) {
         estado.xp = 0
+    }
+    else if (estado.xp > 100) {
+        estado.xp = estado.xp%100
     }
 
 	atualizarDOM(estado)

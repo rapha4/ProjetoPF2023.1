@@ -2,7 +2,7 @@
  const FPS = 30 // frames per second
  const vidas_iniciais = 3
  const tamanho_da_nave = 30 // pixels
- const velocidade_de_rotacao = 0.6
+ const velocidade_de_rotacao = 0.3
  const aceleracao_da_nave = 0.1
  const duracao_da_explosao_da_nave = 3
  const duracao_da_invisibilidade = 15
