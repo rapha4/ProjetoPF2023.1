@@ -4,8 +4,8 @@
 
 Vida Universitária RPG é um jogo desenvolvido por alunos da Universidade Federal de Sergipe (UFS) cujo objetivo é explorar a vida de um estudante universitário como uma aventura, na qual ele precisará estrategizar para adquirir experiência e enfrentar as desafiantes provas do curso. 
 
-[Acesse aqui o vídeo do jogo.](https://youtu.be/jnlD5qBYRsw)
-[Acesse aqui o jogo no Netlify](https://vidauniversitariarpg.netlify.app/)
+- [Acesse aqui o vídeo do jogo.](https://youtu.be/jnlD5qBYRsw)
+- [Acesse aqui o jogo no Netlify](https://vidauniversitariarpg.netlify.app/)
 
 ## Tecnologias
 
