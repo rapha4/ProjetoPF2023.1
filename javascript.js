@@ -295,9 +295,8 @@ const boss = [
         //Caso o ataque falhe, o usuário perde hp
         }else{
             texto.innerText += " Você errou o ataque";
-            const novoHp = estado.hp - pegarValorAtaqueBoss(boss, estado)
-            estado.hp = novoHp
-            atualizarDOM({...estado, hp: novoHp})
+			estado.hp -= pegarValorAtaqueBoss(boss, estado)
+            atualizarDOM(estado)
         }
         //Analisa a situação do usuário e do boss após sofrerem ataque, determinando a vitória ou a derrota
         if (estado.hp <= 0) {
@@ -339,9 +338,8 @@ const desviar = (boss, estado) => {
         texto.innerText = "Você desviou do ataque de " + boss.nome + " com alguns arranhões."
     } else {
         texto.innerText = "Você não conseguiu desviar do ataque a tempo."
-        const novoHp = estado.hp - pegarValorAtaqueBoss(boss, estado)
-        estado.hp = novoHp
-        atualizarDOM({...estado, hp: novoHp})
+        estado.hp-= pegarValorAtaqueBoss(boss, estado)
+        atualizarDOM(estado)
     }
     if (estado.hp <= 0) {
         estado.hp = 100
