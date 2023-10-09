@@ -373,12 +373,14 @@ const fugir = (boss) => {
 }
 
 /*Caso o hp do boss < 0 e ele n seja o Boss final, ele será recompensado com xp e moedas. 
-As funções dos botões na área de Batalha tbm são atualizadas*/ // e muda a tela
+As funções dos botões na área de Batalha tbm são atualizadas e muda a tela*/ 
 const bossDerrotado = (boss, estado) => {
     texto.innerText = "Você está lutando com o Boss!"
     mudarXP(estado)(100)
     ganharMoedas(estado)(50)
 	mudarTela('gamediv')('tela vitoria')
+	boss.hp = 100
+    atualizarDOMboss({...boss, hp: 100})
 	estado.boss+=1
 	atualizarDOM(estado)
 	musicaBatalhaOFF()
@@ -422,6 +424,7 @@ const mudarBtnOnClick = (bossnum, estado) =>{
 
 //Passa para a última tela do jogo 
 const vitoria = () => {
+	musicaBatalhaOFF()
     mudarTela('gamediv')('fimdejogo')
     console.log('vitória')
 }
